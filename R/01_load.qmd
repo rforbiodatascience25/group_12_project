@@ -4,18 +4,36 @@ format: html
 editor: visual
 ---
 
-# Load data
-
 ## Load libraries
 
 ```{r}
 #| message: false
-library("GEOquery")
+library(GEOquery)
+library(readr)
+library(here)
+library(dplyr)
 ```
 
-## Load data
+## Raw data
 
 ```{r}
+# Download GEO dataset GSE20194
 gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
+
+# Save the raw GEO object
 save(gse, file = "data/_raw/raw_data.RData")
+```
+
+## Preliminary Processing
+
+```{r}
+# Extract the first ExpressionSet
+eset <- gse[[1]]
+
+# Extract sample metadata and add a sample column
+dat_load <- as.data.frame(pData(eset)) %>%
+  mutate(sample = rownames(.)) 
+
+# Save the metadata as 01_dat_load.tsv
+write_tsv(dat_load, here("data", "01_dat_load.tsv"))
 ```
