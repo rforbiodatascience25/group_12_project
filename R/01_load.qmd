@@ -1,0 +1,21 @@
+---
+title: "01_load"
+format: html
+editor: visual
+---
+
+# Load data
+
+## Load libraries
+
+```{r}
+#| message: false
+library("GEOquery")
+```
+
+## Load data
+
+```{r}
+gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
+save(gse, file = "data/_raw/GSE20194.RData")
+```
