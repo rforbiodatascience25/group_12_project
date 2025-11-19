@@ -17,5 +17,5 @@ library("GEOquery")
 
 ```{r}
 gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
-save(gse, file = "data/_raw/GSE20194.RData")
+save(gse, file = "data/_raw/raw_data.RData")
 ```
