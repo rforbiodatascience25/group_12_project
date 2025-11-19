@@ -14,7 +14,7 @@ library(here)
 library(dplyr)
 ```
 
-## Raw data
+## Save raw data
 
 ```{r}
 # Download GEO dataset GSE20194
@@ -24,16 +24,40 @@ gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
 save(gse, file = "data/_raw/raw_data.RData")
 ```
 
-## Preliminary Processing
+## Load raw data
 
 ```{r}
+# Load raw_data
+load(here("data", "_raw", "raw_data.RData"))
+
 # Extract the first ExpressionSet
 eset <- gse[[1]]
+```
 
+## Preliminary processing
+
+Convert the ExpressionSet object to a data frame and handle missing or blank values to prevent misalignment.
+
+```{r}
 # Extract sample metadata and add a sample column
 dat_load <- as.data.frame(pData(eset)) %>%
-  mutate(sample = rownames(.)) 
+  # Add sample_id as first column
+  mutate(sample_id = rownames(.)) %>%
+  relocate(sample_id) %>%
+  mutate(across(where(is.factor), as.character)) %>%  
+  mutate(across(
+    everything(), 
+    ~ ifelse(. == "" | is.na(.), NA_character_, .)))
+
+```
+
+## Save load data
+
+```{r}
 
 # Save the metadata as 01_dat_load.tsv
-write_tsv(dat_load, here("data", "01_dat_load.tsv"))
+write_tsv(
+  dat_load, 
+  here("data", "01_dat_load.tsv"), 
+  na = "NA")
 ```
