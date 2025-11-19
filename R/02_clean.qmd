@@ -1,0 +1,67 @@
+---
+title: "02_clean"
+format: html
+editor: visual
+---
+
+## Load libraries
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+## Load data
+
+```{r}
+input_file <- "data/01_dat_load.tsv"
+dat_load <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
+```
+
+## Clean data
+
+```{r}
+# Select columns with core characteristics
+dat_core <- dat_load %>% 
+  select(
+    geo_accession,
+    matches("^characteristics_ch1\\.([1-9]|1[0-4])$"))
+```
+
+```{r}
+dat_clean <- dat_core %>%
+  # Pivot all characteristics_ch1.* columns longer
+  pivot_longer(
+    cols = starts_with("characteristics_ch1."),
+    names_to = "char_num",
+    values_to = "char_value"
+  ) %>% 
+  # Separate colname and value by ": "
+  separate(
+    char_value, 
+    into = c("colname", "value"),
+    sep = ":\\s+"
+    ) %>% 
+  select(-("char_num")) %>% 
+  # Handle duplicate entries by keeping the first value
+  pivot_wider(
+    names_from = colname,
+    values_from = value,
+    values_fn = function(x) x[1] 
+  ) %>% 
+  select(-`treatments comments`, -`NA`)
+  
+  
+```
+
+## Save clean data
+
+```{r}
+write_tsv(
+  dat_clean, 
+  here("data", "02_dat_clean.tsv"), 
+  na = "NA")
+```
