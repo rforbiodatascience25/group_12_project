@@ -21,7 +21,7 @@ library(dplyr)
 gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
 
 # Save the raw GEO object
-save(gse, file = "data/_raw/raw_data.RData")
+save(gse, file = here("data/_raw/raw_data.RData"))
 ```
 
 ## Load raw data
