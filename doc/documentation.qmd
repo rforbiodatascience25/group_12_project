@@ -1,0 +1,46 @@
+---
+title: "documentation"
+format: html
+editor: visual
+---
+
+## Documentation of data
+
+Interpret columns of the cleaned data:
+
+```{r}
+colnames(dat_clean)
+```
+
+-   "geo_accession": GEO sample ID, links each row to its expression data
+-   "age"
+-   "race"
+-   "er_status": Estrogen receptor (ER) status of the tumor.
+    -   P = positive
+    -   N = negative
+-   "pcr_vs_rd": Pathologic Complete Response (pCR) vs. Residual Disease (RD)\
+    The main outcome variable in the MAQC-II project, meaning if there is 'no detectable tumor after treatment' or the 'tumor remains after therapy'
+-   "pr_status": Progesterone receptor (PR) status of the tumor.
+    -   P = positive
+    -   N = negative
+-   "tbefore": Tumor size before treatment.
+    -   0-4 = size coded by numbers
+-   "nbefore": Nodal involvement before treatment, represents whether lymph nodes had detectable cancer.
+    -   0-3 = increasing levels of nodal disease
+-   "bmngrd": Bloom–Richardson (BR) grade\
+    Scores reflect tumor aggressiveness.
+    -   1 = low
+    -   2 = intermediate
+    -   3 = high
+-   "er": Another coding of estrogen receptor status.
+    -   0-100: increasing ER expression
+-   "her2 status": Overall HER2 receptor classification (growth factor receptor)
+    -   P = positive
+    -   N = negative
+-   "her2 ihc": HER2 status measured by IHC (Immunohistochemistry) assay.
+    -   0-1 = negative
+    -   2 = equivocal
+    -   3 = positive
+-   "her2 fish": HER2 status measured by FISH (Fluorescence In Situ Hybridization).
+-   "histology": Tumor subtype based on microscopic examination.
+-   "treatment code": The therapy the patient received.
