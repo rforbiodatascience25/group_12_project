@@ -9,12 +9,13 @@ editor: visual
 ```{r}
 #| message: false
 library(tidyverse)
+library(here)
 ```
 
 ## Load data
 
 ```{r}
-input_file <- "data/01_dat_load.tsv"
+input_file <- here("data/01_dat_load.tsv")
 dat_load <- read_tsv(
   input_file,
   na = c("", "NA"),

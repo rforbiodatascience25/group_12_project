@@ -28,7 +28,7 @@ save(gse, file = here("data/_raw/raw_data.RData"))
 
 ```{r}
 # Load raw_data
-load(here("data", "_raw", "raw_data.RData"))
+load(here("data/_raw/raw_data.RData"))
 
 # Extract the first ExpressionSet
 eset <- gse[[1]]
@@ -54,7 +54,6 @@ dat_load <- as.data.frame(pData(eset)) %>%
 ## Save load data
 
 ```{r}
-
 # Save the metadata as 01_dat_load.tsv
 write_tsv(
   dat_load, 
