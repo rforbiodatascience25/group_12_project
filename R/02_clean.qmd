@@ -34,12 +34,14 @@ dat_core <- dat_load %>%
 
 ```{r}
 dat_clean <- dat_core %>%
+  
   # Pivot all characteristics_ch1.* columns longer
   pivot_longer(
     cols = starts_with("characteristics_ch1."),
     names_to = "char_num",
     values_to = "char_value"
   ) %>% 
+  
   # Separate colname and value by ": "
   separate(
     char_value, 
@@ -47,14 +49,17 @@ dat_clean <- dat_core %>%
     sep = ":\\s+"
     ) %>% 
   select(-("char_num")) %>% 
+  
   # Handle duplicate entries by keeping the first value
   pivot_wider(
     names_from = colname,
     values_from = value,
     values_fn = function(x) x[1] 
   ) %>% 
-  select(-`treatments comments`, -`NA`)
+  select(-`treatments comments`, -`NA`) %>%
   
+  # Replace 'ND' with NA
+  mutate(across(everything(), ~na_if(., "ND")))
   
 ```
 
