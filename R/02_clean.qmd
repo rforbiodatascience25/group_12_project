@@ -83,8 +83,6 @@ dat_clean <- dat_clean |>
 
 ## Convert data types
 
-### Factor variables
-
 ```{r}
 dat_clean <- dat_clean |>
    mutate(
