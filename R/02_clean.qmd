@@ -63,11 +63,57 @@ dat_clean <- dat_core %>%
   
 ```
 
+## Rename columns
+
+```{r}
+dat_clean <- dat_clean |>
+  rename(
+    sample_id = geo_accession,
+    response = pcr_vs_rd,
+    tumor_size_before = tbefore,
+    nodes_before = nbefore,
+    grade = bmngrd,
+    er_percent = er,
+    her2_status = `her2 status`,
+    her2_ihc = `her2 ihc`,
+    her2_fish = `her2 fish`,
+    treatment = `treatment code`
+  ) 
+```
+
+## Convert data types
+
+### Factor variables
+
+```{r}
+dat_clean <- dat_clean |>
+   mutate(
+    # factor varaibles
+    er_status = factor(er_status, levels = c("N","P")),
+    pr_status = factor(pr_status, levels = c("N","P")),
+    response = factor(response, levels = c("RD","pCR")),
+    race = factor(race),
+    her2_status = factor(her2_status, levels = c("N","P")),
+    her2_ihc = factor(her2_ihc, levels = c("0","1","2","3")),
+    histology = factor(histology),
+    treatment = factor(treatment),
+    
+    # numeric variables
+    age = as.numeric(age),
+    tumor_size_before = as.numeric(tumor_size_before),
+    nodes_before = as.numeric(nodes_before),
+    grade = as.numeric(grade),
+    er_percent = as.numeric(er_percent),
+    her2_fish = as.numeric(her2_fish)
+  )
+```
+
 ## Save clean data
 
 ```{r}
 write_tsv(
   dat_clean, 
   here("data", "02_dat_clean.tsv"), 
-  na = "NA")
+  na = "NA"
+  )
 ```
