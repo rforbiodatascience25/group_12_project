@@ -22,7 +22,7 @@ dat_clean <- read_tsv(
   show_col_types = FALSE)
 ```
 
-## 
+## Augment data
 
 ```{r}
 dat_aug <- dat_clean |> 
