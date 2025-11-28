@@ -1,0 +1,17 @@
+---
+title: "04_describe"
+format: html
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+clean_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/02_dat_clean.tsv")
+```
+
+```{r}
+
+```
