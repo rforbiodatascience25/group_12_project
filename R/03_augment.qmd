@@ -4,23 +4,61 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Load libraries
 
 ```{r}
-1 + 1
+#| message: false
+library(tidyverse)
+library(here)
 ```
 
-You can add options to executable code like this
+## Load data
 
 ```{r}
-#| echo: false
-2 * 2
+input_file <- here("data/02_dat_clean.tsv")
+dat_clean <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+## 
+
+```{r}
+dat_aug <- dat_clean |> 
+  mutate(
+    er_num = if_else(er_status == "P", 1, 0),
+    pr_num = if_else(pr_status == "P", 1, 0),
+    her2_num = if_else(her2_status == "P", 1, 0),
+    
+    # hormone receptor groups
+    hormone_group = paste0(
+      if_else(er_num == 1, "ER+", "ER-"),
+      if_else(pr_num == 1, "PR+", "PR-")
+    ),
+    
+    # three receptor combination
+    receptor_group = paste0(
+      if_else(er_num == 1, "ER+", "ER-"),
+      if_else(pr_num == 1, "PR+", "PR-"),
+      if_else(her2_num == 1, "HER2+", "HER2-")
+    ),
+    
+    # triple negative
+    triple_negative = case_when(
+      er_num == 0 & pr_num == 0 & her2_num == 0 ~ 1,  # TNBC
+      TRUE ~ 0                                        
+    )
+  )
+
+```
+
+## Save augment data
+
+```{r}
+write_tsv(
+  dat_aug, 
+  here("data", "03_dat_aug.tsv"), 
+  na = "NA"
+  )
+```
