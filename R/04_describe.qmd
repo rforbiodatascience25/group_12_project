@@ -16,7 +16,6 @@ load the data as a variable to use in descriptive graphs
 
 ```{r}
 #| message: false
-clean_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/02_dat_clean.tsv")
 augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
 ```
 
@@ -26,11 +25,10 @@ augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_proj
 
 ```{r}
 df_plot <- augment_data |>
-  mutate(age_group = cut(
-    age,
+  mutate(age_group = cut(age,
     breaks = seq(0, 100, by = 10),
     labels = paste(seq(0, 90, 10), seq(9, 99, 10), sep = "-"))) |>
-  filter(!is.na(age_group), !is.na(race)) |>
+  filter(!is.na(age_group)) |>
   count(age_group, race)
 
 ggplot(df_plot, aes(x = age_group, y = n, fill = race)) +
@@ -38,16 +36,17 @@ ggplot(df_plot, aes(x = age_group, y = n, fill = race)) +
   theme_minimal()
 ```
 
-### Distribution of ER positive and PR positive (hormone positive change when i get augment data and also take her2 into consideration)
+### Distribution of hormones in different patients
 
 ```{r}
 df_plot <- augment_data |>
-  filter(!is.na(hormone_group)) |>
-  count(hormone_group)
+  filter(!is.na(receptor_group)) |>
+  count(receptor_group)
 
-ggplot(df_plot, aes(x = hormone_group, y = n, fill = hormone_group)) +
-  geom_col(position = "stack") +
-  theme_minimal()
+ggplot(df_plot, aes(x = receptor_group, y = n, fill = receptor_group)) +
+  geom_col() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
 ### Distribution of successful or unsuccessful treatment
@@ -58,6 +57,6 @@ df_plot <- augment_data |>
   count(response)
 
 ggplot(df_plot, aes(x = response, y = n, fill = response)) +
-  geom_col(position = "stack") +
+  geom_col() +
   theme_minimal()
 ```

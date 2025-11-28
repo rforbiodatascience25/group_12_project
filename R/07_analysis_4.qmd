@@ -14,15 +14,16 @@ library(tidyverse)
 
 ```{r}
 #| message: false
-clean_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/02_dat_clean.tsv")
 augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
 ```
 
-## Plot to analyze the Outcome compared to age
+## Graphical Comparisons
+
+### Outcome compared to age
 
 ```{r}
 ggplot(augment_data, aes(x = response, y = age, fill = response)) +
-  geom_boxplot(alpha = 0.7) +
+  geom_boxplot() +
   geom_jitter(width = 0.15, alpha = 0.6, size = 2) +
   scale_fill_manual(values = c("RD" = "blue", "pCR" = "magenta")) +
   labs(
@@ -32,3 +33,5 @@ ggplot(augment_data, aes(x = response, y = age, fill = response)) +
   ) +
   theme_minimal(base_size = 14)
 ```
+
+# Copy in the other graphs here

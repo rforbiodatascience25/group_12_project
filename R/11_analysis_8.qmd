@@ -1,0 +1,40 @@
+---
+title: "11_analysis_8"
+format: html
+---
+
+## Load Libraries
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+## Load Data
+
+```{r}
+#| message: false
+augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
+```
+
+## Plot
+
+```{r}
+ggplot(augment_data, aes(x = her2_status, y = her2_fish, fill = her2_status)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "HER2-FISH and HER2 receptor Status Comparison",
+       x = "HER2 Receptor",
+       y = "HER2-FISH") +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+ggplot(augment_data, aes(x = as.numeric(tumor_size_before), y = her2_fish)) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  theme_minimal() +
+  labs(x = "Tumorsize", y = "HER2-FISH",
+       title = "Linear Regression: HER2-FISH vs Tumorgsize")
+```
