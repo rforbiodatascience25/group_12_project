@@ -8,6 +8,8 @@ editor: visual
 
 ## Full list of all analysis we created
 
+Barplots of Henrique:
+
 -   05 (First analysis)
 
 -   06
@@ -22,6 +24,8 @@ editor: visual
 
 -   11
 
+Main plots of Paula and Sylvia:
+
 -   12
 
 -   13
@@ -34,4 +38,14 @@ editor: visual
 
 -   17
 
--   
+Final plots of Sofie:
+
+-   18
+
+-   19
+
+-   20
+
+-   21
+
+-   22
