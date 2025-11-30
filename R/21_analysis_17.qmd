@@ -10,9 +10,9 @@ editor: visual
 
 ```{r}
 
-library(dplyr)    
-library(ggplot2)    
-library(scales)
+library("dplyr")    
+library("ggplot2")    
+library("scales")
 ```
 
 #### Read data:
@@ -31,10 +31,19 @@ Ordering the different genotypes into groups from the augmented data:
 # Create ER/PR/HER2 combo groups
 dat <- dat |>
   mutate(
-    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
-    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
-    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
-    combo = paste(ER, PR, HER2, sep = ", ")
+    ER   = if_else(er_status  == "P",
+                   "ER+",
+                   "ER-"),
+    PR   = if_else(pr_status  == "P",
+                   "PR+",
+                   "PR-"),
+    HER2 = if_else(her2_status == "P",
+                   "HER2+",
+                   "HER2-"),
+    combo = paste(ER,
+                  PR, 
+                  HER2,
+                  sep = ", ")
   ) |>
   mutate(
     combo = factor(
@@ -77,7 +86,9 @@ dat_nodes <- dat |>
 
 # 2. Summarise counts and percentages per combo × node category
 nodes_summary <- dat_nodes |>
-  count(combo, nodes_cat, name = "n") |>
+  count(combo, 
+        nodes_cat,
+        name = "n") |>
   group_by(combo) |>
   mutate(
     total = sum(n),
@@ -97,13 +108,15 @@ y_levels <- c("0", "1", "2", "3", "NA", "N")
 # Add plotting factor for nodes
 nodes_summary <- nodes_summary |>
   mutate(
-    nodes_y = factor(nodes_cat, levels = y_levels)
+    nodes_y = factor(nodes_cat,
+                     levels = y_levels)
   )
 
 # Data frame for N labels row
 n_label_df <- group_counts_nodes |>
   mutate(
-    nodes_y = factor("N", levels = y_levels)
+    nodes_y = factor("N",
+                     levels = y_levels)
   )
 
 head(nodes_summary)
@@ -118,14 +131,21 @@ ggplot() +
   # Bubbles: size & colour = percentage
   geom_point(
     data = nodes_summary,
-    aes(x = combo, y = nodes_y, size = pct, colour = pct),
+    aes(
+      x = combo,
+      y = nodes_y, 
+      size = pct,
+      colour = pct),
     alpha = 0.9
   ) +
 
   # N labels in their own row ABOVE NA
   geom_text(
     data = n_label_df,
-    aes(x = combo, y = nodes_y, label = paste0("N=", N_group)),
+    aes(
+      x = combo,
+      y = nodes_y, 
+      label = paste0("N=", N_group)),
     size = 3,
     ) +
 
@@ -158,12 +178,13 @@ ggplot() +
     x     = "ER/PR/HER2 Genotypes",
     y     = "Nodes before surgery"
   ) +
-
-coord_cartesian(ylim = c(0.2, length(y_levels) + 0.7)) +
-  
+  coord_cartesian(ylim = c(0.2,
+                           length(y_levels) + 0.7)) +
   theme_minimal() +
   theme(
-    axis.text.x  = element_text(angle = 45, hjust = 1, size = 8),
+    axis.text.x  = element_text(angle = 45, 
+                                hjust = 1,
+                                size = 8),
     plot.title   = element_text(size = 9),
     axis.title.x = element_text(size = 8),
     axis.title.y = element_text(size = 8),
