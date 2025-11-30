@@ -7,8 +7,8 @@ format: html
 
 ```{r}
 #| message: false
-library(here)
-library(tidyverse)
+library("here")
+library("tidyverse")
 ```
 
 ## Load data as variables
@@ -22,22 +22,25 @@ dat_aug <- read_tsv(
   show_col_types = FALSE)
 ```
 
-## Graphical Comparisons
+## Graphical Comparison
 
 ### Outcome compared to age
 
 ```{r}
 dat_aug |> 
-  ggplot(aes(x = response, y = age, fill = response)) +
+  ggplot(aes(x = response,
+             y = age,
+             fill = response)) +
   geom_boxplot() +
-  geom_jitter(width = 0.15, alpha = 0.5, size = 1.6) +
-  scale_fill_manual(values = c("RD" = "blue", "pCR" = "magenta")) +
+  geom_jitter(width = 0.15,
+              alpha = 0.5,
+              size = 1.6) +
+  scale_fill_manual(
+    values = c("RD" = "blue",
+               "pCR" = "magenta")) +
   labs(
     x = "Response",
     y = "Age",
-    title = "Distribution of age with outcome"
-  ) +
+    title = "Distribution of age across outcome") +
   theme_minimal(base_size = 14)
 ```
-
-# Copy in the other graphs here
