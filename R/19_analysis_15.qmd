@@ -10,9 +10,9 @@ editor: visual
 
 ```{r}
 
-library(dplyr)  
-library(ggplot2)  
-library(scales)
+library("dplyr")  
+library("ggplot2")  
+library("scales")
 ```
 
 #### Read data:
@@ -31,10 +31,19 @@ Ordering the different genotypes into groups from the augmented data:
 # Create ER/PR/HER2 combo groups
 dat <- dat |>
   mutate(
-    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
-    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
-    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
-    combo = paste(ER, PR, HER2, sep = ", ")
+    ER   = if_else(er_status  == "P",
+                   "ER+",
+                   "ER-"),
+    PR   = if_else(pr_status  == "P", 
+                   "PR+", 
+                   "PR-"),
+    HER2 = if_else(her2_status == "P",
+                   "HER2+",
+                   "HER2-"),
+    combo = paste(ER, 
+                  PR,
+                  HER2,
+                  sep = ", ")
   ) |>
   mutate(
     combo = factor(
@@ -61,7 +70,7 @@ dat |> count(combo)
 
 #### **Graph 2:**
 
-##### Tumor Grade (1–3) by ER/PR/HER2 Combination
+##### Tumor Grade (1–3) by ER/PR/HER2 Genotypes
 
 ```{r}
 
@@ -69,8 +78,11 @@ dat |> count(combo)
 dat_grade <- dat |>
   mutate(
     grade = as.character(grade),
-    grade = if_else(is.na(grade), "NA", grade),
-    grade = factor(grade, levels = c("1", "2", "3", "NA"))
+    grade = if_else(is.na(grade),
+                    "NA",
+                    grade),
+    grade = factor(grade,
+                   levels = c("1", "2", "3", "NA"))
   )
 
 # total N (same as before, but explicit)
@@ -79,9 +91,13 @@ N_total_grade <- nrow(dat_grade)
 # N per genotype
 group_counts_grade <- dat_grade |>
   group_by(combo) |>
-  summarise(N_group = n(), .groups = "drop")
+  summarise(N_group = n(),
+            .groups = "drop")
 
-ggplot(dat_grade, aes(x = combo, fill = grade)) +
+ggplot(dat_grade,
+       aes(
+         x = combo,
+         fill = grade)) +
   geom_bar(position = "fill") +
   scale_x_discrete(drop = FALSE) +
   
@@ -96,7 +112,6 @@ ggplot(dat_grade, aes(x = combo, fill = grade)) +
     drop = FALSE,
     name = "Grade"
   ) +
-  
   scale_y_continuous(labels = percent_format()) +
   
   # N labels above bars
@@ -110,7 +125,6 @@ ggplot(dat_grade, aes(x = combo, fill = grade)) +
     size = 3,
     inherit.aes = FALSE
   ) +
-  
   labs(
     title = "Tumor Grade (1–3) by ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotypes",
@@ -119,7 +133,9 @@ ggplot(dat_grade, aes(x = combo, fill = grade)) +
   ) +
   theme_minimal() +
   theme(
-    axis.text.x  = element_text(angle = 45, hjust = 1, size = 8),
+    axis.text.x  = element_text(angle = 45,
+                                hjust = 1,
+                                size = 8),
     plot.title   = element_text(size = 10),
     axis.title.y = element_text(size = 8),
     axis.title.x = element_text(size = 8)
