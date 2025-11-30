@@ -9,6 +9,8 @@ editor: visual
 ```{r}
 #| message: false
 library("tidyverse")
+library("here")
+library("RColorBrewer")
 ```
 
 ## Load Data
@@ -18,7 +20,7 @@ load the data as a variable to use in descriptive graphs
 ```{r}
 #| message: false
 augment_data <- 
-  read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
+  read_tsv(file = here("data/03_dat_aug.tsv"))
 ```
 
 ## Descriptive Graphs
@@ -26,7 +28,7 @@ augment_data <-
 ### Distribution of age groups and race
 
 ```{r}
-df_plot <- augment_data |>
+df_plot1 <- augment_data |>
   mutate(age_group = cut(age,
                          breaks = seq(0, 100, by = 10),
                          labels = paste(seq(0, 90, 10),
@@ -34,45 +36,93 @@ df_plot <- augment_data |>
                                         sep = "-"))
          ) |>
   filter(!is.na(age_group)) |>
-  count(age_group, race)
+  count(age_group,
+        race)
 
-ggplot(df_plot,
+ggplot(df_plot1,
        aes(x = age_group,
            y = n,
            fill = race)) +
   geom_col(position = "stack") +
-  theme_minimal()
+  labs(title = "Distribution of age groups and race") +
+  # scale_fill_brewer(palette = "Set2") +
+  theme_bw()
 ```
 
 ### Distribution of hormones in different patients
 
 ```{r}
-df_plot <- augment_data |>
+df_plot2 <- augment_data |>
   filter(!is.na(receptor_group)) |>
+  mutate(receptor_group = receptor_group %>%
+           gsub("HER2-", "", .) %>%
+           gsub("PR-", "", .) %>%
+           gsub("ER-", "", .)) %>%
   count(receptor_group)
 
-ggplot(df_plot,
+ggplot(df_plot2,
        aes(x = receptor_group,
            y = n,
            fill = receptor_group)) +
   geom_col() +
+  labs(title = "Distribution of hormones") +
   theme_minimal() + 
-  theme(axis.text.x = element_text(angle = 90,
-                                   hjust = 1,
-                                   vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 30,
+                                   hjust = 0.5,
+                                   vjust = 1))
 ```
 
 ### Distribution of successful or unsuccessful treatment
 
 ```{r}
-df_plot <- augment_data |>
+df_plot3 <- augment_data |>
   filter(!is.na(response)) |>
   count(response)
 
-ggplot(df_plot,
+ggplot(df_plot3,
        aes(x = response, 
            y = n,
            fill = response)) +
   geom_col() +
+  labs(title = "Distribution of treatment success: 
+       pCR = 'no detectable tumor after treatment'
+       or RD = 'tumor remains after therapy'") +
+  theme_minimal()
+```
+
+### Distribution of tumor subtypes (histology)
+
+```{r}
+df_plot4 <- augment_data |>
+  filter(!is.na(histology)) |>
+  count(histology)
+
+ggplot(df_plot4,
+       aes(x = histology, 
+           y = n,
+           fill = histology)) +
+  geom_col() +
+  labs(title = "Distribution of tumor subtypes (histology)") +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1,
+                                   vjust = 1)) + 
+  guides(fill = guide_legend(ncol = 2))
+```
+
+### Distribution of tumor aggressiveness (bmngrd = Bloom–Richardson (BR) grade)
+
+```{r}
+df_plot5 <- augment_data |>
+  filter(!is.na(grade)) |>
+  mutate(grade = factor(grade)) |>
+  count(grade)
+
+ggplot(df_plot5,
+       aes(x = grade, 
+           y = n,
+           fill = grade)) +
+  geom_col() +
+  labs(title = "Distribution of tumor aggressiveness (BR grade)") +
   theme_minimal()
 ```
