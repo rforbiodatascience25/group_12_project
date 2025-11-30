@@ -52,6 +52,8 @@ Final plots of Sofie:
 
 ## What to include:
 
+Hypothesis:
+
 1.  Show the data: ages, race \~descriptive plot
-    -   age against
+    -   from 04
 2.  
