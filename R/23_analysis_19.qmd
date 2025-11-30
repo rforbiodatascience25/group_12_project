@@ -1,0 +1,48 @@
+---
+title: "23_analysis_19"
+format: html
+---
+
+## Load Libraries
+
+```{r}
+#| message: false
+library("tidyverse")
+library("here")
+```
+
+## Load Data
+
+load the data as a variable to use in descriptive graphs
+
+```{r}
+#| message: false
+augment_data <- 
+  read_tsv(file = here("data/03_dat_aug.tsv"))
+```
+
+## Age vs. Genotype
+
+```{r}
+df_plot1 <- augment_data |>
+  mutate(age_group = cut(age,
+                         breaks = seq(0, 100, by = 10),
+                         labels = paste(seq(0, 90, 10),
+                                        seq(9, 99, 10),
+                                        sep = "-"))
+         ) |>
+  filter(!is.na(age_group)) |>
+  count(age_group,
+        receptor_group)
+
+ggplot(df_plot1,
+       aes(x = age_group,
+           y = n,
+           fill = receptor_group)) +
+  geom_col(position = "stack") +
+  labs(title = "Distribution of age groups and race",
+       y = "Amount",
+       x = "Age Groups") +
+  # scale_fill_brewer(palette = "Set2") +
+  theme_bw()
+```
