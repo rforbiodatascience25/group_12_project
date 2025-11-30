@@ -40,7 +40,7 @@ ggplot(df_plot1,
            y = n,
            fill = receptor_group)) +
   geom_col(position = "stack") +
-  labs(title = "Distribution of age groups and race",
+  labs(title = "Distribution of age groups and genotypes",
        y = "Amount",
        x = "Age Groups") +
   # scale_fill_brewer(palette = "Set2") +
