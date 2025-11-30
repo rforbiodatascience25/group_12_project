@@ -8,20 +8,23 @@ editor: visual
 
 ```{r}
 #| message: false
-library(GEOquery)
-library(readr)
-library(here)
-library(dplyr)
+library("GEOquery")
+library("readr")
+library("here")
+library("dplyr")
 ```
 
 ## Save raw data
 
 ```{r}
 # Download GEO dataset GSE20194
-gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
+gse <- getGEO("GSE20194",
+              GSEMatrix = TRUE,
+              getGPL = FALSE)
 
 # Save the raw GEO object
-save(gse, file = here("data/_raw/raw_data.RData"))
+save(gse,
+     file = here("data/_raw/raw_data.RData"))
 ```
 
 ## Load raw data
@@ -41,14 +44,15 @@ Convert the ExpressionSet object to a data frame and handle missing or blank val
 ```{r}
 # Extract sample metadata and add a sample column
 dat_load <- as.data.frame(pData(eset)) %>%
+  
   # Add sample_id as first column
   mutate(sample_id = rownames(.)) %>%
   relocate(sample_id) %>%
-  mutate(across(where(is.factor), as.character)) %>%  
-  mutate(across(
-    everything(), 
-    ~ ifelse(. == "" | is.na(.), NA_character_, .)))
-
+  mutate(across(where(is.factor),
+                as.character)) %>%  
+  mutate(across(everything(), 
+                ~ ifelse(. == "" | is.na(.),
+                         NA_character_, .)))
 ```
 
 ## Save load data

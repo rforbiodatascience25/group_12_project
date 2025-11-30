@@ -8,8 +8,8 @@ editor: visual
 
 ```{r}
 #| message: false
-library(tidyverse)
-library(here)
+library("tidyverse")
+library("here")
 ```
 
 ## Load data
@@ -87,12 +87,17 @@ dat_clean <- dat_clean |>
 dat_clean <- dat_clean |>
    mutate(
     # factor varaibles
-    er_status = factor(er_status, levels = c("N","P")),
-    pr_status = factor(pr_status, levels = c("N","P")),
-    response = factor(response, levels = c("RD","pCR")),
+    er_status = factor(er_status,
+                       levels = c("N","P")),
+    pr_status = factor(pr_status,
+                       levels = c("N","P")),
+    response = factor(response,
+                      levels = c("RD","pCR")),
     race = factor(race),
-    her2_status = factor(her2_status, levels = c("N","P")),
-    her2_ihc = factor(her2_ihc, levels = c("0","1","2","3")),
+    her2_status = factor(her2_status,
+                         levels = c("N","P")),
+    her2_ihc = factor(her2_ihc,
+                      levels = c("0","1","2","3")),
     histology = factor(histology),
     treatment = factor(treatment),
     

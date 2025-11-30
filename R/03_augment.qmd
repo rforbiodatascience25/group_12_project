@@ -8,8 +8,8 @@ editor: visual
 
 ```{r}
 #| message: false
-library(tidyverse)
-library(here)
+library("tidyverse")
+library("here")
 ```
 
 ## Load data
@@ -50,7 +50,6 @@ dat_aug <- dat_clean |>
       TRUE ~ 0                                        
     )
   )
-
 ```
 
 ## Save augment data
