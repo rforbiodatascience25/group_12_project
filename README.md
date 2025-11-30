@@ -3,7 +3,7 @@
 ## Project Contributors
 octopusply <br />
 s253719 - teranni <br />
-paulameerjanssen <br />
+s253689 - paulameerjanssen <br />
 shagelund <br />
 quiquegomes123-cloud
 
