@@ -1,8 +1,8 @@
 # group_12_project
 
 ## Project Contributors
-octopusply
-s253719 - teranni
-paulameerjanssen
-shagelund
+octopusply <br />
+s253719 - teranni <br />
+paulameerjanssen <br />
+shagelund <br />
 quiquegomes123-cloud
