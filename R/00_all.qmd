@@ -26,17 +26,17 @@ Barplots of Henrique:
 
 Main plots of Paula and Sylvia:
 
--   12
+-   12 - Age vs. Outcome
 
--   13
+-   13 - Age and Race vs. Aggressivness and Tumor Size
 
--   14
+-   14 - Tumorsize, Lymphnodes and Aggression Comparison
 
--   15
+-   15 - Response to Treatment according to Receptor Status
 
--   16
+-   16 - Her2 fish vs. Her2 recpeotr positive or negative and linear regression of her2 and tumor size
 
--   17
+-   17 - PCA with colouring according to receptor positiveness or negativeness
 
 Final plots of Sofie:
 
