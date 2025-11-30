@@ -1,13 +1,11 @@
 # group_12_project
 
 ## Project Contributors
-octopusply <br />
+s252750 - octopusply <br />
 s253719 - teranni <br />
 s253689 - paulameerjanssen <br />
 shagelund <br />
-quiquegomes123-cloud
-
-test1
+s253710 - quiquegomes123-cloud
 
 ## Presentation
 {link}
