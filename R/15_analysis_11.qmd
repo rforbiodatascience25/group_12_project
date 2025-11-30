@@ -7,8 +7,8 @@ format: html
 
 ```{r}
 #| message: false
-library(here)
-library(tidyverse)
+library("here")
+library("tidyverse")
 ```
 
 ## Load Data
@@ -26,16 +26,21 @@ dat_aug <- read_tsv(
 
 ```{r}
 dat_aug |>
-  count(receptor_group, response) |>
+  count(receptor_group,
+        response) |>
   group_by(receptor_group) |>
   mutate(percent = n / sum(n) * 100) |>
-  ggplot(aes(x = receptor_group, y = percent, fill = response)) +
+  ggplot(aes(x = receptor_group,
+             y = percent,
+             fill = response)) +
   geom_col(position = "stack") +
   theme_minimal() +
-  labs(title = "Response to Treatment according to Receptor Status",
-       x = "Receptors",
-       y = "Percent",
-       fill = "Response")+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-
+  labs(
+    title = "Response to Treatment according to Receptor Status",
+    x = "Receptors",
+    y = "Percent",
+    fill = "Response")+
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1,
+                                   vjust = 0.5))
 ```
