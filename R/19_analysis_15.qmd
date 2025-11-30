@@ -1,0 +1,132 @@
+---
+title: "19_analysis_15"
+format: html
+editor: visual
+---
+
+## Running Code
+
+#### Loading libraries:
+
+```{r}
+
+library(dplyr)  
+library(ggplot2)  
+library(scales)
+```
+
+#### Read data:
+
+```{r}
+
+dat <- read.delim("../data/03_dat_aug.tsv")
+```
+
+#### Re-ordering
+
+Ordering the different genotypes into groups from the augmented data:
+
+```{r}
+
+# Create ER/PR/HER2 combo groups
+dat <- dat |>
+  mutate(
+    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
+    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
+    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
+    combo = paste(ER, PR, HER2, sep = ", ")
+  ) |>
+  mutate(
+    combo = factor(
+      combo,
+      levels = c(
+        "ER+, PR-, HER2-",
+        "ER+, PR+, HER2-",
+        "ER+, PR-, HER2+",
+        "ER+, PR+, HER2+",
+        "ER-, PR+, HER2-",
+        "ER-, PR+, HER2+",
+        "ER-, PR-, HER2+",
+        "ER-, PR-, HER2-"
+      )
+    )
+  )
+
+# check: how many rows total?
+nrow(dat)
+
+# check: how many patients in each genotype?
+dat |> count(combo)
+```
+
+#### **Graph 2:**
+
+##### Tumor Grade (1–3) by ER/PR/HER2 Combination
+
+```{r}
+
+# Prepare data with grade as factor (1,2,3,NA)
+dat_grade <- dat |>
+  mutate(
+    grade = as.character(grade),
+    grade = if_else(is.na(grade), "NA", grade),
+    grade = factor(grade, levels = c("1", "2", "3", "NA"))
+  )
+
+# total N (same as before, but explicit)
+N_total_grade <- nrow(dat_grade)
+
+# N per genotype
+group_counts_grade <- dat_grade |>
+  group_by(combo) |>
+  summarise(N_group = n(), .groups = "drop")
+
+ggplot(dat_grade, aes(x = combo, fill = grade)) +
+  geom_bar(position = "fill") +
+  scale_x_discrete(drop = FALSE) +
+  
+  # Red colour scheme + grey for NA
+  scale_fill_manual(
+    values = c(
+      "1" = "#FFCCCC",  # very light red
+      "2" = "#FF6666",  # medium red
+      "3" = "#CC0000",  # dark red
+      "NA" = "grey80"   # NA grey
+    ),
+    drop = FALSE,
+    name = "Grade"
+  ) +
+  
+  scale_y_continuous(labels = percent_format()) +
+  
+  # N labels above bars
+  geom_text(
+    data = group_counts_grade,
+    aes(
+      x = combo,
+      y = 1.05,
+      label = paste0("N=", N_group)
+    ),
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  
+  labs(
+    title = "Tumor Grade (1–3) by ER/PR/HER2 Genotypes",
+    x = "ER/PR/HER2 Genotypes",
+    y = paste0("Proportion of Patients (N = ", N_total_grade, ")"),
+    fill = "Grade"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x  = element_text(angle = 45, hjust = 1, size = 8),
+    plot.title   = element_text(size = 10),
+    axis.title.y = element_text(size = 8),
+    axis.title.x = element_text(size = 8)
+  ) +
+  coord_cartesian(ylim = c(0, 1.15))
+```
+
+##### **Conclusions:**
+
+Even tough being postitive for Estrogen receptors do have the worst outcome (Graph 1), they do not have a more agressive tumor grade (Graph 2). Being negative for both hormone receptors leads to a more aggressive tumor grade (Graph 2), and those two actually had the worst outcome (Graph 1).

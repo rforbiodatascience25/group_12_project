@@ -1,0 +1,127 @@
+---
+title: "18_analysis_14"
+format: html
+editor: visual
+---
+
+## Running Code
+
+#### Loading libraries:
+
+```{r}
+library("dplyr") 
+library("ggplot2") 
+library("scales")
+```
+
+#### Read data:
+
+```{r}
+
+dat <- read.delim("../data/03_dat_aug.tsv")
+```
+
+#### Re-ordering
+
+Ordering the different genotypes into groups from the augmented data:
+
+```{r}
+
+# Create ER/PR/HER2 combo groups
+dat <- dat |>
+  mutate(
+    ER   = if_else(er_status  == "P",
+                   "ER+",
+                   "ER-"),
+    PR   = if_else(pr_status  == "P",
+                   "PR+", 
+                   "PR-"),
+    HER2 = if_else(her2_status == "P",
+                   "HER2+",
+                   "HER2-"),
+    combo = paste(ER,
+                  PR,
+                  HER2,
+                  sep = ", ")
+  ) |>
+  mutate(
+    combo = factor(
+      combo,
+      levels = c(
+        "ER+, PR-, HER2-",
+        "ER+, PR+, HER2-",
+        "ER+, PR-, HER2+",
+        "ER+, PR+, HER2+",
+        "ER-, PR+, HER2-",
+        "ER-, PR+, HER2+",
+        "ER-, PR-, HER2+",
+        "ER-, PR-, HER2-"
+      )
+    )
+  )
+
+# check: how many rows total?
+nrow(dat)
+
+# check: how many patients in each genotype?
+dat |> count(combo)
+```
+
+#### **Graph 1:**
+
+##### **Response (pCR vs RD) by ER/PR/HER2 Gentypes**
+
+**pCR** = **pathological complete response,** meaning no residual invasive cancer found in the breast or lymph nodes at the time of surgery, It means the treatment eliminated all detectable invasive tumor. This is a strong **positive** prognostic indicator.
+
+**RD = residual disease, meaning** invasive tumor remains in the breast and/or lymph nodes after treatment. It means the cancer did not completely respond to treatment. Indicates relative treatment resistance. RD is considered a **non-responder** outcome.
+
+```{r}
+
+# total number of patients
+N_total <- nrow(dat)
+
+# Count N per genotype (combo) group
+group_counts_resp <- dat |>
+  group_by(combo) |>
+  summarise(N_group = n(),
+            .groups = "drop")
+
+ggplot(dat,
+       aes(x = combo,
+           fill = response)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = percent_format()) +
+  
+  # show all 8 levels even if some are empty
+  scale_x_discrete(drop = FALSE) +
+  
+  # add N labels above each bar
+  geom_text(
+    data = group_counts_resp,
+    aes(x = combo,
+        y = 1.05,
+        label = paste0("N=", N_group)),
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  labs(
+    title = "Response (pCR=good vs RD=bad) by ER/PR/HER2 Genotypes",
+    x = "ER/PR/HER2 Genotypes",
+    y = paste0("Proportion of Patients (N = ", N_total, ")"),
+    fill = "Response"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x  = element_text(angle = 45,
+                                hjust = 1,
+                                size = 8),
+    plot.title   = element_text(size = 9.5),
+    axis.title.y = element_text(size = 8),
+    axis.title.x = element_text(size = 8)
+  ) +
+  coord_cartesian(ylim = c(0, 1.15))
+```
+
+##### **Conclusions:**
+
+Estrogen receptor-positive breast cancer patients have a worse treatment response (Graph 1).

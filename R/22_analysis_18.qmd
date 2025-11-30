@@ -1,0 +1,186 @@
+---
+title: "22_analysis_18"
+format: html
+editor: visual
+---
+
+## Running Code
+
+#### Loading libraries:
+
+```{r}
+
+library(dplyr)     
+library(ggplot2)     
+library(scales)
+```
+
+#### Read data:
+
+```{r}
+
+dat <- read.delim("../data/03_dat_aug.tsv")
+```
+
+#### Re-ordering
+
+Ordering the different genotypes into groups from the augmented data:
+
+```{r}
+
+# Create ER/PR/HER2 combo groups
+dat <- dat |>
+  mutate(
+    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
+    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
+    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
+    combo = paste(ER, PR, HER2, sep = ", ")
+  ) |>
+  mutate(
+    combo = factor(
+      combo,
+      levels = c(
+        "ER+, PR-, HER2-",
+        "ER+, PR+, HER2-",
+        "ER+, PR-, HER2+",
+        "ER+, PR+, HER2+",
+        "ER-, PR+, HER2-",
+        "ER-, PR+, HER2+",
+        "ER-, PR-, HER2+",
+        "ER-, PR-, HER2-"
+      )
+    )
+  )
+
+# check: how many rows total?
+nrow(dat)
+
+# check: how many patients in each genotype?
+dat |> count(combo)
+```
+
+#### **Graph 5:**
+
+##### **Prep: treatment among genotypes**
+
+```{r}
+
+# Clean treatment variable
+dat_treat <- dat |>
+  mutate(
+    treatment = as.character(treatment),
+    treatment = if_else(is.na(treatment), "NA", treatment)
+  )
+
+# Summarise: count + proportions per genotype × treatment
+treat_summary <- dat_treat |>
+  group_by(combo, treatment) |>
+  summarise(n = n(), .groups = "drop") |>
+  group_by(combo) |>
+  mutate(
+    total = sum(n),
+    pct   = n / total
+  ) |>
+  ungroup()
+
+# Keep the same genotype order you already defined
+treat_summary$combo <- factor(
+  treat_summary$combo,
+  levels = levels(dat$combo)
+)
+```
+
+##### **Graph - Treatment among genotypes**
+
+```{r}
+
+treatment_colors <- c(
+  "FAC"        = "#FF9999",
+  "FACT"       = "#E69F00",
+  "FACT+XRT/X" = "#B8860B",
+  "FEC"        = "#66A61E",
+  "FECT"       = "#1B9E77",
+  "NA"         = "grey70",  
+  "TFAC"       = "#00A6D6",
+  "TFAC/HT"    = "#56B4E9",
+  "TFEC"       = "#0072B2",
+  "TH/FAC"     = "#7570B3",
+  "TH/FEC"     = "#CC79A7",
+  "Tonly"      = "#F0027F",
+  "TXFAC"      = "#E7298A"
+)
+
+ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
+  
+  # N labels above bars 
+  geom_text(
+    data = group_counts_treat,
+    aes(
+      x = combo,
+      y = 1.07,                     
+      label = paste0("N=", N_group)
+    ),
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  
+  # Stacked bars
+  geom_col(position = "fill") +
+  
+  # Percent labels
+  geom_text(
+    aes(
+      label = ifelse(pct > 0.02, paste0(round(pct * 100), "%"), "")
+    ),
+    position = position_fill(vjust = 0.5),
+    size = 2.5,
+    color = "black",
+  ) +
+  
+  # Apply grey for NA + colors for other treatments
+  scale_fill_manual(values = treatment_colors, drop = FALSE) +
+
+  scale_x_discrete(drop = FALSE) +
+  scale_y_continuous(labels = percent_format()) +
+
+  labs(
+    title = "Treatment Distribution Across ER/PR/HER2 Genotypes",
+    x = "ER/PR/HER2 Genotype",
+    y = "Proportion of Patients",
+    fill = "Treatment"
+  ) +
+  
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 20, hjust = 1, size = 7),
+    plot.title  = element_text(size = 10),
+    axis.title  = element_text(size = 9),
+
+    legend.position = "bottom",
+    legend.title = element_text(size = 7),
+    legend.text  = element_text(size = 6),
+
+    legend.box       = "horizontal",
+    legend.box.spacing = unit(0.2, "lines"),
+    legend.key.size  = unit(3.5, "mm"),
+    legend.key.width = unit(3.5, "mm"),
+    legend.spacing.x = unit(0.5, "mm"),
+    legend.spacing.y = unit(0.2, "mm")
+  ) +
+  
+  guides(
+    fill = guide_legend(
+      ncol = 7,
+      byrow = TRUE,
+      title.position = "top"
+    )
+  ) +
+  
+  coord_cartesian(ylim = c(0, 1.15))
+```
+
+##### Conclusion:
+
+Generally, more different treatments were tried in the last two groups, especially for the second last group, which also had the best response. The second group from the left (ER+, PR+, HER2-) also had more treatments but showed a bad response. So in conclusion, (1) more personalized treatment options give better response, (2) and a general broad TFAC and TFEC is not working for estrogen-positive patients.
+
+Aggressiveness, tumor size, and nodes do not necessarily mean a bad outcome. With personalized treatments, it can mean good results for the patient even if the stage or grade of the tumor seems to have a theoretically bad prognosis.

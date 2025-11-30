@@ -1,0 +1,58 @@
+---
+title: "14_analysis_10"
+format: html
+---
+
+## Load Libraries
+
+```{r}
+#| message: false
+library("here")
+library("tidyverse")
+```
+
+## Load Data into variable
+
+```{r}
+#| message: false
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
+```
+
+## Tumorsize, Lymphnodes and Aggression Comparison
+
+```{r}
+ggplot(dat_aug, 
+       aes(x = tumor_size_before, 
+           y = nodes_before, 
+           color = grade)) +
+  geom_jitter(width = 0.2,
+              height = 0.2,
+              size = 3) +
+  theme_minimal() +
+  labs(
+    title = "Tumor size vs. Lymphnodes and Aggression of Tumor",
+    x = "Tumor Sizw",
+    y = "Lymphnodes") 
+```
+
+```{r}
+dat_aug |>
+  count(tumor_size_before,
+        nodes_before, 
+        grade) |>
+  ggplot(aes(x = tumor_size_before, 
+             y = nodes_before, 
+             fill = n)) +
+  geom_tile(color = "white") +
+  facet_wrap(~grade) +
+  theme_minimal() +
+  labs(
+    title = "HAmount of Tumor Sizes and Lymphnodes according to Aggression",
+    x = "Tumorsize",
+    y = "Lymphnodes",
+    fill = "Amount")
+```

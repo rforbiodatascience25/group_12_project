@@ -1,0 +1,51 @@
+---
+title: "00_all"
+format: html
+editor: visual
+---
+
+# Master Document
+
+## Full list of all analysis we created
+
+Barplots of Henrique:
+
+-   05 (First analysis)
+
+-   06
+
+-   07
+
+-   08
+
+-   09
+
+-   10
+
+-   11
+
+Main plots of Paula and Sylvia:
+
+-   12
+
+-   13
+
+-   14
+
+-   15
+
+-   16
+
+-   17
+
+Final plots of Sofie:
+
+-   18
+
+-   19
+
+-   20
+
+-   21
+
+-   22

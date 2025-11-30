@@ -6,7 +6,7 @@ editor: visual
 
 ## Running Code
 
-Loading libraries:
+#### Loading libraries:
 
 ```{r}
 
@@ -15,14 +15,16 @@ library(ggplot2)
 library(scales)
 ```
 
-Read data:
+#### Read data:
 
 ```{r}
 
 dat <- read.delim("../data/03_dat_aug.tsv")
 ```
 
-Ordering the different genotypes into different groups from the augmented data:
+#### Re-ordering
+
+Ordering the different genotypes into groups from the augmented data:
 
 ```{r}
 
@@ -57,7 +59,9 @@ nrow(dat)
 dat |> count(combo)
 ```
 
-#### **Graph 1: Response (pCR vs RD) by ER/PR/HER2 Gentypes**
+#### **Graph 1:**
+
+##### **Response (pCR vs RD) by ER/PR/HER2 Gentypes**
 
 **pCR** = **pathological complete response,** meaning no residual invasive cancer found in the breast or lymph nodes at the time of surgery, It means the treatment eliminated all detectable invasive tumor. This is a strong **positive** prognostic indicator.
 
@@ -92,7 +96,7 @@ ggplot(dat, aes(x = combo, fill = response)) +
   ) +
   
   labs(
-    title = "Response (pCR vs RD) by ER/PR/HER2 Genotypes",
+    title = "Response (pCR=good vs RD=bad) by ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotypes",
     y = paste0("Proportion of Patients (N = ", N_total, ")"),
     fill = "Response"
@@ -100,14 +104,20 @@ ggplot(dat, aes(x = combo, fill = response)) +
   theme_minimal() +
   theme(
     axis.text.x  = element_text(angle = 45, hjust = 1, size = 8),
-    plot.title   = element_text(size = 10),
+    plot.title   = element_text(size = 9.5),
     axis.title.y = element_text(size = 8),
     axis.title.x = element_text(size = 8)
   ) +
   coord_cartesian(ylim = c(0, 1.15))
 ```
 
-#### **Graph 2:** Tumor Grade (1–3) by ER/PR/HER2 Combination
+##### **Conclusions:**
+
+Estrogen receptor-positive breast cancer patients have a worse treatment response (Graph 1).
+
+#### **Graph 2:**
+
+##### Tumor Grade (1–3) by ER/PR/HER2 Combination
 
 ```{r}
 
@@ -174,11 +184,13 @@ ggplot(dat_grade, aes(x = combo, fill = grade)) +
 
 ```
 
-**Conclusions:**
+##### **Conclusions:**
 
-Estrogen receptor-positive breast cancer patients have a worse outcome (Graph 1) even tough they do not have a more agressive tumor grade (Graph 2). Being negative for both hormone receptors leads to a more aggressive tumor grade (Graph 2).
+Even tough being postitive for Estrogen receptors do have the worst outcome (Graph 1), they do not have a more agressive tumor grade (Graph 2). Being negative for both hormone receptors leads to a more aggressive tumor grade (Graph 2), and those two actually had the worst outcome (Graph 1).
 
-**Prepare for heatmap plot to look at the tumor size (0-4) among genotypes:**
+#### Graph 3:
+
+##### **Prepare for heatmap plot to look at the tumor size (0-4) among genotypes:**
 
 ```{r}
 
@@ -239,7 +251,7 @@ n_label_df <- group_counts_ts |>
   )
 ```
 
-**Graph 3, heatmap plot, tumor size among genotypes:**
+##### **Graph - Heatmap plot -** Tumor Size Before Treatment by ER/PR/HER2 Genotypes
 
 ```{r}
 
@@ -298,9 +310,13 @@ ggplot() +
   )
 ```
 
-Conclusion: far most of the genotype groups have a size 2 tumor stage, or otherwise they have developed into size 3-4. This is especially the case for groups that are Estrogen receptor positive, and the last two groups which are negative for both hormone receptors.
+##### Conclusion:
 
-**Prepare for bubble plot to look at the lymph nodes among genotype groups:**
+Far most of the genotype groups have a size 2 tumor stage, or otherwise they have developed into size 3-4. This is especially the case for groups that are Estrogen receptor positive, and the last two groups which are negative for both hormone receptors.
+
+#### Graph 4:
+
+##### **Prepare for bubble plot to look at the lymph nodes among genotype groups:**
 
 ```{r}
 
@@ -349,7 +365,7 @@ head(nodes_summary)
 group_counts_nodes
 ```
 
-**Graph 4: bubble plot, lymph nodes among genotype groups**:
+##### **Graph - Bubble plot - Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes**
 
 ```{r}
 
@@ -412,15 +428,19 @@ coord_cartesian(ylim = c(0.2, length(y_levels) + 0.7)) +
 
 ```
 
-Conclusion: generally it seems to be worst to have these three genotypes:
+##### Conclusion:
+
+Generally it seems to be worst to have these three genotypes:
 
 ER+, PR-, HER2-\
 ER-PR-, HER+2\
 ER-, PR-, HER2- (triple negative)
 
-as they have more affected lymph nodes.
+As they have more affected lymph nodes.
 
-**Graph 5 prep: treatment among genotypes**
+#### **Graph 5:**
+
+##### **Prep: treatment among genotypes**
 
 ```{r}
 
@@ -449,13 +469,29 @@ treat_summary$combo <- factor(
 )
 ```
 
-**Graph 5 plot: treatment among genotypes**
+##### **Graph - Treatment among genotypes**
 
 ```{r}
 
+treatment_colors <- c(
+  "FAC"        = "#FF9999",
+  "FACT"       = "#E69F00",
+  "FACT+XRT/X" = "#B8860B",
+  "FEC"        = "#66A61E",
+  "FECT"       = "#1B9E77",
+  "NA"         = "grey70",  
+  "TFAC"       = "#00A6D6",
+  "TFAC/HT"    = "#56B4E9",
+  "TFEC"       = "#0072B2",
+  "TH/FAC"     = "#7570B3",
+  "TH/FEC"     = "#CC79A7",
+  "Tonly"      = "#F0027F",
+  "TXFAC"      = "#E7298A"
+)
+
 ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
   
-  # N LABELS ABOVE THE BARS 
+  # N labels above bars 
   geom_text(
     data = group_counts_treat,
     aes(
@@ -467,10 +503,10 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     inherit.aes = FALSE
   ) +
   
-  # STACKED BARS
+  # Stacked bars
   geom_col(position = "fill") +
   
-  # PERCENT LABELS INSIDE BARS
+  # Percent labels
   geom_text(
     aes(
       label = ifelse(pct > 0.02, paste0(round(pct * 100), "%"), "")
@@ -480,7 +516,9 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     color = "black",
   ) +
   
-  # AXES & SCALES
+  # Apply grey for NA + colors for other treatments
+  scale_fill_manual(values = treatment_colors, drop = FALSE) +
+
   scale_x_discrete(drop = FALSE) +
   scale_y_continuous(labels = percent_format()) +
 
@@ -517,8 +555,11 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     )
   ) +
   
-  coord_cartesian(ylim = c(0, 1.15))   # room for N labels
-
+  coord_cartesian(ylim = c(0, 1.15))
 ```
 
-Generally, more different treatments were tried in the last two groups, so in conclusion more personalized treatment options give better response.
+##### Conclusion:
+
+Generally, more different treatments were tried in the last two groups, especially for the second last group, which also had the best response. The second group from the left (ER+, PR+, HER2-) also had more treatments but showed a bad response. So in conclusion, (1) more personalized treatment options give better response, (2) and a general broad TFAC and TFEC is not working for estrogen-positive patients.
+
+Aggressiveness, tumor size, and nodes do not necessarily mean a bad outcome. With personalized treatments, it can mean good results for the patient even if the stage or grade of the tumor seems to have a theoretically bad prognosis.

@@ -1,0 +1,71 @@
+---
+title: "17_analysis_13"
+format: html
+---
+
+## Load Libraries
+
+```{r}
+#| message: false
+library("here")
+library("tidyverse")
+```
+
+## Load Data
+
+```{r}
+#| message: false
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
+```
+
+## PCA
+
+```{r}
+df_clean <- dat_aug |>
+  select(her2_num, 
+         er_num,
+         pr_num, 
+         age) |>
+  drop_na()
+
+df_scaled <- df_clean |>
+  map_dfc(~ (. - mean(.)) / sd(.))
+
+pca_res <- prcomp(df_scaled, 
+                  center = FALSE, 
+                  scale. = FALSE)
+
+pca_df <- as_tibble(pca_res$x) |>
+  bind_cols(df_clean)
+
+pca_df |>
+  ggplot(aes(x = PC1,
+             y = PC2,
+             color = factor(er_num))) +
+  geom_point(size = 3, 
+             alpha = 0.7) +
+  labs(color = "ER Status") +
+  theme_minimal()
+
+pca_df |>
+  ggplot(aes(x = PC1,
+             y = PC2,
+             color = factor(pr_num))) +
+  geom_point(size = 3, 
+             alpha = 0.7) +
+  labs(color = "PR Status") +
+  theme_minimal()
+
+pca_df |>
+  ggplot(aes(x = PC1, 
+             y = PC2, 
+             color = factor(her2_num))) +
+  geom_point(size = 3, 
+             alpha = 0.7) +
+  labs(color = "HER2 Status") +
+  theme_minimal()
+```

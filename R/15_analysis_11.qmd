@@ -1,0 +1,46 @@
+---
+title: "15_analysis_11"
+format: html
+---
+
+## Load Libraries
+
+```{r}
+#| message: false
+library("here")
+library("tidyverse")
+```
+
+## Load Data
+
+```{r}
+#| message: false
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
+```
+
+## Response to Treatment according to Receptor Status
+
+```{r}
+dat_aug |>
+  count(receptor_group,
+        response) |>
+  group_by(receptor_group) |>
+  mutate(percent = n / sum(n) * 100) |>
+  ggplot(aes(x = receptor_group,
+             y = percent,
+             fill = response)) +
+  geom_col(position = "stack") +
+  theme_minimal() +
+  labs(
+    title = "Response to Treatment according to Receptor Status",
+    x = "Receptors",
+    y = "Percent",
+    fill = "Response")+
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 1,
+                                   vjust = 0.5))
+```

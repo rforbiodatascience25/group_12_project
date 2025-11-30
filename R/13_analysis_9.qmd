@@ -1,5 +1,5 @@
 ---
-title: "08_analysis_5"
+title: "13_analysis_9"
 format: html
 ---
 
@@ -7,20 +7,25 @@ format: html
 
 ```{r}
 #| message: false
-library(tidyverse)
+library("here")
+library("tidyverse")
 ```
 
 ## Load data as variables
 
 ```{r}
 #| message: false
-augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
 ```
 
 ## Age and race compared to aggressiveness and Tumor Size
 
 ```{r}
-ggplot(augment_data, 
+ggplot(dat_aug, 
        aes(x = age, 
            y = grade,
            color = race,
@@ -35,9 +40,33 @@ ggplot(augment_data,
 ```
 
 ```{r}
-ggplot(augment_data, aes(x = factor(grade), y = age)) +
-  geom_violin(fill = "steelblue", alpha = 0.6, color = NA) +
-  geom_jitter(aes(color = race, size = tumor_size_before),
+ggplot(dat_aug, 
+       aes(x = factor(grade),
+           y = age)) +
+  geom_violin(fill = "steelblue", 
+              alpha = 0.6,
+              color = NA) +
+  geom_jitter(aes(color = race,
+                  size = tumor_size_before),
+              width = 0.15, 
+              height = 0,
+              alpha = 0.7) +
+  labs(
+    title = "Age vs. Tumor Aggressiveness",
+    x = "Tumor Aggressiveness",
+    y = "Age"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(dat_aug,
+       aes(x = factor(grade), 
+           y = age)) +
+  geom_boxplot(outlier.shape = NA,
+               alpha = 0.4) +
+  geom_jitter(aes(color = race,
+                  size = tumor_size_before),
               width = 0.15, height = 0,
               alpha = 0.7) +
   labs(
@@ -49,22 +78,12 @@ ggplot(augment_data, aes(x = factor(grade), y = age)) +
 ```
 
 ```{r}
-ggplot(augment_data, aes(x = factor(grade), y = age)) +
-  geom_boxplot(outlier.shape = NA, alpha = 0.4) +
-  geom_jitter(aes(color = race, size = tumor_size_before),
-              width = 0.15, height = 0,
-              alpha = 0.7) +
-  labs(
-    title = "Age vs. Tumor Aggressiveness",
-    x = "Tumor Aggressiveness",
-    y = "Age"
-  ) +
-  theme_minimal()
-```
-
-```{r}
-ggplot(augment_data, aes(age, fill = race)) +
-  geom_histogram(alpha = 0.5, bins = 20, position = "identity") +
+ggplot(dat_aug, 
+       aes(age, 
+           fill = race)) +
+  geom_histogram(alpha = 0.5,
+                 bins = 20, 
+                 position = "identity") +
   facet_wrap(~ grade) +
   theme_minimal()
 ```
@@ -72,11 +91,15 @@ ggplot(augment_data, aes(age, fill = race)) +
 ## Heatmap Age vs. Aggressiveness
 
 ```{r}
-df <- augment_data |>
-  mutate(age_bin = cut(age, breaks = seq(20, 90, by = 5)))
+df <- dat_aug |>
+  mutate(age_bin = cut(age,
+                       breaks = seq(20, 90, by = 5)))
 
-ggplot(df, aes(x = age, y = grade)) +
-  stat_bin2d(bins = c(20, 3), aes(fill = ..count..)) +
+ggplot(df,
+       aes(x = age,
+           y = grade)) +
+  stat_bin2d(bins = c(20, 3),
+             aes(fill = ..count..)) +
   scale_fill_viridis_c(name = "Count") +
   labs(
     title = "Heatmap Age vs Tumor Aggressiveness",
@@ -88,10 +111,15 @@ ggplot(df, aes(x = age, y = grade)) +
 
 ```{r}
 df |>
-  mutate(age_bin = cut(age, breaks = seq(20, 90, 5))) |>
-  group_by(age_bin, grade) |>
-  summarise(mean_size = mean(tumor_size_before, na.rm = TRUE)) |>
-  ggplot(aes(age_bin, factor(grade), fill = mean_size)) +
+  mutate(age_bin = cut(age,
+                       breaks = seq(20, 90, 5))) |>
+  group_by(age_bin,
+           grade) |>
+  summarise(mean_size = mean(tumor_size_before,
+                             na.rm = TRUE)) |>
+  ggplot(aes(age_bin,
+             factor(grade),
+             fill = mean_size)) +
   geom_tile(color = "white") +
   labs(
     title = "Heatmap of Mean Tumor Size by Age & Aggressiveness",
@@ -99,11 +127,14 @@ df |>
     y = "Tumor Aggressiveness"
   ) +
   theme_minimal(base_size = 14) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1))
 ```
 
 ```{r}
-ggplot(df, aes(x = age, y = grade)) +
+ggplot(df, 
+       aes(x = age, 
+           y = grade)) +
   stat_density_2d_filled(contour_var = "ndensity") +
   labs(
     title = "2D Density Heatmap: Age vs Tumor Aggressiveness",
