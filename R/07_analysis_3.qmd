@@ -1,0 +1,59 @@
+---
+title: "07_analysis_3"
+format: html
+editor: visual
+---
+
+## Loading Libraries
+
+```{r}
+#| message: false 
+library(here) 
+library(tidyverse)
+```
+
+## Reading the Data
+
+```{r}
+#| message: false 
+data_path <- "data/03_dat_aug.tsv"  
+
+dataset <- read_tsv(file = here(data_path))
+```
+
+## Data Wrangling
+
+```{r}
+dataset <- dataset |>
+  mutate(
+    # making tumor_size_before into a factor -> needed for coloring in graphs
+    tumor_size_before = factor(
+      tumor_size_before, levels = c(0, 1, 2, 3, 4), exclude = NULL
+      )
+    )
+```
+
+## Plotting
+
+### HER2 vs Tumor Size
+
+```{r}
+her2_vs_tmrsz <- ggplot(dataset, aes(x = her2_status, fill = tumor_size_before)) +
+  geom_bar(stat = "count", position = "stack") +
+  scale_fill_manual(
+    values = c("0" = "#ADD8E6",
+               "1" = "#87CEFA", 
+               "2" = "#4682B4", 
+               "3" = "#0000CD",
+               "4" = "#00008B",
+               "NA" = "gray")
+    ) +
+  labs(title = "HER2 Status vs Tumor Size Before Treatment",
+       x = "HER2 Status", 
+       y = "Amount", 
+       fill = "Tumor Size") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+her2_vs_tmrsz
+```

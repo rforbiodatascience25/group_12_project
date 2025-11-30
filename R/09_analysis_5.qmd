@@ -1,0 +1,59 @@
+---
+title: "09_analysis_5"
+format: html
+editor: visual
+---
+
+## Loading Libraries
+
+```{r}
+#| message: false
+library(here)   
+library(tidyverse)
+```
+
+## Reading the Data
+
+```{r}
+#| message: false
+data_path <- "data/03_dat_aug.tsv"   
+
+dataset <- read_tsv(file = here(data_path))
+```
+
+## Data Wrangling
+
+```{r}
+dataset <- dataset |>
+  mutate(
+    # creating a new column for the combinations of E and P receptor statuses
+    er_pr_status = case_when(
+    er_status == "P" & pr_status == "P" ~ "ER Positive, PR Positive",
+    er_status == "P" & pr_status == "N" ~ "ER Positive, PR Negative",
+    er_status == "N" & pr_status == "P" ~ "ER Negative, PR Positive",
+    er_status == "N" & pr_status == "N" ~ "ER Negative, PR Negative"
+    ),
+    # making response into factor -> needed for coloring in graphs
+    response = factor(response, levels = c("RD", "pCR"), exclude = NULL)
+    )
+```
+
+## Plotting
+
+### ER & PR Status vs Treatment Outcome
+
+```{r}
+receptors_vs_outcome <- ggplot(dataset, aes(x = er_pr_status, fill = response)) +
+  geom_bar(stat = "count", position = "stack") +
+  scale_fill_manual(
+    values = c("RD" = "darkred", 
+               "pCR" = "#32CD32")) +
+  labs(title = "ER & PR Status vs Treatment Outcome",
+       x = "Receptor Status Combination", 
+       y = "Amount", 
+       fill = "Response") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+receptors_vs_outcome
+```

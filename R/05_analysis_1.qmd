@@ -1,0 +1,61 @@
+---
+title: "05_analysis_1"
+format: html
+editor: visual
+---
+
+## Loading Libraries
+
+```{r}
+#| message: false
+library(here)
+library(tidyverse)
+```
+
+## Reading the Data
+
+```{r}
+#| message: false
+data_path <- "data/03_dat_aug.tsv"
+
+dataset <- read_tsv(file = here(data_path))
+```
+
+## Data Wrangling
+
+```{r}
+dataset <- dataset |>
+  mutate(
+    # creating a new column for the combinations of E and P receptor statuses
+    er_pr_status = case_when(
+    er_status == "P" & pr_status == "P" ~ "ER Positive, PR Positive",
+    er_status == "P" & pr_status == "N" ~ "ER Positive, PR Negative",
+    er_status == "N" & pr_status == "P" ~ "ER Negative, PR Positive",
+    er_status == "N" & pr_status == "N" ~ "ER Negative, PR Negative"
+    ),
+    # making grade into a factor -> needed for coloring in graphs
+    grade = factor(grade, levels = c(1, 2, 3), exclude = NULL)
+    )
+```
+
+## Plotting
+
+### ER & PR Status vs Aggressiveness
+
+```{r}
+receptors_vs_grade <- ggplot(dataset, aes(x = er_pr_status, fill = grade)) +
+  geom_bar(stat = "count", position = "stack") +
+  scale_fill_manual(
+    values = c("1" = "pink", 
+               "2" = "red", 
+               "3" = "darkred", 
+               "NA" = "gray")) +
+  labs(title = "ER & PR Status vs Aggressiveness",
+       x = "Receptor Status Combination", 
+       y = "Amount", 
+       fill = "Grade") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+receptors_vs_grade
+```
