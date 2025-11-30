@@ -52,6 +52,10 @@ Final plots of Sofie:
 
 ## What to include:
 
+script 04, 23, 18,*19, 20, 21, 22*
+
+## Presentation:
+
 1.  **Introduction (HEADLINE) - Slide 1**
 
     Group name (12), original topic (Oncology)
@@ -62,22 +66,22 @@ Final plots of Sofie:
     -   What is the description/meaning of the dataset
         -   List of the observations we are working with
     -   **Slide 3**: Quick background brush-up on the genotypes.
-    -   **Slide 4** SHOWING **graph 04** - HEADLINE (Age and race)
+    -   **Slide 4** SHOWING ***graph 04*** - HEADLINE (Age and race)
         -   Breast cancer patients are mainly white and in the ages between 40-59.
-    -   Demographics (graph 23) - age and genotypes
+    -   Demographics (*graph 23*) - age and genotypes
 
 3.  **Aims**
 
     -   **Slide 5** - Does the theoretically predicted prognosis for specific genotypes match the observed response data
 
-    -   **Slide 6** - graph 18
+    -   **Slide 6** - *graph 18*
 
     -   **Slide 7** - Does the response correlate with tumor aggressiveness, tumor size, and the number of affected lymph nodes?
 
-    -   **Slide 8, 9, 10** - graphs 19, 20, and 21
+    -   **Slide 8, 9, 10** - *graphs 19, 20, and 21*
 
     -   **Slide 11** - Does the response and the treatment give any insights into whether personalized treatment is the way to go?
 
-    -   **Slide 12** - graph 22
+    -   **Slide 12** - *graph 22*
 
     -   **Slide 13** - Thank you for your attention.
