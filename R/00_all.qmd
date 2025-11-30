@@ -40,12 +40,12 @@ Main plots of Paula and Sylvia:
 
 Final plots of Sofie:
 
--   18
+-   18 (Response (pCR vs RD) by ER/PR/HER2 Gentypes)
 
--   19
+-   19 (Tumor Grade (1–3) by ER/PR/HER2 Genotypes)
 
--   20
+-   20 (Tumor Size Before Treatment by ER/PR/HER2 Genotypes)
 
--   21
+-   21 (Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes)
 
--   22
+-   22 (Treatment Distribution Across ER/PR/HER2 Genotypes)

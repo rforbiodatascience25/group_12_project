@@ -90,7 +90,7 @@ treat_summary$combo <- factor(
 )
 ```
 
-##### **Graph - Treatment among genotypes**
+##### **Graph -** Treatment Distribution Across ER/PR/HER2 Genotypes
 
 ```{r}
 

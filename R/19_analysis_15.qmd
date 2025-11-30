@@ -70,7 +70,7 @@ dat |> count(combo)
 
 #### **Graph 2:**
 
-##### Tumor Grade (1–3) by ER/PR/HER2 Combination
+##### Tumor Grade (1–3) by ER/PR/HER2 Genotypes
 
 ```{r}
 
