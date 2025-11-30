@@ -1,7 +1,7 @@
 ---
-title: "00_all"
-format: html
-editor: visual
+title: "00_all" 
+format: html 
+editor: visual 
 ---
 
 # Master Document
@@ -10,19 +10,19 @@ editor: visual
 
 Barplots of Henrique:
 
--   05 (First analysis)
+-   05 E and P receptor statuses vs cancer aggressiveness
 
--   06
+-   06 HER2 receptor status vs cancer aggressiveness
 
--   07
+-   07 HER2 receptor status vs tumor size before treatment
 
--   08
+-   08 HER2 receptor status vs nodes before treatment
 
--   09
+-   09 E and P receptor statuses vs treatment outcome
 
--   10
+-   10 HER2 receptor status vs treatment outcome
 
--   11
+-   11 Cancer aggressiveness vs treatment outcome
 
 Main plots of Paula and Sylvia:
 
@@ -34,13 +34,13 @@ Main plots of Paula and Sylvia:
 
 -   15 - Response to Treatment according to Receptor Status
 
--   16 - Her2 fish vs. Her2 recpeotr positive or negative and linear regression of her2 and tumor size
+-   16 - Her2 fish vs. Her2 receptor positive or negative and linear regression of her2 and tumor size
 
 -   17 - PCA with colouring according to receptor positiveness or negativeness
 
 Final plots of Sofie:
 
--   18 (Response (pCR vs RD) by ER/PR/HER2 Gentypes)
+-   18 (Response (pCR vs RD) by ER/PR/HER2 Genotypes)
 
 -   19 (Tumor Grade (1–3) by ER/PR/HER2 Genotypes)
 
@@ -56,8 +56,7 @@ Hypothesis:
 
 1.  Show the data: ages, race \~descriptive plot
     -   from 04
-    HEADLINE: Breast cancer patients are mainly white and in the ages
-              between 40-59
+    -   HEADLINE: Breast cancer patients are mainly white and in the ages between 40-59
 2.  Show Genotypes among different ages
-    - graph DO NOT exist yet
-3. Show data from
+    -   graph DOES NOT exist yet
+3.  Show data from
