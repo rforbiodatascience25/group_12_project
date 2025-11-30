@@ -10,9 +10,9 @@ editor: visual
 
 ```{r}
 
-library(dplyr)     
-library(ggplot2)     
-library(scales)
+library("dplyr")     
+library("ggplot2")     
+library("scales")
 ```
 
 #### Read data:
@@ -31,10 +31,19 @@ Ordering the different genotypes into groups from the augmented data:
 # Create ER/PR/HER2 combo groups
 dat <- dat |>
   mutate(
-    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
-    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
-    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
-    combo = paste(ER, PR, HER2, sep = ", ")
+    ER   = if_else(er_status  == "P",
+                   "ER+", 
+                   "ER-"),
+    PR   = if_else(pr_status  == "P", 
+                   "PR+", 
+                   "PR-"),
+    HER2 = if_else(her2_status == "P",
+                   "HER2+",
+                   "HER2-"),
+    combo = paste(ER,
+                  PR,
+                  HER2,
+                  sep = ", ")
   ) |>
   mutate(
     combo = factor(
@@ -69,13 +78,17 @@ dat |> count(combo)
 dat_treat <- dat |>
   mutate(
     treatment = as.character(treatment),
-    treatment = if_else(is.na(treatment), "NA", treatment)
+    treatment = if_else(is.na(treatment), 
+                        "NA",
+                        treatment)
   )
 
 # Summarise: count + proportions per genotype × treatment
 treat_summary <- dat_treat |>
-  group_by(combo, treatment) |>
-  summarise(n = n(), .groups = "drop") |>
+  group_by(combo,
+           treatment) |>
+  summarise(n = n(),
+            .groups = "drop") |>
   group_by(combo) |>
   mutate(
     total = sum(n),
@@ -130,7 +143,9 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
   # Percent labels
   geom_text(
     aes(
-      label = ifelse(pct > 0.02, paste0(round(pct * 100), "%"), "")
+      label = ifelse(pct > 0.02,
+                     paste0(round(pct * 100), "%"),
+                     "")
     ),
     position = position_fill(vjust = 0.5),
     size = 2.5,
@@ -138,21 +153,22 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
   ) +
   
   # Apply grey for NA + colors for other treatments
-  scale_fill_manual(values = treatment_colors, drop = FALSE) +
+  scale_fill_manual(values = treatment_colors,
+                    drop = FALSE) +
 
   scale_x_discrete(drop = FALSE) +
   scale_y_continuous(labels = percent_format()) +
-
   labs(
     title = "Treatment Distribution Across ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotype",
     y = "Proportion of Patients",
     fill = "Treatment"
   ) +
-  
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 20, hjust = 1, size = 7),
+    axis.text.x = element_text(angle = 20,
+                               hjust = 1,
+                               size = 7),
     plot.title  = element_text(size = 10),
     axis.title  = element_text(size = 9),
 
@@ -161,7 +177,8 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     legend.text  = element_text(size = 6),
 
     legend.box       = "horizontal",
-    legend.box.spacing = unit(0.2, "lines"),
+    legend.box.spacing = unit(0.2,
+                              "lines"),
     legend.key.size  = unit(3.5, "mm"),
     legend.key.width = unit(3.5, "mm"),
     legend.spacing.x = unit(0.5, "mm"),
@@ -175,8 +192,8 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
       title.position = "top"
     )
   ) +
-  
-  coord_cartesian(ylim = c(0, 1.15))
+  coord_cartesian(ylim = c(0,
+                           1.15))
 ```
 
 ##### Conclusion:
