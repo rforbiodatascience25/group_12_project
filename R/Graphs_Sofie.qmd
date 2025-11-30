@@ -59,7 +59,7 @@ nrow(dat)
 dat |> count(combo)
 ```
 
-#### **Graph 1:** 
+#### **Graph 1:**
 
 ##### **Response (pCR vs RD) by ER/PR/HER2 Gentypes**
 
@@ -115,7 +115,7 @@ ggplot(dat, aes(x = combo, fill = response)) +
 
 Estrogen receptor-positive breast cancer patients have a worse treatment response (Graph 1).
 
-#### **Graph 2:** 
+#### **Graph 2:**
 
 ##### Tumor Grade (1–3) by ER/PR/HER2 Combination
 
@@ -310,7 +310,7 @@ ggplot() +
   )
 ```
 
-##### Conclusion: 
+##### Conclusion:
 
 Far most of the genotype groups have a size 2 tumor stage, or otherwise they have developed into size 3-4. This is especially the case for groups that are Estrogen receptor positive, and the last two groups which are negative for both hormone receptors.
 
@@ -365,7 +365,7 @@ head(nodes_summary)
 group_counts_nodes
 ```
 
-##### **Graph - Bubble plot - Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes** 
+##### **Graph - Bubble plot - Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes**
 
 ```{r}
 
@@ -428,7 +428,7 @@ coord_cartesian(ylim = c(0.2, length(y_levels) + 0.7)) +
 
 ```
 
-##### Conclusion: 
+##### Conclusion:
 
 Generally it seems to be worst to have these three genotypes:
 
@@ -473,9 +473,25 @@ treat_summary$combo <- factor(
 
 ```{r}
 
+treatment_colors <- c(
+  "FAC"        = "#FF9999",
+  "FACT"       = "#E69F00",
+  "FACT+XRT/X" = "#B8860B",
+  "FEC"        = "#66A61E",
+  "FECT"       = "#1B9E77",
+  "NA"         = "grey70",  
+  "TFAC"       = "#00A6D6",
+  "TFAC/HT"    = "#56B4E9",
+  "TFEC"       = "#0072B2",
+  "TH/FAC"     = "#7570B3",
+  "TH/FEC"     = "#CC79A7",
+  "Tonly"      = "#F0027F",
+  "TXFAC"      = "#E7298A"
+)
+
 ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
   
-  # N LABELS ABOVE THE BARS 
+  # N labels above bars 
   geom_text(
     data = group_counts_treat,
     aes(
@@ -487,10 +503,10 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     inherit.aes = FALSE
   ) +
   
-  # STACKED BARS
+  # Stacked bars
   geom_col(position = "fill") +
   
-  # PERCENT LABELS INSIDE BARS
+  # Percent labels
   geom_text(
     aes(
       label = ifelse(pct > 0.02, paste0(round(pct * 100), "%"), "")
@@ -500,7 +516,9 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     color = "black",
   ) +
   
-  # AXES & SCALES
+  # Apply grey for NA + colors for other treatments
+  scale_fill_manual(values = treatment_colors, drop = FALSE) +
+
   scale_x_discrete(drop = FALSE) +
   scale_y_continuous(labels = percent_format()) +
 
@@ -537,10 +555,11 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     )
   ) +
   
-  coord_cartesian(ylim = c(0, 1.15))   # room for N labels
-
+  coord_cartesian(ylim = c(0, 1.15))
 ```
 
 ##### Conclusion:
 
-Generally, more different treatments were tried in the last two groups. Soo in conclusion, more personalized treatment options give better responses.
+Generally, more different treatments were tried in the last two groups, especially for the second last group, which also had the best response. The second group from the left (ER+, PR+, HER2-) also had more treatments but showed a bad response. So in conclusion, (1) more personalized treatment options give better response, (2) and a general broad TFAC and TFEC is not working for estrogen-positive patients.
+
+Aggressiveness, tumor size, and nodes do not necessarily mean a bad outcome. With personalized treatments, it can mean good results for the patient even if the stage or grade of the tumor seems to have a theoretically bad prognosis.
