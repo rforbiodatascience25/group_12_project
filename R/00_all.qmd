@@ -49,3 +49,15 @@ Final plots of Sofie:
 -   21 (Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes)
 
 -   22 (Treatment Distribution Across ER/PR/HER2 Genotypes)
+
+## What to include:
+
+Hypothesis:
+
+1.  Show the data: ages, race \~descriptive plot
+    -   from 04
+    HEADLINE: Breast cancer patients are mainly white and in the ages
+              between 40-59
+2.  Show Genotypes among different ages
+    - graph DO NOT exist yet
+3. Show data from
