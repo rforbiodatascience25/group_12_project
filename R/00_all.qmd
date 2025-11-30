@@ -49,3 +49,9 @@ Final plots of Sofie:
 -   21 (Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes)
 
 -   22 (Treatment Distribution Across ER/PR/HER2 Genotypes)
+
+## What to include:
+
+1.  Show the data: ages, race \~descriptive plot
+    -   age against
+2.  
