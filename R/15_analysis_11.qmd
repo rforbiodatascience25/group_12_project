@@ -7,6 +7,7 @@ format: html
 
 ```{r}
 #| message: false
+library(here)
 library(tidyverse)
 ```
 
@@ -14,16 +15,20 @@ library(tidyverse)
 
 ```{r}
 #| message: false
-augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
 ```
 
 ## Response to Treatment according to Receptor Status
 
 ```{r}
-augment_data %>%
-  count(receptor_group, response) %>%
-  group_by(receptor_group) %>%
-  mutate(percent = n / sum(n) * 100) %>%
+dat_aug |>
+  count(receptor_group, response) |>
+  group_by(receptor_group) |>
+  mutate(percent = n / sum(n) * 100) |>
   ggplot(aes(x = receptor_group, y = percent, fill = response)) +
   geom_col(position = "stack") +
   theme_minimal() +

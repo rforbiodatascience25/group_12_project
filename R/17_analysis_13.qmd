@@ -7,6 +7,7 @@ format: html
 
 ```{r}
 #| message: false
+library(here)
 library(tidyverse)
 ```
 
@@ -14,13 +15,17 @@ library(tidyverse)
 
 ```{r}
 #| message: false
-augment_data <- read_tsv("/net/pupil1/home/people/s253689/projects/group_12_project/data/03_dat_aug.tsv")
+input_file <- here("data/03_dat_aug.tsv")
+dat_aug <- read_tsv(
+  input_file,
+  na = c("", "NA"),
+  show_col_types = FALSE)
 ```
 
 ## PCA
 
 ```{r}
-df_clean <- augment_data |>
+df_clean <- dat_aug |>
   select(her2_num, er_num, pr_num, age) |>
   drop_na()
 
