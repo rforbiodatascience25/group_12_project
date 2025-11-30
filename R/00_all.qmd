@@ -56,4 +56,8 @@ Hypothesis:
 
 1.  Show the data: ages, race \~descriptive plot
     -   from 04
-2.  
+    HEADLINE: Breast cancer patients are mainly white and in the ages
+              between 40-59
+2.  Show Genotypes among different ages
+    - graph DO NOT exist yet
+3. Show data from
