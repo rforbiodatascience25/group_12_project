@@ -1,7 +1,8 @@
 # Raw data
-.data/_raw/raw_data.RData
-.data/_raw
+data/_raw/raw_data.RData
+data/_raw
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+.nfs000000038653cfdc00000007
