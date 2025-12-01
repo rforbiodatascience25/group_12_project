@@ -46,7 +46,7 @@ s253719 (Eszter Hudra)
 -   **Grade/Level of aggressiveness (1-3)**
     -   The higher the more aggressive
 
-----
+---
 
 ## Materials and Methods (continued)
 
