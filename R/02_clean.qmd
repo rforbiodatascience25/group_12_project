@@ -1,6 +1,8 @@
 ---
 title: "02_clean"
-format: html
+format: 
+  html:
+    self-contained: true
 editor: visual
 ---
 
