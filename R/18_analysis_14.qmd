@@ -86,6 +86,8 @@ group_counts_resp <- dat |>
   summarise(N_group = n(),
             .groups = "drop")
 
+custom_palette <- c("#e27bb1", "#A6D15A")
+
 ggplot(dat,
        aes(x = combo,
            fill = response)) +
@@ -110,6 +112,7 @@ ggplot(dat,
     y = paste0("Proportion of Patients (N = ", N_total, ")"),
     fill = "Response"
   ) +
+  scale_fill_manual(values = custom_palette) +
   theme_minimal() +
   theme(
     axis.text.x  = element_text(angle = 45,

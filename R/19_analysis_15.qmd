@@ -94,6 +94,8 @@ group_counts_grade <- dat_grade |>
   summarise(N_group = n(),
             .groups = "drop")
 
+custom_palette <- c("#e27bb1", "lightblue", "#A6D15A", "gray")
+
 ggplot(dat_grade,
        aes(
          x = combo,
@@ -131,6 +133,7 @@ ggplot(dat_grade,
     y = paste0("Proportion of Patients (N = ", N_total_grade, ")"),
     fill = "Grade"
   ) +
+  scale_fill_manual(values = custom_palette) +
   theme_minimal() +
   theme(
     axis.text.x  = element_text(angle = 45,

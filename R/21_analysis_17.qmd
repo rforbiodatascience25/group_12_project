@@ -138,8 +138,8 @@ ggplot() +
 
   # bubble colour = percentage (red gradient)
   scale_colour_gradient(
-    low    = "#FFEEEE",
-    high   = "#990000",
+    low    = "#e27bb1",
+    high   = "#A6D15A",
     labels = percent_format(accuracy = 1),
     name   = "Proportion"
   ) +

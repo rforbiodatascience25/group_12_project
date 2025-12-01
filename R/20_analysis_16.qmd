@@ -176,10 +176,9 @@ ggplot() +
       label = paste0("N=", N_group)),
     size = 3
   ) +
-  
   scale_fill_gradient(
-    low   = "#FFEEEE",
-    high  = "#990000",
+    low   = "#e27bb1",
+    high  = "#A6D15A",
     labels = percent_format(accuracy = 1),
     name  = "Proportion"
   ) +

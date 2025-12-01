@@ -35,6 +35,8 @@ df_plot1 <- augment_data |>
   count(age_group,
         receptor_group)
 
+custom_palette <- c("#a53e76", "#d24787", "#e2619f", "#e5a0c6", "#B3D84C", "#90C84C", "#4F9A2F", "#1D6510")
+
 ggplot(df_plot1,
        aes(x = age_group,
            y = n,
@@ -43,6 +45,6 @@ ggplot(df_plot1,
   labs(title = "Distribution of age groups and genotypes",
        y = "Amount",
        x = "Age Groups") +
-  # scale_fill_brewer(palette = "Set2") +
+  scale_fill_manual(values = custom_palette) +
   theme_bw()
 ```
