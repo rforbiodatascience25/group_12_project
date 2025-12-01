@@ -1,134 +1,142 @@
 ---
-title: "Breast Cancer Response Analysis – Group 12"
+title: "Exam in R for data science - Group 12"
 format:
   revealjs:
     smaller: true
-    slide-number: true
+    slide-number: true     
     center: false
----
-
-<!-- Embedded CSS for floating section label -->
-<style>
-.section-label {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  z-index: 9999;
-}
-</style>
-
 ---
 
 ## **Introduction**
 
-<div class="section-label">Introduction</div>
+### **Group 12:**
+
+Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra
+
+### Chosen dataset:
+
+MAQC-II Project: human breast cancer (BR) dataset
+
+------------------------------------------------------------------------
+
+## Dataset Overview
+
+-   MAQC-II Project: human breast cancer (BR) dataset
+-   Variables analyzed:
+    -   **Demographics**: Age, Race
+    -   **Clinical(in grades):** 
+        -   Tumor Size before Treatment, 
+        -   Lymph node involvement before Treatment 
+        -   Grade/Level of Aggressiveness
+    -  **Receptor Status(+/-):**
+        -   Estrogen Receptor
+        -   Progesterone Receptor
+        -   HER2 Receptor
+    -   **Treatments**
+    -   **Response to Treatment**: 
+         -   pCR = pathological complete response (=good)
+         -   RD = residual disease (=bad)
 
 
-### Group 12  
-Sofie Emilie Hagelund • Henrique Gomes • Paula Meer Janssen •  
-Shuyue Zhang • Eszter Hudra
+------------------------------------------------------------------------
 
-
-### Objective  
-Explore how **genotype**, **tumor characteristics**, and **treatments** relate to **treatment response** in breast cancer.
-
----
-
-## Dataset Overview**
-
-<div class="section-label">Materials and Methods</div>
-
-
-- MAQC-II breast cancer dataset  
-
-
-- Variables analyzed:
-  - Demographics: Age, Race  
-  - Clinical: Tumor size, Lymph nodes, Grade  
-  - Biology: ER, PR, HER2  
-  - Outcome: pCR (good) vs RD (bad)
-
----
-
-## Demographics**
-
-<div class="section-label">Materials and Methods</div>
+## Demographics - Age and Race
 
 ![](presentation_files/04.png){fig-align="center"}
 
-- Majority: white, age 40–59
+-   Breast cancer patients are mainly white and between the ages of 40-59.
 
----
+------------------------------------------------------------------------
 
-## **Genotype Distribution**
-
-<div class="section-label">Materials and Methods</div>
+## Age and Genotype
 
 ![](presentation_files/23.png){fig-align="center"}
 
-- Frequent patterns: ER+, PR+, HER2– & triple negative  
-- No visible age–genotype relationship
+-   **The most common Genotype trend is**
+    -   ER+, PR+, HER2-
+    -   ER-, PR-, HER2- (Triple negative)
 
----
+There is [no clear]{.underline} correlation between age and genotype.
 
-## **Genotype vs Treatment Response**
+------------------------------------------------------------------------
 
-<div class="section-label">Analysis</div>
+### Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?
 
-**Do expected prognoses match observed outcomes?**
+#### ER+ patients have the worst treatment response
 
 ![](presentation_files/18.png){fig-align="center"}
 
-- ER+ = *worst* response  
-- Triple negative & HER2+ only = *best* response  
+-   **Surprisingly**:
+    -   ER+ patients have the worst treatment response.
+    -   HER2+ only patients and triple-negative patients have the best treatment response.
 
----
+------------------------------------------------------------------------
 
-## **Tumor Characteristics**
+### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-<div class="section-label">Analysis</div>
-
-**Do size, grade, or lymph nodes predict response?**
+#### Treatment response does not correlate with tumor aggressiveness
 
 ![](presentation_files/19.png){fig-align="center"}
 
-- ER+ poor response not explained by aggressiveness  
-- ER-/PR- aggressive tumors still respond well  
-- Size & lymph nodes show **no consistent correlation**
+-   ER+ do not have a more aggressive tumor grade = no correlation to response.
+-   ER-, PR- have a more aggressive tumor grade = no correlation to response.
 
----
+------------------------------------------------------------------------
+### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-## **Treatment Types**
+#### Treatment response does not correlate with tumor size
 
-<div class="section-label">Analysis</div>
+![](presentation_files/20.png){fig-align="center"}
 
-**Do specific genotypes benefit from specific treatments?**
+-   Most of the genotypes have a tumor size of 2, or developed into size 3-4. Especially the case for:
 
-<div class="section-label">Analysis</div>
+    -   ER+ genotype, and ER-, PR- genotype combinations.
+
+------------------------------------------------------------------------
+### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
+
+#### Treatment response does not correlate with lymph node involvement
+
+![](presentation_files/21.png){fig-align="center"}
+
+-   Generally, following genotypes have the most lymph node involvement:
+
+    -   ER+, PR-, HER2-
+
+    -   ER-,PR-, HER2+
+
+    -   ER-, PR-, HER2- (triple negative)
+
+------------------------------------------------------------------------
+
+### Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?
+
+#### More treatment options lead to better response
 
 ![](presentation_files/22.png){fig-align="center"}
 
-- Genotypes with **more specialized treatments** → better outcomes  
-- TFAC/TFEC performs poorly for ER+ patients
+-   The last two groups were exposed to the most different treatment options:
 
----
+    -   ER-,PR-, HER2+ and ER-, PR-, HER2- (triple negative)
 
-## **Conclusion**
+-   A general broad TFAC and TFEC is not working for ER+ patients.
 
-<div class="section-label">Discussion</div>
+------------------------------------------------------------------------
 
-- **Genotype** predicts response better than size/grade  
-- **Personalized treatment** improves outcomes  
-- Classical prognoses (ER+) don’t always match real data  
-- Supports **genotype-guided therapy strategies**
+## Conclusion/Discussion
 
----
+-   More personalized treatment options give better response.
 
-## **Thank you for your attention!**
+-   The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
 
-We are happy to answer questions.
+------------------------------------------------------------------------
+
+## Thank you for your Attention
+
+We are happy to answer any of your questions!
+
+------------------------------------------------------------------------
+
+## References
+
+here link to dataset

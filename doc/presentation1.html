@@ -10,7 +10,7 @@
 <link href="presentation1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <title>Breast Cancer Response Analysis – Group 12</title>
+  <title>Exam in R for data science - Group 12</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -325,143 +325,154 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Breast Cancer Response Analysis – Group 12</h1>
+  <h1 class="title">Exam in R for data science - Group 12</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section class="slide level2">
-
-<!-- Embedded CSS for floating section label -->
-<style>
-.section-label {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  z-index: 9999;
-}
-</style>
-</section>
 <section id="introduction" class="slide level2">
 <h2><strong>Introduction</strong></h2>
-<div class="section-label">
-Introduction
-</div>
-<h3 id="group-12">Group 12</h3>
-<p>Sofie Emilie Hagelund • Henrique Gomes • Paula Meer Janssen •<br>
-Shuyue Zhang • Eszter Hudra</p>
-<h3 id="objective">Objective</h3>
-<p>Explore how <strong>genotype</strong>, <strong>tumor characteristics</strong>, and <strong>treatments</strong> relate to <strong>treatment response</strong> in breast cancer.</p>
+<h3 id="group-12"><strong>Group 12:</strong></h3>
+<p>Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra</p>
+<h3 id="chosen-dataset">Chosen dataset:</h3>
+<p>MAQC-II Project: human breast cancer (BR) dataset</p>
 </section>
 <section id="dataset-overview" class="slide level2">
-<h2>Dataset Overview**</h2>
-<div class="section-label">
-Materials and Methods
-</div>
+<h2>Dataset Overview</h2>
 <ul>
-<li><p>MAQC-II breast cancer dataset</p></li>
-<li><p>Variables analyzed:</p>
+<li>MAQC-II Project: human breast cancer (BR) dataset</li>
+<li>Variables analyzed:
 <ul>
-<li>Demographics: Age, Race<br>
-</li>
-<li>Clinical: Tumor size, Lymph nodes, Grade<br>
-</li>
-<li>Biology: ER, PR, HER2<br>
-</li>
-<li>Outcome: pCR (good) vs RD (bad)</li>
+<li><strong>Demographics</strong>: Age, Race</li>
+<li><strong>Clinical(in grades):</strong>
+<ul>
+<li>Tumor Size before Treatment,</li>
+<li>Lymph node involvement before Treatment</li>
+<li>Grade/Level of Aggressiveness</li>
+</ul></li>
+<li><strong>Receptor Status(+/-):</strong>
+<ul>
+<li>Estrogen Receptor</li>
+<li>Progesterone Receptor</li>
+<li>HER2 Receptor</li>
+</ul></li>
+<li><strong>Treatments</strong></li>
+<li><strong>Response to Treatment</strong>:
+<ul>
+<li>pCR = pathological complete response (=good)</li>
+<li>RD = residual disease (=bad)</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="demographics" class="slide level2">
-<h2>Demographics**</h2>
-<div class="section-label">
-Materials and Methods
-</div>
+<section id="demographics---age-and-race" class="slide level2">
+<h2>Demographics - Age and Race</h2>
 
 <img data-src="presentation_files/04.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>Majority: white, age 40–59</li>
+<li>Breast cancer patients are mainly white and between the ages of 40-59.</li>
 </ul>
 </section>
-<section id="genotype-distribution" class="slide level2">
-<h2><strong>Genotype Distribution</strong></h2>
-<div class="section-label">
-Materials and Methods
-</div>
+<section id="age-and-genotype" class="slide level2">
+<h2>Age and Genotype</h2>
 
 <img data-src="presentation_files/23.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>Frequent patterns: ER+, PR+, HER2– &amp; triple negative<br>
-</li>
-<li>No visible age–genotype relationship</li>
+<li><strong>The most common Genotype trend is</strong>
+<ul>
+<li>ER+, PR+, HER2-</li>
+<li>ER-, PR-, HER2- (Triple negative)</li>
+</ul></li>
 </ul>
+<p>There is <u>no clear</u> correlation between age and genotype.</p>
 </section>
-<section id="genotype-vs-treatment-response" class="slide level2">
-<h2><strong>Genotype vs Treatment Response</strong></h2>
-<div class="section-label">
-Analysis
-</div>
-<p><strong>Do expected prognoses match observed outcomes?</strong></p>
+<section class="slide level2">
+
+<h3 id="do-the-theoretically-predicted-prognoses-for-the-genotypes-match-the-observed-responses-in-the-dataset">Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?</h3>
+<h4 id="er-patients-have-the-worst-treatment-response">ER+ patients have the worst treatment response</h4>
 
 <img data-src="presentation_files/18.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>ER+ = <em>worst</em> response<br>
-</li>
-<li>Triple negative &amp; HER2+ only = <em>best</em> response</li>
+<li><strong>Surprisingly</strong>:
+<ul>
+<li>ER+ patients have the worst treatment response.</li>
+<li>HER2+ only patients and triple-negative patients have the best treatment response.</li>
+</ul></li>
 </ul>
 </section>
-<section id="tumor-characteristics" class="slide level2">
-<h2><strong>Tumor Characteristics</strong></h2>
-<div class="section-label">
-Analysis
-</div>
-<p><strong>Do size, grade, or lymph nodes predict response?</strong></p>
+<section class="slide level2">
 
-<img data-src="presentation_files/19.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>ER+ poor response not explained by aggressiveness<br>
-</li>
-<li>ER-/PR- aggressive tumors still respond well<br>
-</li>
-<li>Size &amp; lymph nodes show <strong>no consistent correlation</strong></li>
-</ul>
-</section>
-<section id="treatment-types" class="slide level2">
-<h2><strong>Treatment Types</strong></h2>
-<div class="section-label">
-Analysis
-</div>
-<p><strong>Do specific genotypes benefit from specific treatments?</strong></p>
-<div class="section-label">
-Analysis
-</div>
-
-<img data-src="presentation_files/22.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>Genotypes with <strong>more specialized treatments</strong> → better outcomes<br>
-</li>
-<li>TFAC/TFEC performs poorly for ER+ patients</li>
-</ul>
-</section>
-<section id="conclusion" class="slide level2">
-<h2><strong>Conclusion</strong></h2>
-<div class="section-label">
-Discussion
+<h3 id="does-the-treatment-response-from-the-genotypes-correlate-with-tumor-aggressiveness-size-and-lymph-node-involvement">Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</h3>
+<h4 id="treatment-response-does-not-correlate-with-tumor-aggressiveness">Treatment response does not correlate with tumor aggressiveness</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="presentation_files/19.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
 </div>
 <ul>
-<li><strong>Genotype</strong> predicts response better than size/grade<br>
-</li>
-<li><strong>Personalized treatment</strong> improves outcomes<br>
-</li>
-<li>Classical prognoses (ER+) don’t always match real data<br>
-</li>
-<li>Supports <strong>genotype-guided therapy strategies</strong></li>
+<li>ER+ do not have a more aggressive tumor grade = no correlation to response.</li>
+<li>ER-, PR- have a more aggressive tumor grade = no correlation to response.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#### Treatment response does not correlate with lymph node involvement</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><img data-src="presentation_files/21.png" class="quarto-figure quarto-figure-center"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- Generally, following genotypes have the most lymph node involvement:</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- ER+, PR-, HER2-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- ER-,PR-, HER2+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- ER-, PR-, HER2- (triple negative)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="does-the-response-and-treatment-type-give-any-insights-into-whether-a-specific-treatment-is-favorable-for-certain-genotypes">Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?</h3>
+<h4 id="more-treatment-options-lead-to-better-response">More treatment options lead to better response</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="presentation_files/22.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<ul>
+<li><p>The last two groups were exposed to the most different treatment options:</p>
+<ul>
+<li>ER-,PR-, HER2+ and ER-, PR-, HER2- (triple negative)</li>
+</ul></li>
+<li><p>A general broad TFAC and TFEC is not working for ER+ patients.</p></li>
+</ul>
+</section>
+<section id="conclusiondiscussion" class="slide level2">
+<h2>Conclusion/Discussion</h2>
+<ul>
+<li><p>More personalized treatment options give better response.</p></li>
+<li><p>The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.</p></li>
 </ul>
 </section>
 <section id="thank-you-for-your-attention" class="slide level2">
-<h2><strong>Thank you for your attention!</strong></h2>
-<p>We are happy to answer questions.</p>
+<h2>Thank you for your Attention</h2>
+<p>We are happy to answer any of your questions!</p>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<p>here link to dataset</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
