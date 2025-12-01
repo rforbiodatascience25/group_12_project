@@ -41,9 +41,9 @@ MAQC-II Project: human breast cancer (BR) dataset
 
 ### Demographics - Age and Race
 
-![](presentation_files/04.png){fig-align="center"}
+![](images/04_key_plot_1.png){fig-align="center"}
 
--   Breast cancer patients are mainly white and between the ages of 40-59.
+\- Breast cancer patients are mainly white and between the ages of 40-59.
 
 ------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 <br><br><br><br>
 
--   More personalized treatment options give better response. <br><br> 
+-   More personalized treatment options give better response. <br><br>
 
 -   The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
 
@@ -140,6 +140,6 @@ We are happy to answer any of your questions!
 
 ------------------------------------------------------------------------
 
-## References
+## Reference
 
-here link to dataset
+Shi L. *Gene expression data from 230 stage I–III breast cancers (GSE20194)*. NCBI Gene Expression Omnibus. GEO Series GSE20194. Accessed via [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE20194](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE20194&utm_source=chatgpt.com)
