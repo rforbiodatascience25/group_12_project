@@ -9,17 +9,16 @@ editor: visual
 #### Loading libraries:
 
 ```{r}
-
-library(dplyr)     
-library(ggplot2)     
-library(scales)
+#| message: false
+library("here")
+library("tidyverse")
 ```
 
 #### Read data:
 
 ```{r}
-
-dat <- read.delim("../data/03_dat_aug.tsv")
+#| message: false
+dataset <- read_tsv(file = here("data/03_dat_aug.tsv"))
 ```
 
 #### Re-ordering
@@ -27,15 +26,26 @@ dat <- read.delim("../data/03_dat_aug.tsv")
 Ordering the different genotypes into groups from the augmented data:
 
 ```{r}
-
 # Create ER/PR/HER2 combo groups
-dat <- dat |>
+dataset <- dataset |>
   mutate(
-    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
-    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
-    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
-    combo = paste(ER, PR, HER2, sep = ", ")
-  ) |>
+    ER = if_else(
+      er_status == "P", 
+      "ER+",
+      "ER-"),
+    PR = if_else(
+      pr_status == "P",
+      "PR+", 
+      "PR-"),
+    HER2 = if_else(
+      her2_status == "P",
+      "HER2+",
+      "HER2-"),
+    combo = paste(
+      ER,
+      PR,
+      HER2,
+      sep = ", ")) |>
   mutate(
     combo = factor(
       combo,
@@ -47,16 +57,14 @@ dat <- dat |>
         "ER-, PR+, HER2-",
         "ER-, PR+, HER2+",
         "ER-, PR-, HER2+",
-        "ER-, PR-, HER2-"
-      )
-    )
-  )
+        "ER-, PR-, HER2-")))
 
 # check: how many rows total?
-nrow(dat)
+nrow(dataset)
 
 # check: how many patients in each genotype?
-dat |> count(combo)
+dataset |> 
+  count(combo)
 ```
 
 #### **Graph 5:**
@@ -64,53 +72,66 @@ dat |> count(combo)
 ##### **Prep: treatment among genotypes**
 
 ```{r}
-
 # Clean treatment variable
-dat_treat <- dat |>
+dat_treat <- dataset |>
   mutate(
     treatment = as.character(treatment),
-    treatment = if_else(is.na(treatment), "NA", treatment)
-  )
+    treatment = if_else(
+      is.na(treatment),
+      "NA",
+      treatment))
 
 # Summarise: count + proportions per genotype × treatment
 treat_summary <- dat_treat |>
-  group_by(combo, treatment) |>
-  summarise(n = n(), .groups = "drop") |>
+  group_by(combo,
+           treatment) |>
+  summarise(n = n(),
+            .groups = "drop") |>
   group_by(combo) |>
   mutate(
     total = sum(n),
-    pct   = n / total
-  ) |>
+    pct   = n / total) |>
   ungroup()
+
+# N per combo (for labels)
+group_counts_treat <- treat_summary |>
+  distinct(combo,
+           total) |>
+  rename(N_group = total)
 
 # Keep the same genotype order you already defined
 treat_summary$combo <- factor(
   treat_summary$combo,
-  levels = levels(dat$combo)
-)
+  levels = levels(dataset$combo))
 ```
 
 ##### **Graph -** Treatment Distribution Across ER/PR/HER2 Genotypes
 
 ```{r}
-
+# Construct color palett
 treatment_colors <- c(
-  "FAC"        = "#FF9999",
-  "FACT"       = "#E69F00",
-  "FACT+XRT/X" = "#B8860B",
-  "FEC"        = "#66A61E",
-  "FECT"       = "#1B9E77",
-  "NA"         = "grey70",  
-  "TFAC"       = "#00A6D6",
-  "TFAC/HT"    = "#56B4E9",
-  "TFEC"       = "#0072B2",
-  "TH/FAC"     = "#7570B3",
-  "TH/FEC"     = "#CC79A7",
-  "Tonly"      = "#F0027F",
-  "TXFAC"      = "#E7298A"
-)
+  "FAC"        = "#7f3667",
+  "FACT"       = "#bb437e",
+  "FACT+XRT/X" = "#e44b8d",
+  "FEC"        = "#e2619f",
+  "TFAC"       = "#e5a0c6",
+  "FECT"       = "lightblue",
+  "TFAC/HT"    = "#B3D84C",
+  "TFEC"       = "#90C84C",
+  "TH/FAC"     = "#70B83F",
+  "TH/FEC"     = "#4F9A2F",
+  "Tonly"      = "#1D6510",
+  "TXFAC"      = "#004400",
+  "NA"         = "grey")
+```
 
-ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
+```{r}
+gg_18 <- ggplot(
+  treat_summary,
+  aes(
+    x = combo,
+    y = pct,
+    fill = treatment)) +
   
   # N labels above bars 
   geom_text(
@@ -118,11 +139,10 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
     aes(
       x = combo,
       y = 1.07,                     
-      label = paste0("N=", N_group)
-    ),
+      label = paste0("N=",
+                     N_group)),
     size = 3,
-    inherit.aes = FALSE
-  ) +
+    inherit.aes = FALSE) +
   
   # Stacked bars
   geom_col(position = "fill") +
@@ -130,53 +150,53 @@ ggplot(treat_summary, aes(x = combo, y = pct, fill = treatment)) +
   # Percent labels
   geom_text(
     aes(
-      label = ifelse(pct > 0.02, paste0(round(pct * 100), "%"), "")
-    ),
+      label = ifelse(
+        pct > 0.02,
+        paste0(round(pct * 100), "%"),
+        "")),
     position = position_fill(vjust = 0.5),
-    size = 2.5,
-    color = "black",
-  ) +
+    size = 2.5) +
   
   # Apply grey for NA + colors for other treatments
-  scale_fill_manual(values = treatment_colors, drop = FALSE) +
+  scale_fill_manual(values = treatment_colors) +
 
   scale_x_discrete(drop = FALSE) +
   scale_y_continuous(labels = percent_format()) +
-
   labs(
     title = "Treatment Distribution Across ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotype",
     y = "Proportion of Patients",
     fill = "Treatment"
   ) +
-  
   theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 20, hjust = 1, size = 7),
-    plot.title  = element_text(size = 10),
-    axis.title  = element_text(size = 9),
-
-    legend.position = "bottom",
-    legend.title = element_text(size = 7),
-    legend.text  = element_text(size = 6),
-
-    legend.box       = "horizontal",
-    legend.box.spacing = unit(0.2, "lines"),
-    legend.key.size  = unit(3.5, "mm"),
-    legend.key.width = unit(3.5, "mm"),
-    legend.spacing.x = unit(0.5, "mm"),
-    legend.spacing.y = unit(0.2, "mm")
-  ) +
-  
+  theme(axis.text.x  = element_text(angle = 20,
+                                    hjust = 1, 
+                                    size = 8),
+        plot.title   = element_text(hjust = 0.5),
+        axis.title.x = element_text(vjust = 0),
+        
+        legend.position = "bottom",
+        legend.title = element_text(size = 10),
+        legend.text  = element_text(size = 8),
+        legend.box.spacing = unit(0.2, "lines"),
+        legend.key.size  = unit(3.5, "mm")) +
   guides(
     fill = guide_legend(
       ncol = 7,
       byrow = TRUE,
-      title.position = "top"
-    )
-  ) +
-  
-  coord_cartesian(ylim = c(0, 1.15))
+      title.position = "top")) +
+  coord_cartesian(ylim = c(0, 1.1))
+
+gg_18
+```
+
+```{r}
+ggsave(gg_18, 
+       filename = "22_key_plot_18.png",
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 ```
 
 ##### Conclusion:
