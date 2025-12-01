@@ -6,7 +6,7 @@ s252750 - octopusply <br /> s253719 - teranni <br /> s253689 - paulameerjanssen 
 
 ## Presentation
 
-<https://teaching.healthtech.dtu.dk/22100/rstudio5/files/projects/group_12_project/doc/presentation.html#/title-slide>
+<https://raw.githack.com/rforbiodatascience25/group_12_project/main/doc/presentation.html#/title-slide>
 
 ## Data retrieval
 
