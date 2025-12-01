@@ -90,7 +90,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## ER+ patients have the worst treatment response
+### ER+ patients have the worst treatment response
 
 ![](presentation_files/18.png){fig-align="center"}
 
@@ -108,7 +108,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Treatment response does not correlate with tumor aggressiveness
+### Treatment response does not correlate with tumor aggressiveness
 
 ![](presentation_files/19.png){fig-align="center"}
 
@@ -118,7 +118,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Treatment response does not correlate with tumor size
+### Treatment response does not correlate with tumor size
 
 ![](presentation_files/20.png){fig-align="center"}
 
@@ -128,7 +128,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Treatment response does not correlate with lymph node involvement
+### Treatment response does not correlate with lymph node involvement
 
 ![](presentation_files/21.png){fig-align="center"}
 
@@ -148,7 +148,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## More treatment options lead to better response
+### More treatment options lead to better response
 
 ![](presentation_files/22.png){fig-align="center"}
 
