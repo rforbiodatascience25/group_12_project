@@ -9,17 +9,16 @@ editor: visual
 #### Loading libraries:
 
 ```{r}
-
-library(dplyr)    
-library(ggplot2)    
-library(scales)
+#| message: false
+library("here")
+library("tidyverse")
 ```
 
 #### Read data:
 
 ```{r}
-
-dat <- read.delim("../data/03_dat_aug.tsv")
+#| message: false
+dataset <- read_tsv(file = here("data/03_dat_aug.tsv"))
 ```
 
 #### Re-ordering
@@ -27,15 +26,26 @@ dat <- read.delim("../data/03_dat_aug.tsv")
 Ordering the different genotypes into groups from the augmented data:
 
 ```{r}
-
 # Create ER/PR/HER2 combo groups
-dat <- dat |>
+dataset <- dataset |>
   mutate(
-    ER   = if_else(er_status  == "P", "ER+",  "ER-"),
-    PR   = if_else(pr_status  == "P", "PR+",  "PR-"),
-    HER2 = if_else(her2_status == "P", "HER2+","HER2-"),
-    combo = paste(ER, PR, HER2, sep = ", ")
-  ) |>
+    ER = if_else(
+      er_status == "P", 
+      "ER+",
+      "ER-"),
+    PR = if_else(
+      pr_status == "P",
+      "PR+", 
+      "PR-"),
+    HER2 = if_else(
+      her2_status == "P",
+      "HER2+",
+      "HER2-"),
+    combo = paste(
+      ER,
+      PR,
+      HER2,
+      sep = ", ")) |>
   mutate(
     combo = factor(
       combo,
@@ -47,47 +57,45 @@ dat <- dat |>
         "ER-, PR+, HER2-",
         "ER-, PR+, HER2+",
         "ER-, PR-, HER2+",
-        "ER-, PR-, HER2-"
-      )
-    )
-  )
+        "ER-, PR-, HER2-")))
 
 # check: how many rows total?
-nrow(dat)
+nrow(dataset)
 
 # check: how many patients in each genotype?
-dat |> count(combo)
+dataset |> 
+  count(combo)
 ```
 
 #### Graph 4:
 
-##### **Prepare for bubble plot to look at the lymph nodes among genotype groups:**
+##### **Prepare for a bubble plot to look at the lymph nodes among genotype groups:**
 
 ```{r}
 
 # 1. Clean node categories (0–3 + NA)
-dat_nodes <- dat |>
+dat_nodes <- dataset |>
   mutate(
     nodes_cat = if_else(
       is.na(nodes_before),
       "NA",
-      as.character(nodes_before)
-    )
-  )
+      as.character(nodes_before)))
 
 # 2. Summarise counts and percentages per combo × node category
 nodes_summary <- dat_nodes |>
-  count(combo, nodes_cat, name = "n") |>
+  count(combo, 
+        nodes_cat,
+        name = "n") |>
   group_by(combo) |>
   mutate(
     total = sum(n),
-    pct   = n / total
-  ) |>
+    pct   = n / total) |>
   ungroup()
 
 # 3. N per combo (for labels)
 group_counts_nodes <- nodes_summary |>
-  distinct(combo, total) |>
+  distinct(combo,
+           total) |>
   rename(N_group = total)
 
 # 4. Y-axis levels for plotting:
@@ -97,14 +105,16 @@ y_levels <- c("0", "1", "2", "3", "NA", "N")
 # Add plotting factor for nodes
 nodes_summary <- nodes_summary |>
   mutate(
-    nodes_y = factor(nodes_cat, levels = y_levels)
-  )
+    nodes_y = factor(
+      nodes_cat,
+      levels = y_levels))
 
 # Data frame for N labels row
 n_label_df <- group_counts_nodes |>
   mutate(
-    nodes_y = factor("N", levels = y_levels)
-  )
+    nodes_y = factor(
+      "N", 
+      levels = y_levels))
 
 head(nodes_summary)
 group_counts_nodes
@@ -113,63 +123,67 @@ group_counts_nodes
 ##### **Graph - Bubble plot - Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes**
 
 ```{r}
-
-ggplot() +
+gg_17 <- ggplot() +
   # Bubbles: size & colour = percentage
   geom_point(
     data = nodes_summary,
-    aes(x = combo, y = nodes_y, size = pct, colour = pct),
-    alpha = 0.9
-  ) +
+    aes(
+      x = combo,
+      y = nodes_y,
+      size = pct, 
+      colour = pct),
+    alpha = 0.9) +
 
   # N labels in their own row ABOVE NA
   geom_text(
     data = n_label_df,
-    aes(x = combo, y = nodes_y, label = paste0("N=", N_group)),
-    size = 3,
-    ) +
+    aes(
+      x = combo,
+      y = nodes_y,
+      label = paste0("N=", N_group)),
+    size = 3,) +
 
   # bubble size = percentage (hide legend)
   scale_size(
     range  = c(3, 10),
     labels = percent_format(accuracy = 1),
-    guide  = "none"
-  ) +
+    guide  = "none") +
 
   # bubble colour = percentage (red gradient)
   scale_colour_gradient(
-    low    = "#e27bb1",
-    high   = "#A6D15A",
+    low    = "#e2619f",
+    high   = "#90C84C",
     labels = percent_format(accuracy = 1),
-    name   = "Proportion"
-  ) +
+    name   = "Proportion") +
 
   # keep all 8 genotype groups
   scale_x_discrete(drop = FALSE) +
 
-  # y labels: from TOP → BOTTOM = NA, 3, 2, 1, 0
+  # y labels: from TOP to BOTTOM = NA, 3, 2, 1, 0; "" hides N
   scale_y_discrete(
     limits = y_levels,
-    labels = c("0", "1", "2", "3", "NA", "")   # bottom→top; top tick "" hides N
-  ) +
+    labels = c("0", "1", "2", "3", "NA", "")) +
 
   labs(
     title = "Lymph Node Status Before Treatment by ER/PR/HER2 Genotypes",
     x     = "ER/PR/HER2 Genotypes",
-    y     = "Nodes before surgery"
-  ) +
-
-coord_cartesian(ylim = c(0.2, length(y_levels) + 0.7)) +
-  
+    y     = "Nodes before surgery") +
+  coord_cartesian(ylim = c(0.2,
+                           length(y_levels) + 0.7)) +
   theme_minimal() +
-  theme(
-    axis.text.x  = element_text(angle = 45, hjust = 1, size = 8),
-    plot.title   = element_text(size = 9),
-    axis.title.x = element_text(size = 8),
-    axis.title.y = element_text(size = 8),
-    legend.title = element_text(size = 8),
-    legend.text  = element_text(size = 8)
-  )
+  theme(axis.text.x  = element_text(angle = 45,
+                                    hjust = 0.8,
+                                    size = 8),
+        plot.title   = element_text(hjust = 0.5),
+        axis.title.x = element_text(vjust = 0))
+
+gg_17
+```
+
+```{r}
+ggsave(gg_17, 
+       filename = "21_key_plot_17.png",
+       device = "png")
 ```
 
 ##### Conclusion:

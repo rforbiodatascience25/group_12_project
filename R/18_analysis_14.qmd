@@ -9,16 +9,16 @@ editor: visual
 #### Loading libraries:
 
 ```{r}
-library("dplyr") 
-library("ggplot2") 
-library("scales")
+#| message: false
+library("here")
+library("tidyverse")
 ```
 
 #### Read data:
 
 ```{r}
-
-dat <- read.delim("../data/03_dat_aug.tsv")
+#| message: false
+dataset <- read_tsv(file = here("data/03_dat_aug.tsv"))
 ```
 
 #### Re-ordering
@@ -28,22 +28,25 @@ Ordering the different genotypes into groups from the augmented data:
 ```{r}
 
 # Create ER/PR/HER2 combo groups
-dat <- dat |>
+dataset <- dataset |>
   mutate(
-    ER   = if_else(er_status  == "P",
-                   "ER+",
-                   "ER-"),
-    PR   = if_else(pr_status  == "P",
-                   "PR+", 
-                   "PR-"),
-    HER2 = if_else(her2_status == "P",
-                   "HER2+",
-                   "HER2-"),
-    combo = paste(ER,
-                  PR,
-                  HER2,
-                  sep = ", ")
-  ) |>
+    ER = if_else(
+      er_status == "P", 
+      "ER+",
+      "ER-"),
+    PR = if_else(
+      pr_status == "P",
+      "PR+", 
+      "PR-"),
+    HER2 = if_else(
+      her2_status == "P",
+      "HER2+",
+      "HER2-"),
+    combo = paste(
+      ER,
+      PR,
+      HER2,
+      sep = ", ")) |>
   mutate(
     combo = factor(
       combo,
@@ -55,16 +58,14 @@ dat <- dat |>
         "ER-, PR+, HER2-",
         "ER-, PR+, HER2+",
         "ER-, PR-, HER2+",
-        "ER-, PR-, HER2-"
-      )
-    )
-  )
+        "ER-, PR-, HER2-")))
 
 # check: how many rows total?
-nrow(dat)
+nrow(dataset)
 
 # check: how many patients in each genotype?
-dat |> count(combo)
+dataset |> 
+  count(combo)
 ```
 
 #### **Graph 1:**
@@ -78,19 +79,22 @@ dat |> count(combo)
 ```{r}
 
 # total number of patients
-N_total <- nrow(dat)
+N_total <- nrow(dataset)
 
 # Count N per genotype (combo) group
-group_counts_resp <- dat |>
+group_counts_resp <- dataset |>
   group_by(combo) |>
   summarise(N_group = n(),
             .groups = "drop")
 
-custom_palette <- c("#e27bb1", "#A6D15A")
+custom_palette <- c("#e44b8d",
+                    "#90C84C")
 
-gg_14 <- ggplot(dat, 
-                aes(x = combo,
-                    fill = response)) +
+gg_14 <- ggplot(
+  dataset, 
+  aes(
+    x = combo,
+    fill = response)) +
   geom_bar(position = "fill") +
   scale_y_continuous(labels = percent_format()) +
   
@@ -100,28 +104,24 @@ gg_14 <- ggplot(dat,
   # add N labels above each bar
   geom_text(
     data = group_counts_resp,
-    aes(x = combo,
-        y = 1.05,
-        label = paste0("N=", N_group)),
+    aes(
+      x = combo,
+      y = 1.05,
+      label = paste0("N=", N_group)),
     size = 3,
-    inherit.aes = FALSE
-  ) +
+    inherit.aes = FALSE) +
   labs(
     title = "Response (pCR=good vs RD=bad) by ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotypes",
     y = paste0("Proportion of Patients (N = ", N_total, ")"),
-    fill = "Response"
-  ) +
+    fill = "Response") +
   scale_fill_manual(values = custom_palette) +
   theme_minimal() +
-  theme(
-    axis.text.x  = element_text(angle = 45,
-                                hjust = 1,
-                                size = 8),
-    plot.title   = element_text(size = 9.5),
-    axis.title.y = element_text(size = 8),
-    axis.title.x = element_text(size = 8)
-  ) +
+  theme(axis.text.x  = element_text(angle = 45,
+                                    hjust = 1,
+                                    size = 8),
+        plot.title   = element_text(hjust = 0.5),
+        axis.title.x = element_text(vjust = 0)) +
   coord_cartesian(ylim = c(0, 1.15))
 
 gg_14
