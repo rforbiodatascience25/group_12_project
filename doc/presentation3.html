@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="presentation2_files/libs/clipboard/clipboard.min.js"></script>
-<script src="presentation2_files/libs/quarto-html/tabby.min.js"></script>
-<script src="presentation2_files/libs/quarto-html/popper.min.js"></script>
-<script src="presentation2_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="presentation2_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="presentation2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentation2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentation2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="presentation3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentation3_files/libs/quarto-html/tabby.min.js"></script>
+<script src="presentation3_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentation3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="presentation3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentation3_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="presentation3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="presentation3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <title>Exam in R for data science - Group 12</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="presentation2_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="presentation2_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="presentation3_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="presentation3_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,11 +29,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="presentation2_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="presentation2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="presentation2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="presentation2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="presentation2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="presentation3_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="presentation3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="presentation3_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="presentation3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="presentation3_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -387,8 +387,8 @@
 </section>
 <section class="slide level2">
 
-<h3 id="do-the-theoretically-predicted-prognoses-for-the-genotypes-match-the-observed-responses-in-the-dataset">Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?</h3>
-<h4 id="er-patients-have-the-worst-treatment-response">ER+ patients have the worst treatment response</h4>
+<h4 id="do-the-theoretically-predicted-prognoses-for-the-genotypes-match-the-observed-responses-in-the-dataset">Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?</h4>
+<p><strong>ER+ patients have the worst treatment response</strong></p>
 
 <img data-src="presentation_files/18.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li><strong>Surprisingly</strong>:
@@ -400,58 +400,46 @@
 </section>
 <section class="slide level2">
 
-<h3 id="does-the-treatment-response-from-the-genotypes-correlate-with-tumor-aggressiveness-size-and-lymph-node-involvement">Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</h3>
-<h4 id="treatment-response-does-not-correlate-with-tumor-aggressiveness">Treatment response does not correlate with tumor aggressiveness</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="presentation_files/19.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
-<ul>
+<h4 id="does-the-treatment-response-from-the-genotypes-correlate-with-tumor-aggressiveness-size-and-lymph-node-involvement">Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</h4>
+<p><strong>Treatment response does not correlate with tumor aggressiveness</strong></p>
+
+<img data-src="presentation_files/19.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>ER+ do not have a more aggressive tumor grade = no correlation to response.</li>
 <li>ER-, PR- have a more aggressive tumor grade = no correlation to response.</li>
 </ul>
-<table class="caption-top">
-<colgroup>
-<col style="width: 100%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">#### Treatment response does not correlate with lymph node involvement</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><img data-src="presentation_files/21.png" class="quarto-figure quarto-figure-center"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">- Generally, following genotypes have the most lymph node involvement:</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">- ER+, PR-, HER2-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">- ER-,PR-, HER2+</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">- ER-, PR-, HER2- (triple negative)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="does-the-response-and-treatment-type-give-any-insights-into-whether-a-specific-treatment-is-favorable-for-certain-genotypes">Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?</h3>
-<h4 id="more-treatment-options-lead-to-better-response">More treatment options lead to better response</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="presentation_files/22.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
+</section>
+<section class="slide level2">
+
+<h4 id="does-the-treatment-response-from-the-genotypes-correlate-with-tumor-aggressiveness-size-and-lymph-node-involvement-1">Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</h4>
+<p><strong>Treatment response does not correlate with tumor size</strong></p>
+
+<img data-src="presentation_files/20.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><p>Most of the genotypes have a tumor size of 2, or developed into size 3-4. Especially the case for:</p>
 <ul>
+<li>ER+ genotype, and ER-, PR- genotype combinations.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="does-the-treatment-response-from-the-genotypes-correlate-with-tumor-aggressiveness-size-and-lymph-node-involvement-2">Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?</h4>
+<p><strong>Treatment response does not correlate with lymph node involvement</strong></p>
+
+<img data-src="presentation_files/21.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><p>Generally, following genotypes have the most lymph node involvement:</p>
+<ul>
+<li><p>ER+, PR-, HER2-</p></li>
+<li><p>ER-,PR-, HER2+</p></li>
+<li><p>ER-, PR-, HER2- (triple negative)</p></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="does-the-response-and-treatment-type-give-any-insights-into-whether-a-specific-treatment-is-favorable-for-certain-genotypes">Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?</h4>
+<p><strong>More treatment options lead to better response</strong></p>
+
+<img data-src="presentation_files/22.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li><p>The last two groups were exposed to the most different treatment options:</p>
 <ul>
 <li>ER-,PR-, HER2+ and ER-, PR-, HER2- (triple negative)</li>
@@ -483,19 +471,19 @@
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="presentation2_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="presentation3_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="presentation2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="presentation2_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="presentation2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="presentation3_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
