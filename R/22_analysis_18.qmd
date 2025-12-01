@@ -14,6 +14,7 @@ editor: visual
 #| message: false
 library("here")
 library("tidyverse")
+library("scales")
 ```
 
 #### Read data:
@@ -168,8 +169,7 @@ gg_18 <- ggplot(
     title = "Treatment Distribution Across ER/PR/HER2 Genotypes",
     x = "ER/PR/HER2 Genotype",
     y = "Proportion of Patients",
-    fill = "Treatment"
-  ) +
+    fill = "Treatment") +
   theme_minimal() +
   theme(axis.text.x  = element_text(angle = 20,
                                     hjust = 1, 
@@ -182,11 +182,10 @@ gg_18 <- ggplot(
         legend.text  = element_text(size = 8),
         legend.box.spacing = unit(0.2, "lines"),
         legend.key.size  = unit(3.5, "mm")) +
-  guides(
-    fill = guide_legend(
-      ncol = 7,
-      byrow = TRUE,
-      title.position = "top")) +
+  guides(fill = guide_legend(
+    ncol = 7,
+    byrow = TRUE,
+    title.position = "top")) +
   coord_cartesian(ylim = c(0, 1.1))
 
 gg_18

@@ -233,21 +233,36 @@ gg_4_5
 ```{r}
 ggsave(gg_4_1, 
        filename = "04_key_plot_1.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 
 ggsave(gg_4_2, 
        filename = "04_key_plot_2.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 
 ggsave(gg_4_3, 
        filename = "04_key_plot_3.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 
 ggsave(gg_4_4, 
        filename = "04_key_plot_4.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 
 ggsave(gg_4_5, 
        filename = "04_key_plot_5.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 ```
