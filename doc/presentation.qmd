@@ -49,7 +49,7 @@ MAQC-II Project: human breast cancer (BR) dataset
 
 ### Age and Genotype
 
-![](presentation_files/23.png){fig-align="center"}
+![](images/23_key_plot_19.png){fig-align="center"}
 
 -   **The most common Genotype trend is**
     -   ER+, PR+, HER2-
@@ -63,7 +63,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 *ER+ patients have the worst treatment response*
 
-![](presentation_files/18.png){fig-align="center"}
+![](images/18_key_plot_14.png){fig-align="center"}
 
 -   **Surprisingly**:
     -   ER+ patients have the worst treatment response.
@@ -75,7 +75,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 *Treatment response does not correlate with tumor aggressiveness*
 
-![](presentation_files/19.png){fig-align="center"}
+![](images/19_key_plot_15.png){fig-align="center"}
 
 -   ER+ do not have a more aggressive tumor grade = no correlation to response.
 -   ER-, PR- have a more aggressive tumor grade = no correlation to response.
@@ -86,7 +86,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 *Treatment response does not correlate with tumor size*
 
-![](presentation_files/20.png){fig-align="center"}
+![](images/20_key_plot_16.png){fig-align="center"}
 
 -   Most of the genotypes have a tumor size of 2, or developed into size 3-4. Especially the case for:
 
@@ -98,7 +98,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 *Treatment response does not correlate with lymph node involvement*
 
-![](presentation_files/21.png){fig-align="center"}
+![](images/21_key_plot_17.png){fig-align="center"}
 
 -   Generally, following genotypes have the most lymph node involvement:
 
@@ -114,7 +114,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 *More treatment options lead to better response*
 
-![](presentation_files/22.png){fig-align="center"}
+![](images/22_key_plot_18.png){fig-align="center"}
 
 -   The last two groups were exposed to the most different treatment options:
 
