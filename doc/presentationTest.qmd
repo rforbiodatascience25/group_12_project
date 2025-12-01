@@ -9,9 +9,13 @@ format:
 
 ## Breast Cancer Response Analysis
 
-<br><br><br> \### **Group 12:**
+<br><br><br>
 
-Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra <br><br> \### Chosen dataset:
+### **Group 12:**
+
+Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra <br><br>
+
+### Chosen dataset:
 
 MAQC-II Project: human breast cancer (BR) dataset
 
