@@ -19,12 +19,10 @@ library("tidyverse")
 ## Save raw data
 
 ```{r}
-# Download GEO dataset GSE20194
 gse <- getGEO("GSE20194",
               GSEMatrix = TRUE,
               getGPL = FALSE)
 
-# Save the raw GEO object
 save(gse,
      file = here("data/_raw/raw_data.RData"))
 ```
@@ -32,10 +30,8 @@ save(gse,
 ## Load raw data
 
 ```{r}
-# Load raw_data
 load(here("data/_raw/raw_data.RData"))
 
-# Extract the first ExpressionSet
 eset <- gse[[1]]
 ```
 
@@ -44,11 +40,14 @@ eset <- gse[[1]]
 Convert the ExpressionSet object to a data frame and handle missing or blank values to prevent misalignment.
 
 ```{r}
+<<<<<<< HEAD
 # Extract sample metadata and add a sample column
 # Using %>% instead of |> because %>% allows using '.' as placeholder
 dat_load <- as.data.frame(pData(eset))  %>% 
+=======
+dat_load <- as.data.frame(pData(eset)) |>
+>>>>>>> b9de3f2c667891cc643b387a3eec1e535afb2327
   
-  # Add sample_id as first column
   mutate(
     sample_id = rownames(.))  %>% 
   relocate(sample_id)  %>% 
@@ -64,7 +63,6 @@ dat_load <- as.data.frame(pData(eset))  %>%
 ## Save load data
 
 ```{r}
-# Save the metadata as 01_dat_load.tsv
 write_tsv(
   dat_load, 
   here("data", "01_dat_load.tsv"), 
