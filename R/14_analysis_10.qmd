@@ -25,10 +25,12 @@ dat_aug <- read_tsv(
 ## Tumorsize, Lymphnodes and Aggression Comparison
 
 ```{r}
-ggplot(dat_aug, 
-       aes(x = tumor_size_before, 
-           y = nodes_before, 
-           color = grade)) +
+ggplot(
+  dat_aug, 
+  aes(
+    x = tumor_size_before, 
+    y = nodes_before, 
+    color = grade)) +
   geom_jitter(width = 0.2,
               height = 0.2,
               size = 3) +
@@ -36,7 +38,8 @@ ggplot(dat_aug,
   labs(
     title = "Tumor size vs. Lymphnodes and Aggression of Tumor",
     x = "Tumor Sizw",
-    y = "Lymphnodes") 
+    y = "Lymphnodes") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ```{r}
@@ -44,15 +47,17 @@ dat_aug |>
   count(tumor_size_before,
         nodes_before, 
         grade) |>
-  ggplot(aes(x = tumor_size_before, 
-             y = nodes_before, 
-             fill = n)) +
+  ggplot(aes(
+    x = tumor_size_before, 
+    y = nodes_before, 
+    fill = n)) +
   geom_tile(color = "white") +
   facet_wrap(~grade) +
   theme_minimal() +
   labs(
-    title = "HAmount of Tumor Sizes and Lymphnodes according to Aggression",
+    title = "Amount of Tumor Sizes and Lymphnodes according to Aggression",
     x = "Tumorsize",
     y = "Lymphnodes",
-    fill = "Amount")
+    fill = "Amount") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```

@@ -24,12 +24,15 @@ dat_aug <- read_tsv(
 
 ## PCA
 
+### Set up the dataset
+
 ```{r}
 df_clean <- dat_aug |>
-  select(her2_num, 
-         er_num,
-         pr_num, 
-         age) |>
+  select(
+    her2_num, 
+    er_num,
+    pr_num, 
+    age) |>
   drop_na()
 
 df_scaled <- df_clean |>
@@ -41,31 +44,47 @@ pca_res <- prcomp(df_scaled,
 
 pca_df <- as_tibble(pca_res$x) |>
   bind_cols(df_clean)
+```
+
+### Plot PCAs
+
+```{r}
+pca_df |>
+  ggplot(aes(
+    x = PC1,
+    y = PC2,
+    color = factor(er_num))) +
+  geom_point(size = 3,
+             alpha = 0.7) +
+  labs(
+    title = "PCA Plot of ER Status",
+    color = "ER Status") +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5))
 
 pca_df |>
-  ggplot(aes(x = PC1,
-             y = PC2,
-             color = factor(er_num))) +
+  ggplot(aes(
+    x = PC1,
+    y = PC2,
+    color = factor(pr_num))) +
   geom_point(size = 3, 
              alpha = 0.7) +
-  labs(color = "ER Status") +
-  theme_minimal()
+  labs(
+    title = "PCA Plot of PR Status",
+    color = "PR Status") +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5))
 
 pca_df |>
-  ggplot(aes(x = PC1,
-             y = PC2,
-             color = factor(pr_num))) +
+  ggplot(aes(
+    x = PC1,
+    y = PC2, 
+    color = factor(her2_num))) +
   geom_point(size = 3, 
              alpha = 0.7) +
-  labs(color = "PR Status") +
-  theme_minimal()
-
-pca_df |>
-  ggplot(aes(x = PC1, 
-             y = PC2, 
-             color = factor(her2_num))) +
-  geom_point(size = 3, 
-             alpha = 0.7) +
-  labs(color = "HER2 Status") +
-  theme_minimal()
+  labs(
+    title = "PCA Plot of HER2 Status",
+    color = "HER2 Status") +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5))
 ```

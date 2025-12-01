@@ -28,9 +28,10 @@ dat_aug <- read_tsv(
 
 ```{r}
 dat_aug |> 
-  ggplot(aes(x = response,
-             y = age,
-             fill = response)) +
+  ggplot(aes(
+    x = response,
+    y = age,
+    fill = response)) +
   geom_boxplot() +
   geom_jitter(width = 0.15,
               alpha = 0.5,
@@ -42,5 +43,6 @@ dat_aug |>
     x = "Response",
     y = "Age",
     title = "Distribution of age across outcome") +
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 14) + 
+  theme(plot.title = element_text(hjust = 0.5))
 ```
