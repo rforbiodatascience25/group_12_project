@@ -18,7 +18,8 @@ library("here")
 input_file <- here("data/02_dat_clean.tsv")
 dat_clean <- read_tsv(
   input_file,
-  na = c("", "NA"),
+  na = c("",
+         "NA"),
   show_col_types = FALSE)
 ```
 
@@ -27,29 +28,44 @@ dat_clean <- read_tsv(
 ```{r}
 dat_aug <- dat_clean |> 
   mutate(
-    er_num = if_else(er_status == "P", 1, 0),
-    pr_num = if_else(pr_status == "P", 1, 0),
-    her2_num = if_else(her2_status == "P", 1, 0),
+    er_num = if_else(
+      er_status == "P",
+      1,
+      0),
+    pr_num = if_else(
+      pr_status == "P",
+      1,
+      0),
+    her2_num = if_else(
+      her2_status == "P",
+      1,
+      0),
     
     # hormone receptor groups
     hormone_group = paste0(
-      if_else(er_num == 1, "ER+", "ER-"),
-      if_else(pr_num == 1, "PR+", "PR-")
-    ),
+      if_else(er_num == 1,
+              "ER+",
+              "ER-"),
+      if_else(pr_num == 1,
+              "PR+",
+              "PR-")),
     
     # three receptor combination
     receptor_group = paste0(
-      if_else(er_num == 1, "ER+", "ER-"),
-      if_else(pr_num == 1, "PR+", "PR-"),
-      if_else(her2_num == 1, "HER2+", "HER2-")
-    ),
+      if_else(er_num == 1,
+              "ER+",
+              "ER-"),
+      if_else(pr_num == 1,
+              "PR+",
+              "PR-"),
+      if_else(her2_num == 1,
+              "HER2+",
+              "HER2-")),
     
     # triple negative
     triple_negative = case_when(
       er_num == 0 & pr_num == 0 & her2_num == 0 ~ 1,  # TNBC
-      TRUE ~ 0                                        
-    )
-  )
+      TRUE ~ 0))
 ```
 
 ## Save augment data
@@ -57,7 +73,7 @@ dat_aug <- dat_clean |>
 ```{r}
 write_tsv(
   dat_aug, 
-  here("data", "03_dat_aug.tsv"), 
-  na = "NA"
-  )
+  here("data",
+       "03_dat_aug.tsv"), 
+  na = "NA")
 ```

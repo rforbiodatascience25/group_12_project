@@ -18,7 +18,8 @@ library("here")
 input_file <- here("data/01_dat_load.tsv")
 dat_load <- read_tsv(
   input_file,
-  na = c("", "NA"),
+  na = c("",
+         "NA"),
   show_col_types = FALSE)
 ```
 
@@ -26,41 +27,44 @@ dat_load <- read_tsv(
 
 ```{r}
 # Select columns with core characteristics
-dat_core <- dat_load %>% 
+dat_core <- dat_load |> 
   select(
     geo_accession,
     matches("^characteristics_ch1\\.([1-9]|1[0-4])$"))
 ```
 
 ```{r}
-dat_clean <- dat_core %>%
+dat_clean <- dat_core |>
   
   # Pivot all characteristics_ch1.* columns longer
   pivot_longer(
     cols = starts_with("characteristics_ch1."),
     names_to = "char_num",
-    values_to = "char_value"
-  ) %>% 
+    values_to = "char_value") |> 
   
   # Separate colname and value by ": "
   separate(
     char_value, 
-    into = c("colname", "value"),
-    sep = ":\\s+"
-    ) %>% 
-  select(-("char_num")) %>% 
+    into = c("colname",
+             "value"),
+    sep = ":\\s+") |> 
+  select(
+    -("char_num")) |> 
   
   # Handle duplicate entries by keeping the first value
   pivot_wider(
     names_from = colname,
     values_from = value,
-    values_fn = function(x) x[1] 
-  ) %>% 
-  select(-`treatments comments`, -`NA`) %>%
+    values_fn = function(x) x[1]) |> 
+  select(
+    -`treatments comments`,
+    -`NA`) |>
   
   # Replace 'ND' with NA
-  mutate(across(everything(), ~na_if(., "ND")))
-  
+  mutate(
+    across(everything(),
+           ~na_if(.,
+                  "ND")))
 ```
 
 ## Rename columns
@@ -68,47 +72,52 @@ dat_clean <- dat_core %>%
 ```{r}
 dat_clean <- dat_clean |>
   rename(
-    sample_id = geo_accession,
-    response = pcr_vs_rd,
+    sample_id    = geo_accession,
+    response     = pcr_vs_rd,
     tumor_size_before = tbefore,
     nodes_before = nbefore,
-    grade = bmngrd,
-    er_percent = er,
-    her2_status = `her2 status`,
-    her2_ihc = `her2 ihc`,
-    her2_fish = `her2 fish`,
-    treatment = `treatment code`
-  ) 
+    grade        = bmngrd,
+    er_percent   = er,
+    her2_status  = `her2 status`,
+    her2_ihc     = `her2 ihc`,
+    her2_fish    = `her2 fish`,
+    treatment    = `treatment code`)
 ```
 
 ## Convert data types
 
 ```{r}
 dat_clean <- dat_clean |>
-   mutate(
+  mutate(
     # factor varaibles
     er_status = factor(er_status,
-                       levels = c("N","P")),
+                       levels = c("N",
+                                  "P")),
     pr_status = factor(pr_status,
-                       levels = c("N","P")),
+                       levels = c("N",
+                                  "P")),
     response = factor(response,
-                      levels = c("RD","pCR")),
+                      levels = c("RD",
+                                 "pCR")),
     race = factor(race),
     her2_status = factor(her2_status,
-                         levels = c("N","P")),
+                         levels = c("N",
+                                    "P")),
     her2_ihc = factor(her2_ihc,
-                      levels = c("0","1","2","3")),
+                      levels = c("0",
+                                 "1",
+                                 "2",
+                                 "3")),
     histology = factor(histology),
     treatment = factor(treatment),
     
     # numeric variables
-    age = as.numeric(age),
+    age               = as.numeric(age),
     tumor_size_before = as.numeric(tumor_size_before),
-    nodes_before = as.numeric(nodes_before),
-    grade = as.numeric(grade),
-    er_percent = as.numeric(er_percent),
-    her2_fish = as.numeric(her2_fish)
-  )
+    nodes_before      = as.numeric(nodes_before),
+    grade             = as.numeric(grade),
+    er_percent        = as.numeric(er_percent),
+    her2_fish         = as.numeric(her2_fish))
 ```
 
 ## Save clean data
@@ -116,7 +125,7 @@ dat_clean <- dat_clean |>
 ```{r}
 write_tsv(
   dat_clean, 
-  here("data", "02_dat_clean.tsv"), 
-  na = "NA"
-  )
+  here("data",
+       "02_dat_clean.tsv"), 
+  na = "NA")
 ```
