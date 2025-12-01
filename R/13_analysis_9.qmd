@@ -24,122 +24,177 @@ dat_aug <- read_tsv(
 
 ## Age and race compared to aggressiveness and Tumor Size
 
+### Plot 1
+
 ```{r}
-ggplot(dat_aug, 
-       aes(x = age, 
-           y = grade,
-           color = race,
-           size = tumor_size_before)) +
+ggplot(
+  dat_aug, 
+  aes(x = age, 
+      y = grade,
+      color = race,
+      size = tumor_size_before)) +
   geom_point(alpha = 0.7) +
   scale_size_continuous(name = "Tumor size") +
   labs(
-    title = "Age vs Tumor Aggressiveness",
+    title = "Age vs Tumor Aggressiveness Across Tumor Size and Race",
     x = "Age",
-    y = "Tumor Aggressiveness") +
-  theme_minimal()
+    y = "Tumor Aggressiveness",
+    color = "Race") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
+### Plot 2
+
 ```{r}
-ggplot(dat_aug, 
-       aes(x = factor(grade),
-           y = age)) +
+ggplot(
+  dat_aug, 
+  aes(
+    x = factor(grade),
+    y = age)) +
   geom_violin(fill = "steelblue", 
               alpha = 0.6,
               color = NA) +
-  geom_jitter(aes(color = race,
-                  size = tumor_size_before),
-              width = 0.15, 
-              height = 0,
-              alpha = 0.7) +
+  geom_jitter(
+    aes(
+      color = race,
+      size = tumor_size_before),
+    width = 0.15, 
+    height = 0,
+    alpha = 0.7) +
   labs(
-    title = "Age vs. Tumor Aggressiveness",
+    title = "Age vs Tumor Aggressiveness
+    Across Tumor Size Before Treatment and Race",
     x = "Tumor Aggressiveness",
-    y = "Age"
-  ) +
-  theme_minimal()
+    y = "Age",
+    color = "Race",
+    size = "Tumore Size Before") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
+### Plot 3
+
 ```{r}
-ggplot(dat_aug,
-       aes(x = factor(grade), 
-           y = age)) +
+ggplot(
+  dat_aug,
+  aes(
+    x = factor(grade), 
+    y = age)) +
   geom_boxplot(outlier.shape = NA,
                alpha = 0.4) +
-  geom_jitter(aes(color = race,
-                  size = tumor_size_before),
-              width = 0.15, height = 0,
-              alpha = 0.7) +
+  geom_jitter(
+    aes(
+      color = race,
+      size = tumor_size_before),
+    width = 0.15,
+    height = 0,
+    alpha = 0.7) +
   labs(
-    title = "Age vs. Tumor Aggressiveness",
+    title = "Age vs Tumor Aggressiveness
+    Across Tumor Size Before Treatment and Race",
     x = "Tumor Aggressiveness",
-    y = "Age"
-  ) +
-  theme_minimal()
+    y = "Age",
+    color = "Race",
+    size = "Tumore Size Before") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
+### Plot 4
+
 ```{r}
-ggplot(dat_aug, 
-       aes(age, 
-           fill = race)) +
+ggplot(
+  dat_aug, 
+  aes(
+    age, 
+    fill = race)) +
   geom_histogram(alpha = 0.5,
                  bins = 20, 
                  position = "identity") +
   facet_wrap(~ grade) +
-  theme_minimal()
+  theme_minimal() +
+  labs(
+    title = "Age vs Tumor Aggressiveness
+    Across Race, Devided by BR Grade",
+    x = "Tumor Aggressiveness",
+    y = "Age",
+    fill = "Race") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ## Heatmap Age vs. Aggressiveness
 
+### Plot 1
+
 ```{r}
 df <- dat_aug |>
-  mutate(age_bin = cut(age,
-                       breaks = seq(20, 90, by = 5)))
+  mutate(
+    age_bin = cut(
+      age,
+      breaks = seq(20, 
+                   90, 
+                   by = 5)))
 
-ggplot(df,
-       aes(x = age,
-           y = grade)) +
+ggplot(
+  df,
+  aes(
+    x = age,
+    y = grade)) +
   stat_bin2d(bins = c(20, 3),
              aes(fill = ..count..)) +
   scale_fill_viridis_c(name = "Count") +
   labs(
     title = "Heatmap Age vs Tumor Aggressiveness",
     x = "Age",
-    y = "Aggressiveness"
-  ) +
-  theme_minimal()
+    y = "Aggressiveness") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
+
+### Plot 2
 
 ```{r}
 df |>
-  mutate(age_bin = cut(age,
-                       breaks = seq(20, 90, 5))) |>
+  mutate(age_bin = cut(
+    age,
+    breaks = seq(20,
+                 90,
+                 5))) |>
   group_by(age_bin,
            grade) |>
-  summarise(mean_size = mean(tumor_size_before,
-                             na.rm = TRUE)) |>
-  ggplot(aes(age_bin,
-             factor(grade),
-             fill = mean_size)) +
+  summarise(mean_size = mean(
+    tumor_size_before,
+    na.rm = TRUE)) |>
+  ggplot(aes(
+    age_bin,
+    factor(grade),
+    fill = mean_size)) +
   geom_tile(color = "white") +
   labs(
     title = "Heatmap of Mean Tumor Size by Age & Aggressiveness",
     x = "Age",
-    y = "Tumor Aggressiveness"
-  ) +
+    y = "Tumor Aggressiveness",
+    fill = "Mean size") +
   theme_minimal(base_size = 14) +
   theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 1))
+                                   hjust = 1),
+        plot.title = element_text(hjust = 0.5))
 ```
 
+### Plot 3
+
 ```{r}
-ggplot(df, 
-       aes(x = age, 
-           y = grade)) +
+ggplot(
+  df, 
+  aes(
+    x = age, 
+    y = grade)) +
   stat_density_2d_filled(contour_var = "ndensity") +
   labs(
     title = "2D Density Heatmap: Age vs Tumor Aggressiveness",
     x = "Age",
-    y = "Tumor Aggressiveness"
-  ) +
-  theme_minimal(base_size = 14)
+    y = "Tumor Aggressiveness") +
+  theme_minimal(base_size = 14) + 
+  theme(plot.title = element_text(hjust = 0.5))
 ```

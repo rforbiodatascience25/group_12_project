@@ -28,20 +28,20 @@ augment_data <-
 ```{r}
 custom_palette <- c(
   "#7f3667",
-  "#a53e76",
+  # "#a53e76",
   "#bb437e",
-  "#d24787",
+  # "#d24787",
   "#e44b8d",
   "#e2619f",
-  "#e27bb1",
+  # "#e27bb1",
   "#e5a0c6",
   "lightblue",
   "#B3D84C",  
-  "#A6D15A",  
+  # "#A6D15A",  
   "#90C84C",  
   "#70B83F",  
   "#4F9A2F",  
-  "#2F7B1F",  
+  # "#2F7B1F",  
   "#1D6510",  
   "#004400")
 ```
@@ -105,11 +105,11 @@ df_plot2 <- augment_data |>
       er_status == "P" & pr_status == "P" & her2_status == "P" ~ "ER+PR+HER2+")) |>
   count(receptor_group)
 
-plot2_palette <- c("#bb437e",
+plot2_palette <- c("#7f3667",
                    "#e44b8d",
-                   "#e27bb1",
+                   "#e5a0c6",
                    "lightblue",
-                   "#A6D15A", 
+                   "#B3D84C", 
                    "#70B83F",
                    "#2F7B1F")
 
@@ -143,8 +143,8 @@ df_plot3 <- augment_data |>
     !is.na(response)) |>
   count(response)
 
-plot3_palette <- c("#e27bb1",
-                   "#A6D15A")
+plot3_palette <- c("#e44b8d",
+                   "#90C84C")
 
 gg_4_3 <- ggplot(
   df_plot3,
@@ -191,8 +191,7 @@ gg_4_4 <- ggplot(
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 1,
                                    vjust = 1),
-        plot.title = element_text(hjust = 0.5)) + 
-  guides(fill = guide_legend(ncol = 2))
+        plot.title = element_text(hjust = 0.5))
 
 gg_4_4
 ```
@@ -204,9 +203,9 @@ df_plot5 <- augment_data |>
   mutate(grade = factor(grade)) |>
   count(grade)
 
-plot5_palette <- c("#e27bb1",
+plot5_palette <- c("#e44b8d",
                    "lightblue",
-                   "#A6D15A")
+                   "#90C84C")
 
 gg_4_5 <- ggplot(
   df_plot5,
