@@ -11,6 +11,7 @@ format:
 #| message: false
 library("here")
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Load Data
@@ -51,7 +52,7 @@ pca_df <- as_tibble(pca_res$x) |>
 ### Plot PCAs
 
 ```{r}
-pca_df |>
+gg_1 <- pca_df |>
   ggplot(aes(
     x = PC1,
     y = PC2,
@@ -64,7 +65,7 @@ pca_df |>
   theme_minimal() + 
   theme(plot.title = element_text(hjust = 0.5))
 
-pca_df |>
+gg_2 <- pca_df |>
   ggplot(aes(
     x = PC1,
     y = PC2,
@@ -77,7 +78,7 @@ pca_df |>
   theme_minimal() + 
   theme(plot.title = element_text(hjust = 0.5))
 
-pca_df |>
+gg_3 <- pca_df |>
   ggplot(aes(
     x = PC1,
     y = PC2, 
@@ -89,4 +90,19 @@ pca_df |>
     color = "HER2 Status") +
   theme_minimal() + 
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_1
+gg_2
+gg_3
+```
+
+## Save plots
+
+```{r}
+save_plot(gg_1, 
+          "17_plot_13_1.png")
+save_plot(gg_2, 
+          "17_plot_13_2.png")
+save_plot(gg_3, 
+          "17_plot_13_3.png")
 ```

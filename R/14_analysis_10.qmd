@@ -11,6 +11,7 @@ format:
 #| message: false
 library("here")
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Load Data into variable
@@ -27,7 +28,7 @@ dat_aug <- read_tsv(
 ## Tumorsize, Lymphnodes and Aggression Comparison
 
 ```{r}
-ggplot(
+gg_1 <- ggplot(
   dat_aug, 
   aes(
     x = tumor_size_before, 
@@ -42,10 +43,12 @@ ggplot(
     x = "Tumor Sizw",
     y = "Lymphnodes") +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_1
 ```
 
 ```{r}
-dat_aug |>
+gg_2 <- dat_aug |>
   count(tumor_size_before,
         nodes_before, 
         grade) |>
@@ -62,4 +65,15 @@ dat_aug |>
     y = "Lymphnodes",
     fill = "Amount") +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_2
+```
+
+## Save plots
+
+```{r}
+save_plot(gg_1, 
+          "14_plot_10_1.png")
+save_plot(gg_2, 
+          "14_plot_10_2.png")
 ```
