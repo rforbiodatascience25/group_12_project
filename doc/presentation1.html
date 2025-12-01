@@ -331,15 +331,39 @@
 </div>
 
 </section>
+<section class="slide level2">
+
+<!-- Embedded CSS for floating section label -->
+<style>
+.section-label {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  z-index: 9999;
+}
+</style>
+</section>
 <section id="introduction" class="slide level2">
-<h2>Introduction</h2>
+<h2><strong>Introduction</strong></h2>
+<div class="section-label">
+Introduction
+</div>
 <h3 id="group-12">Group 12</h3>
-<p>Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra</p>
+<p>Sofie Emilie Hagelund • Henrique Gomes • Paula Meer Janssen •<br>
+Shuyue Zhang • Eszter Hudra</p>
 <h3 id="objective">Objective</h3>
 <p>Explore how <strong>genotype</strong>, <strong>tumor characteristics</strong>, and <strong>treatments</strong> relate to <strong>treatment response</strong> in breast cancer.</p>
 </section>
 <section id="dataset-overview" class="slide level2">
-<h2>Dataset Overview</h2>
+<h2>Dataset Overview**</h2>
+<div class="section-label">
+Materials and Methods
+</div>
 <ul>
 <li><p>MAQC-II breast cancer dataset</p></li>
 <li><p>Variables analyzed:</p>
@@ -355,14 +379,20 @@
 </ul>
 </section>
 <section id="demographics" class="slide level2">
-<h2>Demographics</h2>
+<h2>Demographics**</h2>
+<div class="section-label">
+Materials and Methods
+</div>
 
 <img data-src="presentation_files/04.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>Majority: white, age 40–59</li>
 </ul>
 </section>
 <section id="genotype-distribution" class="slide level2">
-<h2>Genotype Distribution</h2>
+<h2><strong>Genotype Distribution</strong></h2>
+<div class="section-label">
+Materials and Methods
+</div>
 
 <img data-src="presentation_files/23.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>Frequent patterns: ER+, PR+, HER2– &amp; triple negative<br>
@@ -370,27 +400,25 @@
 <li>No visible age–genotype relationship</li>
 </ul>
 </section>
-<section id="aim-1-genotype-vs-treatment-response" class="slide level2">
-<h2>Aim 1: Genotype vs Treatment Response</h2>
+<section id="genotype-vs-treatment-response" class="slide level2">
+<h2><strong>Genotype vs Treatment Response</strong></h2>
+<div class="section-label">
+Analysis
+</div>
 <p><strong>Do expected prognoses match observed outcomes?</strong></p>
-</section>
-<section id="observed-response-patterns" class="slide level2">
-<h2>Observed Response Patterns</h2>
 
 <img data-src="presentation_files/18.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>ER+ = <em>worst</em> response<br>
 </li>
-<li>Triple negative &amp; HER2+ only = <em>best</em> response<br>
-</li>
-<li>Opposes typical clinical expectations</li>
+<li>Triple negative &amp; HER2+ only = <em>best</em> response</li>
 </ul>
 </section>
-<section id="aim-2-tumor-characteristics" class="slide level2">
-<h2>Aim 2: Tumor Characteristics</h2>
+<section id="tumor-characteristics" class="slide level2">
+<h2><strong>Tumor Characteristics</strong></h2>
+<div class="section-label">
+Analysis
+</div>
 <p><strong>Do size, grade, or lymph nodes predict response?</strong></p>
-</section>
-<section id="no-predictive-value" class="slide level2">
-<h2>No Predictive Value</h2>
 
 <img data-src="presentation_files/19.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>ER+ poor response not explained by aggressiveness<br>
@@ -400,33 +428,39 @@
 <li>Size &amp; lymph nodes show <strong>no consistent correlation</strong></li>
 </ul>
 </section>
-<section id="aim-3-treatment-types" class="slide level2">
-<h2>Aim 3: Treatment Types</h2>
+<section id="treatment-types" class="slide level2">
+<h2><strong>Treatment Types</strong></h2>
+<div class="section-label">
+Analysis
+</div>
 <p><strong>Do specific genotypes benefit from specific treatments?</strong></p>
-</section>
-<section id="treatment-diversity-improves-outcomes" class="slide level2">
-<h2>Treatment Diversity Improves Outcomes</h2>
+<div class="section-label">
+Analysis
+</div>
 
 <img data-src="presentation_files/22.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>Genotypes receiving <strong>more specialized treatments</strong> → better outcomes<br>
+<li>Genotypes with <strong>more specialized treatments</strong> → better outcomes<br>
 </li>
 <li>TFAC/TFEC performs poorly for ER+ patients</li>
 </ul>
 </section>
-<section id="final-conclusion" class="slide level2">
-<h2>Final Conclusion</h2>
+<section id="conclusion" class="slide level2">
+<h2><strong>Conclusion</strong></h2>
+<div class="section-label">
+Discussion
+</div>
 <ul>
 <li><strong>Genotype</strong> predicts response better than size/grade<br>
 </li>
-<li><strong>Personalized treatment</strong> significantly improves outcomes<br>
+<li><strong>Personalized treatment</strong> improves outcomes<br>
 </li>
-<li>Classical prognoses (e.g., ER+) don’t always match real data<br>
+<li>Classical prognoses (ER+) don’t always match real data<br>
 </li>
 <li>Supports <strong>genotype-guided therapy strategies</strong></li>
 </ul>
 </section>
-<section id="thank-you-for-your-attention" class="slide level2 center">
-<h2>Thank you for your attention!</h2>
+<section id="thank-you-for-your-attention" class="slide level2">
+<h2><strong>Thank you for your attention!</strong></h2>
 <p>We are happy to answer questions.</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

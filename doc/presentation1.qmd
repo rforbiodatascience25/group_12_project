@@ -7,11 +7,31 @@ format:
     center: false
 ---
 
-## Introduction
+<!-- Embedded CSS for floating section label -->
+<style>
+.section-label {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  z-index: 9999;
+}
+</style>
+
+---
+
+## **Introduction**
+
+<div class="section-label">Introduction</div>
+
 
 ### Group 12  
-Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra
-
+Sofie Emilie Hagelund • Henrique Gomes • Paula Meer Janssen •  
+Shuyue Zhang • Eszter Hudra
 
 
 ### Objective  
@@ -19,9 +39,13 @@ Explore how **genotype**, **tumor characteristics**, and **treatments** relate t
 
 ---
 
-## Dataset Overview
+## Dataset Overview**
+
+<div class="section-label">Materials and Methods</div>
+
 
 - MAQC-II breast cancer dataset  
+
 
 - Variables analyzed:
   - Demographics: Age, Race  
@@ -31,7 +55,9 @@ Explore how **genotype**, **tumor characteristics**, and **treatments** relate t
 
 ---
 
-## Demographics
+## Demographics**
+
+<div class="section-label">Materials and Methods</div>
 
 ![](presentation_files/04.png){fig-align="center"}
 
@@ -39,7 +65,9 @@ Explore how **genotype**, **tumor characteristics**, and **treatments** relate t
 
 ---
 
-## Genotype Distribution
+## **Genotype Distribution**
+
+<div class="section-label">Materials and Methods</div>
 
 ![](presentation_files/23.png){fig-align="center"}
 
@@ -48,29 +76,24 @@ Explore how **genotype**, **tumor characteristics**, and **treatments** relate t
 
 ---
 
-## Aim 1: Genotype vs Treatment Response
+## **Genotype vs Treatment Response**
+
+<div class="section-label">Analysis</div>
 
 **Do expected prognoses match observed outcomes?**
-
----
-
-## Observed Response Patterns
 
 ![](presentation_files/18.png){fig-align="center"}
 
 - ER+ = *worst* response  
 - Triple negative & HER2+ only = *best* response  
-- Opposes typical clinical expectations
 
 ---
 
-## Aim 2: Tumor Characteristics
+## **Tumor Characteristics**
+
+<div class="section-label">Analysis</div>
 
 **Do size, grade, or lymph nodes predict response?**
-
----
-
-## No Predictive Value
 
 ![](presentation_files/19.png){fig-align="center"}
 
@@ -80,30 +103,32 @@ Explore how **genotype**, **tumor characteristics**, and **treatments** relate t
 
 ---
 
-## Aim 3: Treatment Types
+## **Treatment Types**
+
+<div class="section-label">Analysis</div>
 
 **Do specific genotypes benefit from specific treatments?**
 
----
-
-## Treatment Diversity Improves Outcomes
+<div class="section-label">Analysis</div>
 
 ![](presentation_files/22.png){fig-align="center"}
 
-- Genotypes receiving **more specialized treatments** → better outcomes  
+- Genotypes with **more specialized treatments** → better outcomes  
 - TFAC/TFEC performs poorly for ER+ patients
 
 ---
 
-## Final Conclusion
+## **Conclusion**
+
+<div class="section-label">Discussion</div>
 
 - **Genotype** predicts response better than size/grade  
-- **Personalized treatment** significantly improves outcomes  
-- Classical prognoses (e.g., ER+) don't always match real data  
+- **Personalized treatment** improves outcomes  
+- Classical prognoses (ER+) don’t always match real data  
 - Supports **genotype-guided therapy strategies**
 
 ---
 
-## Thank you for your attention! {.center}
+## **Thank you for your attention!**
 
 We are happy to answer questions.
