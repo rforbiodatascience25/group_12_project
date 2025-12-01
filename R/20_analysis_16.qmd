@@ -12,6 +12,7 @@ editor: visual
 #| message: false
 library("here")
 library("tidyverse")
+library("scales")
 ```
 
 #### Read data:
