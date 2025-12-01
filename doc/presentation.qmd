@@ -7,43 +7,94 @@ format: revealjs
 
 # 1. Analysis of Breast Cancer Dataset
 
-Our Names
+**Group 12**
+
+s132347 (Sofie Emilie Hagelund)
+
+s253710 (Henrique Gomes)
+
+s253689 (Paula Meer Janssen)
+
+s252750 (Shuyue Zhang)
+
+s253719 (Eszter Hudra)
 
 # 2. Introduction
 
--   Breast cancer data bc its nice to work with
+-   Original topic - Oncology
 
--   why?
+-   Now chosen specifically Breast Cancer
 
-# 3. MM: Description of the DataSet
+    -   MAQC-II Project: human breast cancer (BR) dataset
 
--   List of observations
+# 3. Materials and Methods
 
-    -   Maybe state **orally** what the expected correlation we are proof-checking
+### Description of the Dataset:
 
--   Measurements and therapy leading to the acquisition of the data
+#### **MAQC-II Project: human breast cancer (BR) dataset**
 
-# 4. Description: Background
+-   **Sample name**
+-   **Age**
+-   **Race**
+-   **pCR vs RD (response from treatment)**
+    -   pCR = pathological complete response (=good)
 
--   Describing the data: Demographics and genotypes
+    -   RD = residual disease (=bad)
+-   **Tumor (0-4) size before treatment**
+    -   The higher, the bigger the size
+-   **Lymph node (0-3) involvement before treatment**
+    -   The higher, the more lymph node involvement
+-   **Grade/Level of aggressiveness (1-3)**
+    -   The higher the more aggressive
+-   **Treatments**
+-   **Receptor status** (+/-)
+    -   Receptor positive (+) = better prognosis
+        -   Estrogen receptor status
+        -   Progesterone receptor status
+        -   HER2 receptor status
+        -   Triple negative = ER-, PR-, HER2-
+
+# 4. Demographics - Age and Race
+
+\*\* INSERT GRAPH 04 \*\*
+
+-   Breast cancer patients are mainly white and between the ages of 40-59.
+
+# 5. Age and Genotype 
+
+\*\* INSERT GRAPH 23 \*\*
+
+-   **The most common Genotype trend is**
+    -   ER+, PR+, HER2-
+    -   ER-, PR-, HER2- (Triple negative)
+
+There is [no clear]{.underline} correlation between age and genotype.
 
 ### *Person 2*
 
-# 5. Aim1
+# 6. Aim #1
 
-# 6. Analysis 1
+*Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?*
 
-Answering question 1
+# 7. ER+ patients have the worst treatment response
 
--   Discriptive headline
+\*\* INSERT GRAPH 18 \*\*
 
--   Plot
+**Surprisingly**:
+
+-   ER+ patients have the worst treatment response.
+
+-   HER+ only patients and triple-negative patients have the best treatment response.
 
 ### *Person 3*
 
-# 7. Aim2
+# 8. Aim #2
 
-# 8. Analysis 2 (This will need to be more slides, as there are more parts of the question)
+*Does the treatment response correlate with tumor aggressiveness, size, and the lymph node involvement?*
+
+# 9. Analysis 2 (This will need to be more slides, as there are more parts of the question)
+
+\*\* INSERT GRAPH 19 \*\*
 
 Answering question 2
 
@@ -53,13 +104,13 @@ Answering question 2
 
 ### *Person 4*
 
-# 9. Aim3
+# 10. Aim #3
 
-# 10. Analysis 3
+# 11. Analysis 3
 
 ### *Person 5*
 
-# 11. Conclusion/Discussion
+# 12. Conclusion/Discussion
 
 -   Summarise all we found
 
@@ -67,6 +118,6 @@ Answering question 2
 
 -   Personalised threapy is best
 
-# 12. Thank you for your Attention
+# 13. Thank you for your Attention
 
 We are happy to answer any of your questions!
