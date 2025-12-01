@@ -11,6 +11,7 @@ format:
 #| message: false
 library("here")
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Load data as variables
@@ -29,7 +30,7 @@ dat_aug <- read_tsv(
 ### Plot 1
 
 ```{r}
-ggplot(
+gg_1 <- ggplot(
   dat_aug, 
   aes(x = age, 
       y = grade,
@@ -44,12 +45,14 @@ ggplot(
     color = "Race") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_1
 ```
 
 ### Plot 2
 
 ```{r}
-ggplot(
+gg_2 <- ggplot(
   dat_aug, 
   aes(
     x = factor(grade),
@@ -73,12 +76,14 @@ ggplot(
     size = "Tumore Size Before") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_2
 ```
 
 ### Plot 3
 
 ```{r}
-ggplot(
+gg_3 <- ggplot(
   dat_aug,
   aes(
     x = factor(grade), 
@@ -101,12 +106,14 @@ ggplot(
     size = "Tumore Size Before") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_3
 ```
 
 ### Plot 4
 
 ```{r}
-ggplot(
+gg_4 <- ggplot(
   dat_aug, 
   aes(
     age, 
@@ -123,6 +130,8 @@ ggplot(
     y = "Age",
     fill = "Race") +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_4
 ```
 
 ## Heatmap Age vs. Aggressiveness
@@ -138,7 +147,7 @@ df <- dat_aug |>
                    90, 
                    by = 5)))
 
-ggplot(
+gg_5 <- ggplot(
   df,
   aes(
     x = age,
@@ -152,12 +161,14 @@ ggplot(
     y = "Aggressiveness") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_5
 ```
 
 ### Plot 2
 
 ```{r}
-df |>
+gg_6 <- df |>
   mutate(age_bin = cut(
     age,
     breaks = seq(20,
@@ -182,12 +193,14 @@ df |>
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 1),
         plot.title = element_text(hjust = 0.5))
+
+gg_6
 ```
 
 ### Plot 3
 
 ```{r}
-ggplot(
+gg_7 <- ggplot(
   df, 
   aes(
     x = age, 
@@ -199,4 +212,25 @@ ggplot(
     y = "Tumor Aggressiveness") +
   theme_minimal(base_size = 14) + 
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_7
+```
+
+## Save all plots
+
+```{r}
+save_plot(gg_1, 
+          "13_plot_9_1.png")
+save_plot(gg_2, 
+          "13_plot_9_2.png")
+save_plot(gg_3, 
+          "13_plot_9_3.png")
+save_plot(gg_4, 
+          "13_plot_9_4.png")
+save_plot(gg_5, 
+          "13_plot_9_5.png")
+save_plot(gg_6, 
+          "13_plot_9_6.png")
+save_plot(gg_7, 
+          "13_plot_9_7.png")
 ```
