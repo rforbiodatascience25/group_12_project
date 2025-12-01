@@ -1,6 +1,8 @@
 ---
 title: "16_analysis_12"
-format: html
+format: 
+  html:
+    self-contained: true
 ---
 
 ## Load Libraries
