@@ -67,6 +67,18 @@ dat_clean <- dat_core |>
                   "ND")))
 ```
 
+```{r}
+# Unify variants in histology
+dat_clean <- dat_clean |> 
+   mutate(
+     histology = case_when(
+       histology %in% c("ILC/IDC", "IDC+ILC") ~ "IDC/ILC",
+       histology %in% c("IDC+DCIS", "IDC/DCIS", "IDC + DCIS") ~ "IDC/DCIS",
+       histology %in% c("IDC/anaplastic", "IDC, medullary features") ~ "IDC",
+    TRUE ~ histology
+  ))
+```
+
 ## Rename columns
 
 ```{r}
