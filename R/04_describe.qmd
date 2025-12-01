@@ -15,7 +15,7 @@ library("RColorBrewer")
 
 ## Load Data
 
-load the data as a variable to use in descriptive graphs
+Load the data as a variable to use in descriptive graphs
 
 ```{r}
 #| message: false
@@ -43,107 +43,158 @@ custom_palette <- c(
   "#4F9A2F",  
   "#2F7B1F",  
   "#1D6510",  
-  "#004400" 
-)
+  "#004400")
 ```
 
 ### Distribution of age groups and race
 
 ```{r}
 df_plot1 <- augment_data |>
-  mutate(age_group = cut(age,
-                         breaks = seq(0, 100, by = 10),
-                         labels = paste(seq(0, 90, 10),
-                                        seq(9, 99, 10),
-                                        sep = "-"))
-         ) |>
-  filter(!is.na(age_group)) |>
+  mutate(
+    age_group = cut(
+      age,
+      breaks = seq(0,
+                   100,
+                   by = 10),
+      labels = paste(seq(0, 90, 10),
+                     seq(9, 99, 10),
+                     sep = "-"))) |>
+  filter(
+    !is.na(age_group)) |>
   count(age_group,
         race)
 
-plot1_pallete <- c("#e44b8d", "#e5a0c6", "lightblue", "#B3D84C", "#70B83F")
+plot1_pallete <- c("#e44b8d",
+                   "#e5a0c6",
+                   "lightblue",
+                   "#B3D84C",
+                   "#70B83F")
 
-ggplot(df_plot1,
-       aes(x = age_group,
-           y = n,
-           fill = race)) +
+gg_4_1 <- ggplot(
+  df_plot1,
+  aes(
+    x = age_group,
+    y = n,
+    fill = race)) +
   geom_col(position = "stack") +
-  labs(title = "Distribution of age groups and race") +
+  labs(
+    title = "Distribution of Age Groups and Race",
+    x = "Age groups",
+    y = "Number of subjects",
+    fill = "Races") +
   scale_fill_manual(values = plot1_pallete) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+gg_4_1
 ```
 
 ### Distribution of hormones in different patients
 
 ```{r}
 df_plot2 <- augment_data |>
-  mutate(receptor_group = case_when(
-    er_status == "N" & pr_status == "N" & her2_status == "N" ~ "ER-PR-HER2-",
-    er_status == "P" & pr_status == "N" & her2_status == "N" ~ "ER+PR-HER2-",
-    er_status == "N" & pr_status == "P" & her2_status == "N" ~ "ER-PR+HER2-",
-    er_status == "N" & pr_status == "N" & her2_status == "P" ~ "ER-PR-HER2+",
-    er_status == "P" & pr_status == "P" & her2_status == "N" ~ "ER+PR+HER2-",
-    er_status == "P" & pr_status == "N" & her2_status == "P" ~ "ER+PR-HER2+",
-    er_status == "N" & pr_status == "P" & her2_status == "P" ~ "ER-PR-HER2-",
-    er_status == "P" & pr_status == "P" & her2_status == "P" ~ "ER+PR+HER2+")
-    ) |>
+  mutate(
+    receptor_group = case_when(
+      er_status == "N" & pr_status == "N" & her2_status == "N" ~ "ER-PR-HER2-",
+      er_status == "P" & pr_status == "N" & her2_status == "N" ~ "ER+PR-HER2-",
+      er_status == "N" & pr_status == "P" & her2_status == "N" ~ "ER-PR+HER2-",
+      er_status == "N" & pr_status == "N" & her2_status == "P" ~ "ER-PR-HER2+",
+      er_status == "P" & pr_status == "P" & her2_status == "N" ~ "ER+PR+HER2-",
+      er_status == "P" & pr_status == "N" & her2_status == "P" ~ "ER+PR-HER2+",
+      er_status == "N" & pr_status == "P" & her2_status == "P" ~ "ER-PR-HER2-",
+      er_status == "P" & pr_status == "P" & her2_status == "P" ~ "ER+PR+HER2+")) |>
   count(receptor_group)
 
-plot2_palette <- c("#bb437e", "#e44b8d", "#e27bb1", "lightblue", "#A6D15A", "#70B83F", "#2F7B1F")
+plot2_palette <- c("#bb437e",
+                   "#e44b8d",
+                   "#e27bb1",
+                   "lightblue",
+                   "#A6D15A", 
+                   "#70B83F",
+                   "#2F7B1F")
 
-ggplot(df_plot2,
-       aes(x = receptor_group,
-           y = n,
-           fill = receptor_group)) +
+gg_4_2 <- ggplot(
+  df_plot2,
+  aes(
+    x = receptor_group,
+    y = n,
+    fill = receptor_group)) +
   geom_col() +
-  labs(title = "Distribution of hormones") +
+  labs(
+    title = "Distribution of Hormones",
+    x = "Receptor groups",
+    y = "Number of occurances",
+    fill = "Receptor groups") +
   scale_fill_manual(values = plot2_palette) +
   theme_minimal() + 
   theme(axis.text.x = element_text(angle = 30,
-                                   hjust = 0.5,
-                                   vjust = 1))
+                                   hjust = 0.9,
+                                   vjust = 1.2),
+        plot.title = element_text(hjust = 0.5))
+
+gg_4_2
 ```
 
 ### Distribution of successful or unsuccessful treatment
 
 ```{r}
 df_plot3 <- augment_data |>
-  filter(!is.na(response)) |>
+  filter(
+    !is.na(response)) |>
   count(response)
 
-plot3_palette <- c("#e27bb1", "#A6D15A")
+plot3_palette <- c("#e27bb1",
+                   "#A6D15A")
 
-ggplot(df_plot3,
-       aes(x = response, 
-           y = n,
-           fill = response)) +
+gg_4_3 <- ggplot(
+  df_plot3,
+  aes(
+    x = response, 
+    y = n,
+    fill = response)) +
   geom_col() +
-  labs(title = "Distribution of treatment success: 
-       pCR = 'no detectable tumor after treatment'
-       or RD = 'tumor remains after therapy'") +
+  labs(
+    title = "Distribution of Treatment Success: 
+             pCR = 'no detectable tumor after treatment'
+             RD = 'tumor remains after therapy'",
+    x = "Response type", 
+    y = "Number of cases",
+    fill = "Response type") +
   scale_fill_manual(values = plot3_palette) +
   theme_minimal()
+
+gg_4_3
 ```
 
 ### Distribution of tumor subtypes (histology)
 
 ```{r}
 df_plot4 <- augment_data |>
-  filter(!is.na(histology)) |>
+  filter(
+    !is.na(histology)) |>
   count(histology)
 
-ggplot(df_plot4,
-       aes(x = histology, 
-           y = n,
-           fill = histology)) +
+gg_4_4 <- ggplot(
+  df_plot4,
+  aes(
+    x = histology, 
+    y = n,
+    fill = histology)) +
   geom_col() +
-  labs(title = "Distribution of tumor subtypes (histology)") +
+  labs(
+    title = "Distribution of Tumor Subtypes (Histology)",
+    x = "Histology",
+    y = "Number of cases",
+    fill = "Histology") +
   scale_fill_manual(values = custom_palette) +
   theme_minimal() + 
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 1,
-                                   vjust = 1)) + 
+                                   vjust = 1),
+        plot.title = element_text(hjust = 0.5)) + 
   guides(fill = guide_legend(ncol = 2))
+
+gg_4_4
 ```
 
 ### Distribution of tumor aggressiveness (bmngrd = Bloom–Richardson (BR) grade)
@@ -153,14 +204,49 @@ df_plot5 <- augment_data |>
   mutate(grade = factor(grade)) |>
   count(grade)
 
-plot5_palette <- c("#e27bb1", "lightblue", "#A6D15A")
+plot5_palette <- c("#e27bb1",
+                   "lightblue",
+                   "#A6D15A")
 
-ggplot(df_plot5,
-       aes(x = grade, 
-           y = n,
-           fill = grade)) +
+gg_4_5 <- ggplot(
+  df_plot5,
+  aes(
+    x = grade, 
+    y = n,
+    fill = grade)) +
   geom_col() +
-  labs(title = "Distribution of tumor aggressiveness (BR grade)") +
+  labs(
+    title = "Distribution of Tumor Aggressiveness (BR grade)",
+    x = "Grade",
+    y = "Number of cases", 
+    fill = "Grade") +
   scale_fill_manual(values = plot5_palette, na.value = "gray") +
-  theme_minimal()
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+gg_4_5
+```
+
+### Save plots as png
+
+```{r}
+ggsave(gg_4_1, 
+       filename = "04_key_plot_1.png",
+       device = "png")
+
+ggsave(gg_4_2, 
+       filename = "04_key_plot_2.png",
+       device = "png")
+
+ggsave(gg_4_3, 
+       filename = "04_key_plot_3.png",
+       device = "png")
+
+ggsave(gg_4_4, 
+       filename = "04_key_plot_4.png",
+       device = "png")
+
+ggsave(gg_4_5, 
+       filename = "04_key_plot_5.png",
+       device = "png")
 ```
