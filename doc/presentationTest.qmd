@@ -7,7 +7,7 @@ format:
     center: false
 ---
 
-## Breast Cancer Response Analysis
+### Breast Cancer Response Analysis
 
 <br><br><br>
 
@@ -39,7 +39,7 @@ MAQC-II Project: human breast cancer (BR) dataset
 
 ------------------------------------------------------------------------
 
-## Demographics - Age and Race
+### Demographics - Age and Race
 
 ![](presentation_files/04.png){fig-align="center"}
 
@@ -47,7 +47,7 @@ MAQC-II Project: human breast cancer (BR) dataset
 
 ------------------------------------------------------------------------
 
-## Age and Genotype
+### Age and Genotype
 
 ![](presentation_files/23.png){fig-align="center"}
 
