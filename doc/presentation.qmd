@@ -1,66 +1,76 @@
 ---
-title: "Analysis of Breast Cancer Dataset"
+title: "Exam in R for data science - Group 12"
 format: revealjs
 ---
 
-### *Person 1*
+## **Introduction**
 
-# 1. Analysis of Breast Cancer Dataset
+### **Group 12:**
 
-**Group 12**
-
-s132347 (Sofie Emilie Hagelund)
-
-s253710 (Henrique Gomes)
-
-s253689 (Paula Meer Janssen)
-
-s252750 (Shuyue Zhang)
-
+s132347 (Sofie Emilie Hagelund)\
+s253710 (Henrique Gomes)\
+s253689 (Paula Meer Janssen)\
+s252750 (Shuyue Zhang)\
 s253719 (Eszter Hudra)
 
-# 2. Introduction
+### Chosen dataset: 
 
--   Original topic - Oncology
+#### Analysis of Breast Cancer Dataset
 
--   Now chosen specifically Breast Cancer
+-   MAQC-II Project: human breast cancer (BR) dataset
 
-    -   MAQC-II Project: human breast cancer (BR) dataset
+------------------------------------------------------------------------
 
-# 3. Materials and Methods
+## Materials and Methods
 
-### Description of the Dataset:
+#### Description and use of the Dataset
 
-#### **MAQC-II Project: human breast cancer (BR) dataset**
-
--   **Sample name**
 -   **Age**
 -   **Race**
--   **pCR vs RD (response from treatment)**
+-   **pCR vs RD (response to treatment)**
     -   pCR = pathological complete response (=good)
 
     -   RD = residual disease (=bad)
+-   **Treatment(s)**
+
+---
+
+## Materials and Methods (continued)
+
+#### Tumor categories:
+
 -   **Tumor (0-4) size before treatment**
     -   The higher, the bigger the size
 -   **Lymph node (0-3) involvement before treatment**
     -   The higher, the more lymph node involvement
 -   **Grade/Level of aggressiveness (1-3)**
     -   The higher the more aggressive
--   **Treatments**
+
+----
+
+## Materials and Methods (continued)
+
+#### Brush-up on receptor genotype descripton:
+
 -   **Receptor status** (+/-)
     -   Receptor positive (+) = better prognosis
-        -   Estrogen receptor status
-        -   Progesterone receptor status
-        -   HER2 receptor status
-        -   Triple negative = ER-, PR-, HER2-
+    -   Receptor negative (-) = worse prognosis
+    -   Receptors status:
+        -   Estrogen
+        -   Progesterone
+        -   HER2
 
-# 4. Demographics - Age and Race
+------------------------------------------------------------------------
+
+## Demographics - Age and Race
 
 \*\* INSERT GRAPH 04 \*\*
 
 -   Breast cancer patients are mainly white and between the ages of 40-59.
 
-# 5. Age and Genotype
+------------------------------------------------------------------------
+
+## Age and Genotype
 
 \*\* INSERT GRAPH 23 \*\*
 
@@ -70,13 +80,15 @@ s253719 (Eszter Hudra)
 
 There is [no clear]{.underline} correlation between age and genotype.
 
-### *Person 2*
+------------------------------------------------------------------------
 
-# 6. Aim #1
+## Aim #1
 
 *Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?*
 
-# 7. ER+ patients have the worst treatment response
+------------------------------------------------------------------------
+
+## ER+ patients have the worst treatment response
 
 \*\* INSERT GRAPH 18 \*\*
 
@@ -86,13 +98,15 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 -   HER+ only patients and triple-negative patients have the best treatment response.
 
-### *Person 3*
+------------------------------------------------------------------------
 
-# 8. Aim #2
+## Aim #2
 
 *Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?*
 
-# 9. Treatment response does not correlate with tumor aggressiveness
+------------------------------------------------------------------------
+
+## Treatment response does not correlate with tumor aggressiveness
 
 \*\* INSERT GRAPH 19 \*\*
 
@@ -100,9 +114,9 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 -   Being ER-, PR- leads to a more aggressive tumor grade, even though they had the best response.
 
-**\>\>\> Treatment response [does not]{.underline} correlate with tumor aggressiveness.**
+------------------------------------------------------------------------
 
-# 10. Treatment response does not correlate with tumor size
+## Treatment response does not correlate with tumor size
 
 \*\* INSERT GRAPH 20 \*\*
 
@@ -112,9 +126,9 @@ There is [no clear]{.underline} correlation between age and genotype.
 
     -   ER-, PR- genotype combinations.
 
-**\>\>\> Treatment response [does not]{.underline} correlate with tumor size.**
+------------------------------------------------------------------------
 
-# 11. Treatment response does not correlate with lymph node involvement
+## Treatment response does not correlate with lymph node involvement
 
 \*\* INSERT GRAPH 21 \*\*
 
@@ -126,15 +140,15 @@ Generally, it seems that following genotypes have most lymph node involvement:
 
 -   ER-, PR-, HER2- (triple negative)
 
-**\>\>\> Treatment response [does not]{.underline} correlate with lymph node involvement.**
+------------------------------------------------------------------------
 
-### *Person 4*
-
-# 12. Aim #3
+## Aim #3
 
 *Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?*
 
-# 13. More treatment options leads to better response
+------------------------------------------------------------------------
+
+## More treatment options leads to better response
 
 \*\* INSERT GRAPH 22 \*\*
 
@@ -148,14 +162,16 @@ Generally, it seems that following genotypes have most lymph node involvement:
 
 -   A general broad TFAC and TFEC is not working for ER+ patients.
 
-### *Person 5*
+------------------------------------------------------------------------
 
-# 14. Conclusion/Discussion
+## Conclusion/Discussion
 
 -   More personalized treatment options give better response.
 
 -   The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
 
-# 14. Thank you for your Attention
+------------------------------------------------------------------------
+
+# Thank you for your Attention
 
 We are happy to answer any of your questions!
