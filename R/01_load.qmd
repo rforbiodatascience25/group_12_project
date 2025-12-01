@@ -40,24 +40,20 @@ eset <- gse[[1]]
 Convert the ExpressionSet object to a data frame and handle missing or blank values to prevent misalignment.
 
 ```{r}
-<<<<<<< HEAD
 # Extract sample metadata and add a sample column
 # Using %>% instead of |> because %>% allows using '.' as placeholder
 dat_load <- as.data.frame(pData(eset))  %>% 
-=======
-dat_load <- as.data.frame(pData(eset)) |>
->>>>>>> b9de3f2c667891cc643b387a3eec1e535afb2327
-  
   mutate(
-    sample_id = rownames(.))  %>% 
+    sample_id = rownames(.)
+  )  %>% 
   relocate(sample_id)  %>% 
   mutate(
-    across(where(is.factor),
-           as.character))  %>%   
+    across(where(is.factor), as.character)
+  )  %>%   
   mutate(
     across(everything(),
-           ~ ifelse(. == "" | is.na(.),
-                    NA_character_, .)))
+           ~ ifelse(. == "" | is.na(.), NA_character_, .))
+  )
 ```
 
 ## Save load data
