@@ -126,7 +126,9 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ## Conclusion/Discussion
 
-<br><br><br><br> - More personalized treatment options give better response. <br><br> - The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
+<br><br><br><br> 
+-   More personalized treatment options give better response. <br><br> 
+-   The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
 
 ------------------------------------------------------------------------
 
