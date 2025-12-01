@@ -3,6 +3,7 @@ title: "Exam in R for data science - Group 12"
 format:
   revealjs:
     smaller: true
+    embed-resources: true
     slide-number: true     
     center: false
 ---
