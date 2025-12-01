@@ -19,23 +19,21 @@ MAQC-II Project: human breast cancer (BR) dataset
 
 ------------------------------------------------------------------------
 
-## Dataset Overview
+### MAQC-II Project: human breast cancer (BR) dataset
 
--   MAQC-II Project: human breast cancer (BR) dataset
--   Variables analyzed:
-    -   **Demographics**: Age, Race
-    -   **Clinical(in grades):** 
-        -   Tumor Size before Treatment, 
-        -   Lymph node involvement before Treatment 
-        -   Grade/Level of Aggressiveness
-    -  **Receptor Status(+/-):**
-        -   Estrogen Receptor
-        -   Progesterone Receptor
-        -   HER2 Receptor
-    -   **Treatments**
-    -   **Response to Treatment**: 
-         -   pCR = pathological complete response (=good)
-         -   RD = residual disease (=bad)
+  -   **Demographics**: Age, Race
+  -   **Clinical (in Grades):** 
+      -   Tumor Size before Treatment
+      -   Lymph node involvement before Treatment 
+      -   Grade/Level of Aggressiveness
+  -  **Receptor Status(+/-):**
+      -   Estrogen Receptor
+      -   Progesterone Receptor
+      -   HER2 Receptor
+  -   **Treatments**
+  -   **Response to Treatment**: 
+      -   pCR = pathological complete response (=good)
+      -   RD = residual disease (=bad)
 
 
 ------------------------------------------------------------------------
@@ -62,7 +60,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 #### Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?
 
-**ER+ patients have the worst treatment response**
+*ER+ patients have the worst treatment response*
 
 ![](presentation_files/18.png){fig-align="center"}
 
@@ -74,7 +72,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 #### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-**Treatment response does not correlate with tumor aggressiveness**
+*Treatment response does not correlate with tumor aggressiveness*
 
 ![](presentation_files/19.png){fig-align="center"}
 
@@ -85,7 +83,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 #### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-**Treatment response does not correlate with tumor size**
+*Treatment response does not correlate with tumor size*
 
 ![](presentation_files/20.png){fig-align="center"}
 
@@ -97,7 +95,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 #### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-**Treatment response does not correlate with lymph node involvement**
+*Treatment response does not correlate with lymph node involvement*
 
 ![](presentation_files/21.png){fig-align="center"}
 
@@ -113,7 +111,7 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 #### Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?
 
-**More treatment options lead to better response**
+*More treatment options lead to better response*
 
 ![](presentation_files/22.png){fig-align="center"}
 
