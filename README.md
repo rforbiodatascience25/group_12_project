@@ -22,5 +22,5 @@ We downloaded the gene expression matrix and sample phenotype information using 
 # Download GEO dataset GSE20194
 library(GEOquery)
 
-gse <- getGEO("GSE20194", GSEMatrix = TRUE, getGPL = FALSE)
+gse <- getGEO("GSE20194",GSEMatrix = TRUE, getGPL = FALSE)
 ```
