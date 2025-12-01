@@ -3,6 +3,8 @@ title: "Exam in R for data science - Group 12"
 format:
   revealjs:
     smaller: true
+    slide-number: true      # Seitenzahlen aktivieren
+    center: false
 ---
 
 ## **Introduction**
