@@ -1,6 +1,8 @@
 ---
 title: "09_analysis_5"
-format: html
+format: 
+  html:
+    self-contained: true
 editor: visual
 ---
 
