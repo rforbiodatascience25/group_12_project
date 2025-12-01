@@ -96,7 +96,7 @@ group_counts_grade <- dat_grade |>
 
 custom_palette <- c("#e27bb1", "lightblue", "#A6D15A", "gray")
 
-ggplot(dat_grade,
+gg_15 <- ggplot(dat_grade,
        aes(
          x = combo,
          fill = grade)) +
@@ -144,6 +144,14 @@ ggplot(dat_grade,
     axis.title.x = element_text(size = 8)
   ) +
   coord_cartesian(ylim = c(0, 1.15))
+
+gg_15
+```
+
+```{r}
+ggsave(gg_15, 
+       filename = "19_key_plot_15.png",
+       device = "png")
 ```
 
 ##### **Conclusions:**
