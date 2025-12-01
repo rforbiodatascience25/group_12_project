@@ -52,7 +52,7 @@ s253719 (Eszter Hudra)
 
 ## Materials and Methods (continued)
 
-#### Brush-up on receptor genotype descripton:
+#### Brush-up on receptor genotype description:
 
 -   **Receptor status** (+/-)
     -   Receptor positive (+) = better prognosis
