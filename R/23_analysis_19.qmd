@@ -25,26 +25,50 @@ augment_data <-
 
 ```{r}
 df_plot1 <- augment_data |>
-  mutate(age_group = cut(age,
-                         breaks = seq(0, 100, by = 10),
-                         labels = paste(seq(0, 90, 10),
-                                        seq(9, 99, 10),
-                                        sep = "-"))
-         ) |>
+  mutate(
+    age_group = cut(
+      age,
+      breaks = seq(0, 100, by = 10),
+      labels = paste(seq(0, 90, 10),
+                     seq(9, 99, 10),
+                     sep = "-"))) |>
   filter(!is.na(age_group)) |>
   count(age_group,
         receptor_group)
 
-custom_palette <- c("#a53e76", "#d24787", "#e2619f", "#e5a0c6", "#B3D84C", "#90C84C", "#4F9A2F", "#1D6510")
+custom_palette <- c("#a53e76",
+                    "#d24787",
+                    "#e2619f",
+                    "#e5a0c6",
+                    "#B3D84C",
+                    "#90C84C",
+                    "#4F9A2F",
+                    "#1D6510")
 
-ggplot(df_plot1,
-       aes(x = age_group,
-           y = n,
-           fill = receptor_group)) +
+gg_19 <- ggplot(
+  df_plot1,
+  aes(
+    x = age_group,
+    y = n,
+    fill = receptor_group)) +
   geom_col(position = "stack") +
-  labs(title = "Distribution of age groups and genotypes",
-       y = "Amount",
-       x = "Age Groups") +
+  labs(
+    title = "Distribution of Age Groups and Genotypes",
+    y = "Amount",
+    x = "Age groups",
+    fill = "Receptor groups") +
   scale_fill_manual(values = custom_palette) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+gg_19
+```
+
+```{r}
+ggsave(gg_19, 
+       filename = "23_key_plot_19.png",
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 ```
