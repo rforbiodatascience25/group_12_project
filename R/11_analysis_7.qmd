@@ -8,8 +8,8 @@ editor: visual
 
 ```{r}
 #| message: false 
-library(here) 
-library(tidyverse)
+library("here") 
+library("tidyverse")
 ```
 
 ## Reading the Data
@@ -25,10 +25,16 @@ dataset <- read_tsv(file = here(data_path))
 ```{r}
 dataset <- dataset |>      
   mutate(          
-    # making grade and response into factors -> for coloring graphs and separating NAs in grade
-    grade = factor(grade, levels = c(1, 2, 3), exclude = NULL),
-    response = factor(response, levels = c("RD", "pCR"), exclude = NULL)
-    )
+    # making grade and response into factors 
+    # -> for coloring graphs and separating NAs in grade
+    grade = factor(
+      grade,
+      levels = c(1, 2, 3),
+      exclude = NULL),
+    response = factor(
+      response,
+      levels = c("RD", "pCR"), 
+      exclude = NULL))
 ```
 
 ## Plotting
@@ -36,17 +42,25 @@ dataset <- dataset |>
 ### Aggressiveness vs Treatment Outcome
 
 ```{r}
-grade_vs_outcome <- ggplot(dataset, aes(x = grade, fill = response)) +
-  geom_bar(stat = "count", position = "stack") +
+grade_vs_outcome <- ggplot(
+  dataset, 
+  aes(
+    x = grade, 
+    fill = response)) +
+  geom_bar(stat = "count",
+           position = "stack") +
   scale_fill_manual(
     values = c("RD" = "darkred", 
                "pCR" = "#32CD32")) +
-  labs(title = "Aggressiveness vs Treatment Outcome",
-       x = "Grade", 
-       y = "Amount", 
-       fill = "Response") +
+  labs(
+    title = "Aggressiveness vs Treatment Outcome",
+    x = "Grade", 
+    y = "Amount", 
+    fill = "Response") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1),
+        plot.title = element_text(hjust = 0.5))
 
 grade_vs_outcome
 ```

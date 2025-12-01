@@ -8,8 +8,8 @@ editor: visual
 
 ```{r}
 #| message: false
-library(here)
-library(tidyverse)
+library("here")
+library("tidyverse")
 ```
 
 ## Reading the Data
@@ -17,7 +17,6 @@ library(tidyverse)
 ```{r}
 #| message: false
 data_path <- "data/03_dat_aug.tsv"       
-
 dataset <- read_tsv(file = here(data_path))
 ```
 
@@ -27,8 +26,10 @@ dataset <- read_tsv(file = here(data_path))
 dataset <- dataset |>   
   mutate(     
     # making response into factor -> needed for coloring in graphs     
-    response = factor(response, levels = c("RD", "pCR"), exclude = NULL) 
-    )
+    response = factor(
+      response,
+      levels = c("RD", "pCR"),
+      exclude = NULL))
 ```
 
 ## Plotting
@@ -36,17 +37,25 @@ dataset <- dataset |>
 ### HER2 Status vs Treatment Outcome
 
 ```{r}
-her2_vs_outcome <- ggplot(dataset, aes(x = her2_status, fill = response)) +
-  geom_bar(stat = "count", position = "stack") +
+her2_vs_outcome <- ggplot(
+  dataset, 
+  aes(
+    x = her2_status,
+    fill = response)) +
+  geom_bar(stat = "count",
+           position = "stack") +
   scale_fill_manual(
     values = c("RD" = "darkred", 
                "pCR" = "#32CD32")) +
-  labs(title = "HER2 Status vs Treatment Outcome",
-       x = "HER2 Status", 
-       y = "Amount", 
-       fill = "Response") +
+  labs(
+    title = "HER2 Status vs Treatment Outcome",
+    x = "HER2 Status", 
+    y = "Amount", 
+    fill = "Response") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1),
+        plot.title = element_text(hjust = 0.5))
 
 her2_vs_outcome
 ```

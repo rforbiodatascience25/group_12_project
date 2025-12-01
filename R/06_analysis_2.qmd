@@ -7,7 +7,9 @@ editor: visual
 ## Loading Libraries
 
 ```{r}
-#| message: false library(here) library(tidyverse)
+#| message: false 
+library("here") 
+library("tidyverse")
 ```
 
 ## Reading the Data
@@ -15,7 +17,6 @@ editor: visual
 ```{r}
 #| message: false 
 data_path <- "data/03_dat_aug.tsv"  
-
 dataset <- read_tsv(file = here(data_path))
 ```
 
@@ -25,8 +26,9 @@ dataset <- read_tsv(file = here(data_path))
 dataset <- dataset |>
   mutate(
     # making grade into a factor -> needed for coloring in graphs
-    grade = factor(grade, levels = c(1, 2, 3), exclude = NULL)
-    )
+    grade = factor(grade,
+                   levels = c(1, 2, 3),
+                   exclude = NULL))
 ```
 
 ## Plotting
@@ -34,20 +36,27 @@ dataset <- dataset |>
 ### HER2 vs Aggressiveness
 
 ```{r}
-her2_vs_grade <- ggplot(dataset, aes(x = her2_status, fill = grade)) +
-  geom_bar(stat = "count", position = "stack") +
+her2_vs_grade <- ggplot(
+  dataset, 
+  aes(
+    x = her2_status,
+    fill = grade)) +
+  geom_bar(stat = "count",
+           position = "stack") +
   scale_fill_manual(
     values = c("1" = "pink", 
                "2" = "red", 
                "3" = "darkred", 
-               "NA" = "gray")
-    ) +
-  labs(title = "HER2 Status vs Aggressiveness",
-       x = "HER2 Status", 
-       y = "Amount", 
-       fill = "Grade") +
+               "NA" = "gray")) +
+  labs(
+    title = "HER2 Status vs Aggressiveness",
+    x = "HER2 Status", 
+    y = "Amount", 
+    fill = "Grade") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1),
+        plot.title = element_text(hjust = 0.5))
 
 her2_vs_grade
 ```
