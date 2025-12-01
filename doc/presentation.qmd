@@ -7,66 +7,39 @@ format:
     center: false
 ---
 
-## **Introduction**
+### Breast Cancer Response Analysis
 
-### **Group 12:**
+<br><br><br>
 
-s132347 (Sofie Emilie Hagelund)\
-s253710 (Henrique Gomes)\
-s253689 (Paula Meer Janssen)\
-s252750 (Shuyue Zhang)\
-s253719 (Eszter Hudra)
+#### **Group 12:**
 
-### Chosen dataset:
+Sofie Emilie Hagelund • Henrique Gomes • Paula Meerjanssen • Shuyue Zhang • Eszter Hudra <br><br>
 
-#### Analysis of Breast Cancer Dataset
+#### Chosen dataset:
 
--   MAQC-II Project: human breast cancer (BR) dataset
+MAQC-II Project: human breast cancer (BR) dataset
 
 ------------------------------------------------------------------------
 
-## Materials and Methods
+### Dataset Overview
 
-#### Description and use of the Dataset
-
--   **Age**
--   **Race**
--   **pCR vs RD (response to treatment)**
+-   **Demographics**: Age, Race
+-   **Clinical (in Grades):**
+    -   Tumor Size before Treatment
+    -   Lymph node involvement before Treatment
+    -   Grade/Level of Aggressiveness
+-   **Receptor Status(+/-):**
+    -   Estrogen Receptor
+    -   Progesterone Receptor
+    -   HER2 Receptor
+-   **Treatments**
+-   **Response to Treatment**:
     -   pCR = pathological complete response (=good)
-
     -   RD = residual disease (=bad)
--   **Treatment(s)**
 
 ------------------------------------------------------------------------
 
-## Materials and Methods (continued)
-
-#### Tumor categories:
-
--   **Tumor (0-4) size before treatment**
-    -   The higher, the bigger the size
--   **Lymph node (0-3) involvement before treatment**
-    -   The higher, the more lymph node involvement
--   **Grade/Level of aggressiveness (1-3)**
-    -   The higher the more aggressive
-
-------------------------------------------------------------------------
-
-## Materials and Methods (continued)
-
-#### Brush-up on receptor genotype description:
-
--   **Receptor status** (+/-)
-    -   Receptor positive (+) = better prognosis
-    -   Receptor negative (-) = worse prognosis
-    -   Receptors status:
-        -   Estrogen
-        -   Progesterone
-        -   HER2
-
-------------------------------------------------------------------------
-
-## Demographics - Age and Race
+### Demographics - Age and Race
 
 ![](presentation_files/04.png){fig-align="center"}
 
@@ -74,7 +47,7 @@ s253719 (Eszter Hudra)
 
 ------------------------------------------------------------------------
 
-## Age and Genotype
+### Age and Genotype
 
 ![](presentation_files/23.png){fig-align="center"}
 
@@ -86,41 +59,32 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Aim #1
+#### Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?
 
-*Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?*
-
-------------------------------------------------------------------------
-
-### ER+ patients have the worst treatment response
+*ER+ patients have the worst treatment response*
 
 ![](presentation_files/18.png){fig-align="center"}
 
 -   **Surprisingly**:
-
     -   ER+ patients have the worst treatment response.
-
     -   HER2+ only patients and triple-negative patients have the best treatment response.
 
 ------------------------------------------------------------------------
 
-## Aim #2
+#### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
 
-*Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?*
-
-------------------------------------------------------------------------
-
-### Treatment response does not correlate with tumor aggressiveness
+*Treatment response does not correlate with tumor aggressiveness*
 
 ![](presentation_files/19.png){fig-align="center"}
 
 -   ER+ do not have a more aggressive tumor grade = no correlation to response.
-
 -   ER-, PR- have a more aggressive tumor grade = no correlation to response.
 
 ------------------------------------------------------------------------
 
-### Treatment response does not correlate with tumor size
+#### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
+
+*Treatment response does not correlate with tumor size*
 
 ![](presentation_files/20.png){fig-align="center"}
 
@@ -130,7 +94,9 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-### Treatment response does not correlate with lymph node involvement
+#### Does the treatment response from the genotypes correlate with tumor aggressiveness, size, and lymph node involvement?
+
+*Treatment response does not correlate with lymph node involvement*
 
 ![](presentation_files/21.png){fig-align="center"}
 
@@ -144,13 +110,9 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Aim #3
+#### Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?
 
-*Does the response and treatment type give any insights into whether a specific treatment is favorable for certain genotypes?*
-
-------------------------------------------------------------------------
-
-### More treatment options lead to better response
+*More treatment options lead to better response*
 
 ![](presentation_files/22.png){fig-align="center"}
 
@@ -162,14 +124,22 @@ There is [no clear]{.underline} correlation between age and genotype.
 
 ------------------------------------------------------------------------
 
-## Conclusion/Discussion
+## Conclusion
 
--   More personalized treatment options give better response.
+<br><br><br><br>
+
+-   More personalized treatment options give better response. <br><br> 
 
 -   The level of aggressiveness, tumor size, and lymph node involvement do not necessarily mean a bad response if personalized treatment is an option.
 
 ------------------------------------------------------------------------
 
-## Thank you for your Attention
+## Thank you for your Attention {.center .vcenter}
 
 We are happy to answer any of your questions!
+
+------------------------------------------------------------------------
+
+## References
+
+here link to dataset
