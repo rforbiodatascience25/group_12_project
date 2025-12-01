@@ -10,7 +10,7 @@
 <link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <title>presentation</title>
+  <title>Analysis of Breast Cancer Dataset</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -325,85 +325,160 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">presentation</h1>
+  <h1 class="title">Analysis of Breast Cancer Dataset</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section>
+<section class="slide level2">
+
+<h3 id="person-1"><em>Person 1</em></h3>
+</section>
 <section id="analysis-of-breast-cancer-dataset" class="title-slide slide level1 center">
-<h1>Analysis of Breast Cancer Dataset</h1>
+<h1>1. Analysis of Breast Cancer Dataset</h1>
+<p><strong>Group 12</strong></p>
+<p>s132347 (Sofie Emilie Hagelund)</p>
+<p>s253710 (Henrique Gomes)</p>
+<p>s253689 (Paula Meer Janssen)</p>
+<p>s252750 (Shuyue Zhang)</p>
+<p>s253719 (Eszter Hudra)</p>
+</section>
+
+<section id="introduction" class="title-slide slide level1 center">
+<h1>2. Introduction</h1>
+<ul>
+<li><p>Original topic - Oncology</p></li>
+<li><p>Now chosen specifically Breast Cancer</p>
+<ul>
+<li>MAQC-II Project: human breast cancer (BR) dataset</li>
+</ul></li>
+</ul>
+</section>
+
+<section>
+<section id="materials-and-methods" class="title-slide slide level1 center">
+<h1>3. Materials and Methods</h1>
 
 </section>
-<section id="title-slide" class="slide level2">
-<h2>1. Title slide</h2>
-<p>Our Names</p>
-</section>
-<section id="introduction" class="slide level2">
-<h2>2. Introduction</h2>
+<h3 id="description-of-the-dataset">Description of the Dataset:</h3>
+<h4 id="maqc-ii-project-human-breast-cancer-br-dataset"><strong>MAQC-II Project: human breast cancer (BR) dataset</strong></h4>
 <ul>
-<li><p>Breast cancer data bc its nice to work with</p></li>
-<li><p>why?</p></li>
-</ul>
-</section>
-<section id="mm-description-of-the-dataset" class="slide level2">
-<h2>3. MM: Description of the DataSet</h2>
+<li><strong>Sample name</strong></li>
+<li><strong>Age</strong></li>
+<li><strong>Race</strong></li>
+<li><strong>pCR vs RD (response from treatment)</strong>
 <ul>
-<li><p>List of observations</p>
-<ul>
-<li>Maybe state <strong>orally</strong> what the expected correlation we are proof-checking</li>
+<li><p>pCR = pathological complete response (=good)</p></li>
+<li><p>RD = residual disease (=bad)</p></li>
 </ul></li>
-<li><p>Measurements and therapy leading to the acquisition of the data</p></li>
-</ul>
-</section>
-<section id="description-background" class="slide level2">
-<h2>4. Description: Background</h2>
+<li><strong>Tumor (0-4) size before treatment</strong>
 <ul>
-<li>Describing the data: Demographics and genotypes</li>
-</ul>
-</section>
-<section id="aims-and-results" class="slide level2">
-<h2>5. Aims and Results</h2>
+<li>The higher, the bigger the size</li>
+</ul></li>
+<li><strong>Lymph node (0-3) involvement before treatment</strong>
 <ul>
-<li>Our 3 questions</li>
-</ul>
-</section>
-<section id="analysis-1" class="slide level2">
-<h2>6. Analysis 1</h2>
-<p>Answering question 1</p>
+<li>The higher, the more lymph node involvement</li>
+</ul></li>
+<li><strong>Grade/Level of aggressiveness (1-3)</strong>
 <ul>
-<li><p>Discriptive headline</p></li>
-<li><p>Plot</p></li>
+<li>The higher the more aggressive</li>
+</ul></li>
+<li><strong>Treatments</strong></li>
+<li><strong>Receptor status</strong> (+/-)
+<ul>
+<li>Receptor positive (+) = better prognosis
+<ul>
+<li>Estrogen receptor status</li>
+<li>Progesterone receptor status</li>
+<li>HER2 receptor status</li>
+<li>Triple negative = ER-, PR-, HER2-</li>
+</ul></li>
+</ul></li>
+</ul></section>
+<section id="demographics---age-and-race" class="title-slide slide level1 center">
+<h1>4. Demographics - Age and Race</h1>
+<p>** INSERT GRAPH 04 **</p>
+<ul>
+<li>Breast cancer patients are mainly white and between the ages of 40-59.</li>
 </ul>
 </section>
-<section id="analysis-2-this-will-need-to-be-more-slides-as-there-are-more-parts-of-the-question" class="slide level2">
-<h2>7. Analysis 2 (This will need to be more slides, as there are more parts of the question)</h2>
+
+<section>
+<section id="age-and-genotype" class="title-slide slide level1 center">
+<h1>5. Age and Genotype</h1>
+<p>** INSERT GRAPH 23 **</p>
+<ul>
+<li><strong>The most common Genotype trend is</strong>
+<ul>
+<li>ER+, PR+, HER2-</li>
+<li>ER-, PR-, HER2- (Triple negative)</li>
+</ul></li>
+</ul>
+<p>There is <u>no clear</u> correlation between age and genotype.</p>
+</section>
+<h3 id="person-2"><em>Person 2</em></h3></section>
+<section id="aim-1" class="title-slide slide level1 center">
+<h1>6. Aim #1</h1>
+<p><em>Do the theoretically predicted prognoses for the genotypes match the observed responses in the dataset?</em></p>
+</section>
+
+<section>
+<section id="er-patients-have-the-worst-treatment-response" class="title-slide slide level1 center">
+<h1>7. ER+ patients have the worst treatment response</h1>
+<p>** INSERT GRAPH 18 **</p>
+<p><strong>Surprisingly</strong>:</p>
+<ul>
+<li><p>ER+ patients have the worst treatment response.</p></li>
+<li><p>HER+ only patients and triple-negative patients have the best treatment response.</p></li>
+</ul>
+</section>
+<h3 id="person-3"><em>Person 3</em></h3></section>
+<section id="aim-2" class="title-slide slide level1 center">
+<h1>8. Aim #2</h1>
+<p><em>Does the treatment response correlate with tumor aggressiveness, size, and the lymph node involvement?</em></p>
+</section>
+
+<section>
+<section id="analysis-2-this-will-need-to-be-more-slides-as-there-are-more-parts-of-the-question" class="title-slide slide level1 center">
+<h1>9. Analysis 2 (This will need to be more slides, as there are more parts of the question)</h1>
+<p>** INSERT GRAPH 19 **</p>
 <p>Answering question 2</p>
 <ul>
 <li><p>Discriptive headline</p></li>
 <li><p>Plot</p></li>
 </ul>
 </section>
-<section id="analysis-3" class="slide level2">
-<h2>8. Analysis 3</h2>
+<h3 id="person-4"><em>Person 4</em></h3></section>
+<section id="aim-3" class="title-slide slide level1 center">
+<h1>10. Aim #3</h1>
+
 </section>
-<section id="conclusiondiscussion" class="slide level2">
-<h2>9. Conclusion/Discussion</h2>
+
+<section>
+<section id="analysis-3" class="title-slide slide level1 center">
+<h1>11. Analysis 3</h1>
+
+</section>
+<h3 id="person-5"><em>Person 5</em></h3></section>
+<section id="conclusiondiscussion" class="title-slide slide level1 center">
+<h1>12. Conclusion/Discussion</h1>
 <ul>
 <li><p>Summarise all we found</p></li>
 <li><p>e.g.&nbsp;“The factors that have biggest effect: …”</p></li>
 <li><p>Personalised threapy is best</p></li>
 </ul>
 </section>
-<section id="thank-you-for-your-attention" class="slide level2">
-<h2>10. Thank you for your Attention</h2>
+
+<section id="thank-you-for-your-attention" class="title-slide slide level1 center">
+<h1>13. Thank you for your Attention</h1>
+<p>We are happy to answer any of your questions!</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
