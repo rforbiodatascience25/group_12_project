@@ -205,7 +205,10 @@ gg_16
 ```{r}
 ggsave(gg_16, 
        filename = "20_key_plot_16.png",
-       device = "png")
+       path = here("./results"),
+       device = "png",
+       height = 5,
+       width = 8)
 ```
 
 ##### Conclusion:
