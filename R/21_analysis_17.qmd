@@ -15,6 +15,7 @@ editor: visual
 library("here")
 library("tidyverse")
 library("scales")
+source(here("R/99_proj_func.R"))
 ```
 
 #### Read data:
@@ -183,13 +184,11 @@ gg_17 <- ggplot() +
 gg_17
 ```
 
+##### Save plot
+
 ```{r}
-ggsave(gg_17, 
-       filename = "21_key_plot_17.png",
-       path = here("./results"),
-       device = "png",
-       height = 5,
-       width = 8)
+save_plot(gg_17, 
+          "21_key_plot_17.png")
 ```
 
 ##### Conclusion:

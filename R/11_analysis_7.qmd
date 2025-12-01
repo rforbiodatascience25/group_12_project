@@ -12,6 +12,7 @@ editor: visual
 #| message: false 
 library("here") 
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Reading the Data
@@ -65,4 +66,11 @@ grade_vs_outcome <- ggplot(
         plot.title = element_text(hjust = 0.5))
 
 grade_vs_outcome
+```
+
+### Save plot
+
+```{r}
+save_plot(grade_vs_outcome, 
+          "11_plot_7.png")
 ```

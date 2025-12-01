@@ -11,6 +11,7 @@ format:
 #| message: false
 library("tidyverse")
 library("here")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Load Data
@@ -66,11 +67,9 @@ gg_19 <- ggplot(
 gg_19
 ```
 
+### Save plot
+
 ```{r}
-ggsave(gg_19, 
-       filename = "23_key_plot_19.png",
-       path = here("./results"),
-       device = "png",
-       height = 5,
-       width = 8)
+save_plot(gg_19, 
+          "23_key_plot_19.png")
 ```

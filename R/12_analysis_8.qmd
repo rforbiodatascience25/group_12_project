@@ -11,6 +11,7 @@ format:
 #| message: false
 library("here")
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Load data as variables
@@ -29,7 +30,7 @@ dat_aug <- read_tsv(
 ### Outcome compared to age
 
 ```{r}
-dat_aug |> 
+gg_8 <- dat_aug |> 
   ggplot(aes(
     x = response,
     y = age,
@@ -47,4 +48,13 @@ dat_aug |>
     title = "Distribution of age across outcome") +
   theme_minimal(base_size = 14) + 
   theme(plot.title = element_text(hjust = 0.5))
+
+gg_8
+```
+
+### Save plot
+
+```{r}
+save_plot(gg_8, 
+          "12_plot_8.png")
 ```

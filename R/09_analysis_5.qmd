@@ -12,6 +12,7 @@ editor: visual
 #| message: false
 library("here")   
 library("tidyverse")
+source(here("R/99_proj_func.R"))
 ```
 
 ## Reading the Data
@@ -67,4 +68,11 @@ receptors_vs_outcome <- ggplot(
         plot.title = element_text(hjust = 0.5))
 
 receptors_vs_outcome
+```
+
+### Save plot
+
+```{r}
+save_plot(receptors_vs_outcome,
+          "09_plot_5.png")
 ```

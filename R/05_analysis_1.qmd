@@ -72,5 +72,6 @@ receptors_vs_grade
 ### Save plot
 
 ```{r}
-save_plot(receptors_vs_grade, "05_plot_1.png")
+save_plot(receptors_vs_grade, 
+          "05_plot_1.png")
 ```
